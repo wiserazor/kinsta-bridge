@@ -1,19 +1,21 @@
-# Kinsta Bridge Page — deploy-ready
+# Wiser Tools — Kinsta bridge page (deploy-ready)
 
-A single-page, affiliate-compliant "bridge page" for promoting the **Kinsta** managed
-WordPress hosting affiliate program via Google Ads search traffic.
+A single-page, affiliate-compliant **bridge page** for the **Kinsta** managed WordPress
+hosting affiliate program, served from the generic brand **wiser-tools.com** so the
+site can later expand to other tracks (VPN, email marketing, CRM, …) via subpaths.
 
-You already have GitHub + Cloudflare, so deployment is ~10 minutes.
+Stack: static HTML → GitHub → Cloudflare Pages.
 
 ---
 
 ## 1. Apply to the Kinsta affiliate program
 
 1. Go to **https://kinsta.com/affiliates**
-2. Fill in your **website URL** (use the live page URL from step 2 below) and how you'll promote.
+2. Fill in your **website URL** (`https://wiser-tools.com`) and how you'll promote.
 3. Manual review (1–3 days). Weak-content / coupon sites get rejected — this page is substantive, so you're fine.
 4. Once approved, in the affiliate dashboard click **Create affiliate link**, paste any Kinsta URL, copy your tracked link.
 5. In `index.html`, replace every `REPLACE_WITH_YOUR_KINSTA_AFFILIATE_LINK` with your real link.
+6. Commit + push — Cloudflare Pages redeploys automatically.
 
 **Program terms (2026):**
 - Commission: **$50–$500 one-time + 10% monthly recurring for life**
@@ -23,73 +25,58 @@ You already have GitHub + Cloudflare, so deployment is ~10 minutes.
 
 ⚠️ **Paid-search rule:** You may NOT bid on Kinsta **branded** keywords
 ("Kinsta", "Kinsta coupon", "Kinsta promo"). Generic high-intent keywords are fine.
+(You also should NOT put the word "Kinsta" in ad headlines — see `google-ads-copy.md`.)
 
 ---
 
-## 2. Deploy to Cloudflare Pages (via GitHub)
+## 2. Connect the domain & deploy (Cloudflare)
 
-```bash
-# from this folder
-git init
-git add index.html
-git commit -m "Kinsta bridge page"
-git branch -M main
-git remote add origin <your-github-repo-url>
-git push -u origin main
-```
+GitHub repo already pushed: **https://github.com/wiserazor/kinsta-bridge**
 
-Then in Cloudflare:
-1. **Dashboard → Pages → Create a project → Connect to Git**
-2. Authorize GitHub and select this repo.
-3. Build settings: **Framework preset = None**, **Build command = (empty)**, **Output directory = `/`**
-4. Deploy. You get `https://<project>.pages.dev`.
-5. (Optional but recommended) Buy a domain (~$10/yr at Namecheap/Porkbun) and add it in
-   **Pages → Custom domains** (Cloudflare auto-adds the DNS record).
+In Cloudflare:
+1. **Dashboard → Workers & Pages → Create → Pages → Connect to Git**
+2. Authorize GitHub, select `wiserazor/kinsta-bridge`.
+3. Build settings: **Framework preset = None**, **Build command = (empty)**, **Output directory = `/`**.
+4. Deploy → you get `https://kinsta-bridge.pages.dev`.
+5. **Pages → Custom domains → Add `wiser-tools.com`**. Cloudflare auto-adds DNS (the domain is already in Cloudflare Registrar, so no nameserver change needed).
 
-Use the live URL as your affiliate application website AND your Google Ads final URL.
+Use `https://wiser-tools.com` as your affiliate application website AND Google Ads final URL.
 
 ---
 
 ## 3. Google Ads setup
 
-- Open a Google Ads account with a foreign-currency / dual-currency card (or Google gift-card top-up).
-- Create one **Search** campaign only (no Display/Discovery at first).
-- Final URL = your bridge page URL. **Never** put the affiliate link in the ad.
+See **`google-ads-copy.md`** for ready-to-paste headlines, descriptions, keywords and campaign settings.
+
+- One **Search** campaign only (no Display/Discovery at first).
+- Final URL = `https://wiser-tools.com/`. **Never** put the affiliate link in the ad.
 - Start budget **$10–20/day**.
-
-### Keyword targets (SAFE for paid search — all non-branded)
-- `best managed wordpress hosting 2026`
-- `managed wordpress hosting comparison`
-- `fastest wordpress hosting`
-- `wordpress hosting for agencies`
-- `high traffic wordpress hosting`
-- `wordpress hosting with staging`
-
-### Keywords to AVOID in paid search (Kinsta brand-protected)
-- `kinsta` · `kinsta coupon` · `kinsta promo` · `kinsta discount`
-- Anything containing the "Kinsta" word. (These are fine for organic blog content, not for ad bids.)
-
-### Negative keywords (add to the campaign)
-`free` `cheap` `coupon` `discount` `jobs` `how to` `tutorial` `reddit` `login` `careers`
-
-### Match & optimization
-- Use **exact / phrase** match to start; review the Search Terms report weekly.
-- Negate any expensive non-converting queries after ~2 weeks.
-- Raise budgets only on ad groups where ROAS > 2.
+- Target English-speaking markets (US / UK / CA / AU) to match Kinsta's billing & the page language.
 
 ---
 
-## 4. Compliance checklist before you launch
+## 4. Expanding to more tracks later
+
+The brand is generic on purpose. To add a second vertical (e.g. VPN):
+- Create a folder, e.g. `vpn/index.html`, reusing this layout with different copy.
+- Link it from a small hub on the root page.
+- Run a separate Google Ads campaign pointing at `/vpn/`.
+Each subpath shares the domain's authority — cheaper than spinning up new domains.
+
+---
+
+## 5. Compliance checklist before launch
 - [ ] Top disclosure banner visible (already in the page)
 - [ ] Footer disclosure present (already in the page)
-- [ ] Affiliate links would carry `rel="sponsored"` — Kinsta's generated links add this automatically
+- [ ] Affiliate links carry `rel="sponsored"` — Kinsta's generated links add this automatically
 - [ ] Page is original, ~1000+ words, and relevant to the ad
-- [ ] Ad final URL points to THIS page, not the affiliate link
-- [ ] No branded-Kinsta keyword bids
+- [ ] Ad final URL points to `wiser-tools.com`, not the affiliate link
+- [ ] No branded-Kinsta keyword bids; no "Kinsta" in ad headlines
 - [ ] Small budget test first, then scale
 
 ---
 
-## 5. Files
-- `index.html` — the bridge page (edit copy + swap affiliate link)
+## 6. Files
+- `index.html` — the bridge page (brand: Wiser Tools; copy: Kinsta comparison; swap affiliate link)
 - `README.md` — this file
+- `google-ads-copy.md` — Google Ads campaign + ad copy
