@@ -74,7 +74,7 @@ Paste all; Google rotates. (≤30 chars each is ideal, but RSA allows up to 45.)
 ## RSA — descriptions
 
 1. We compare the top managed WordPress hosts on speed, support & price — so you choose without trial and error.
-2. Real plans, honest pros & cons, and who each host is actually for. Includes our top pick.
+2. Real plans, honest pros & cons, and who each host is actually for — matched to your situation.
 3. Independent comparison. Affiliate links disclosed. Find the host that fits your traffic.
 4. 30-day money-back on most plans. See the full, no-hype breakdown.
 
