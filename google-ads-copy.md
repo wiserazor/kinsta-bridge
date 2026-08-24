@@ -1,7 +1,20 @@
-# Google Ads — Campaign & Ad Copy (Kinsta / Managed WordPress)
+# Google Ads — Campaign & Ad Copy (Managed WordPress Hosting)
 
-First campaign for `wiser-tools.com`. Built to be **compliant** and **high-relevance**
-so Quality Score (and therefore CPC) stays low.
+> **⏸ STATUS: DRAFT — DO NOT ACTIVATE UNTIL AT LEAST ONE AFFILIATE IS APPROVED**
+>
+> Without an approved partner, every click sends users to placeholder links that:
+>   1. Leak the ad spend (click → 404 / wrong destination)
+>   2. Damage Quality Score (low LP relevance → low CTR → low score → higher CPC)
+>   3. Risk Google disapproval (broken / deceptive destination)
+>
+> **Kinsta application rejected on 2026-08-24.** Reapply in 3-6 months after
+> wiser-tools.com has organic traffic and 4-5 real long-form articles (page-speed
+> benchmark, cheapest managed WP 2026, Cloudflare APO setup, hosting for SaaS
+> startups, WP error fixes). Until then, this file is written generically so any
+> approved host can plug in.
+
+First campaign for `wiser-tools.com`. Built to be **compliant** and **high-relevance** so
+Quality Score (and therefore CPC) stays low.
 
 > Rule reminder: do NOT bid on any hosting brand — Kinsta, Cloudways, WP Engine, SiteGround
 > (or competitors like Hostinger/Bluehost) — or put those names in ad headlines. Mentioning
@@ -20,7 +33,8 @@ so Quality Score (and therefore CPC) stays low.
 | Locations | United States, United Kingdom, Canada, Australia |
 | Bid strategy | Manual CPC (start), then Maximize Clicks once data exists |
 | Daily budget | $10–20 to start |
-| Final URL | `https://wiser-tools.com/best-managed-wordpress-hosting.html` |
+| Final URL (NOW) | `https://wiser-tools.com/` — content-first homepage |
+| Final URL (post-approval) | `https://wiser-tools.com/best-managed-wordpress-hosting.html` (subpage) |
 | Ad rotation | Optimize for conversions (or clicks) |
 
 ---
@@ -91,10 +105,35 @@ Reuse the same RSA headlines/descriptions, or tailor description 2 to:
 
 ---
 
-## Expected economics (sanity check)
+## Expected economics (model only — campaigns paused)
 
-- CPC (managed-WP niche, non-branded): ~$1.0–2.5
-- Landing-page conversion to click (Kinsta signup): aim 2–4%
-- Cost per referral: ~$25–125
-- Kinsta payout: $50 one-time + 10% recurring → first referral is usually profitable; recurring compounds.
-- If cost/referral > ~$120 consistently, pause and rework keywords before scaling.
+This file is paused, so the numbers below are design targets, not active forecasts. They
+describe a generic managed-WP arbitrage setup that becomes valid once *any* partner approves.
+
+| Metric | Typical range (any approved managed-WP program) |
+|---|---|
+| CPC (managed-WP niche, non-branded) | ~$1.0–2.5 |
+| Landing-page → outbound click | 5–15% |
+| Outbound click → signup (partner-dependent) | 1–5% |
+| Cost per referral (all-in) | ~$25–150 |
+| First-sale payout (one-time) | $50–$200 depending on partner |
+| Recurring (where applicable) | 7–10% lifetime (e.g. Cloudways, formerly Kinsta) |
+
+**Decision rule:** if first-month cost/referral > ~$150 after ~20 outbound clicks, pause
+and rework keywords + landing page before scaling. Recurring only changes the math after
+the customer's second billing cycle (~60+ days), so Day-0 ROI depends almost entirely on
+the one-time payout.
+
+---
+
+## Activation checklist (do every one before flipping the campaign on)
+
+- [ ] At least one affiliate approved (Cloudways / A2 / SiteGround) → have the real link
+- [ ] All `REPLACE_WITH_YOUR_*_LINK` placeholders replaced with the live tracking URL
+- [ ] Negative keyword list still includes every brand (kinsta + cloudways + wp engine +
+      siteground + hostinger + bluehost + godaddy + namecheap) — bidding a brand gets
+      every program terminated
+- [ ] Final URL points to a page that has a working CTA to the approved partner (not the
+      homepage, not a broken placeholder)
+- [ ] Conversion tracking installed (Google tag + outbound click event on the partner link)
+- [ ] Daily budget set $10–20 to start; do not let Smart Campaign run while you sleep
