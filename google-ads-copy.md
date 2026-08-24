@@ -50,9 +50,11 @@ Quality Score (and therefore CPC) stays low.
 
 **Negative keywords (campaign level):**
 `free` `cheap` `coupon` `discount` `jobs` `how to` `tutorial` `reddit` `login` `careers`
-`kinsta` `cloudways` `wp engine` `wpengine` `siteground` `hostinger` `bluehost` `godaddy` `namecheap`
+`kinsta` `cloudways` `wp engine` `wpengine` `siteground` `hostinger` `bluehost` `godaddy` `namecheap` `hosting` `hosting.com` `a2hosting` `a2 hosting`
 
-> Note: every hosting **brand** is added as a negative so you never accidentally match a branded query. All four programs you promote (Kinsta, Cloudways, WP Engine, SiteGround) forbid bidding on their brand names — bidding or headlining them risks rejected commissions or terminated partnerships. The competitors you mention in copy (Hostinger, Bluehost, etc.) are also negatives to keep traffic commercial-intent only.
+> Note: every hosting **brand** is added as a negative so you never accidentally match a branded query. All programs you promote forbid bidding on their brand names — bidding or headlining them risks rejected commissions or terminated partnerships. The competitors you mention in copy (Hostinger, Bluehost, etc.) are also negatives to keep traffic commercial-intent only.
+>
+> **Rebrand watch (2026-08-24):** A2 Hosting rebranded to **hosting.com** (same company, new domain). Because you may promote hosting.com, its brand terms `hosting` / `hosting.com` / `a2hosting` / `a2 hosting` are added as negatives — do NOT bid the "hosting" brand word even though it's a generic-looking term. "Managed WordPress hosting" (non-branded) is still a valid keyword.
 
 ---
 

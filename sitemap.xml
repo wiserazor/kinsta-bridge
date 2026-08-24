@@ -7,9 +7,27 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://wiser-tools.com/best-managed-wordpress-hosting.html</loc>
+    <loc>https://wiser-tools.com/best-managed-wordpress-hosting</loc>
     <lastmod>2026-08-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://wiser-tools.com/managed-wordpress-hosting-for-agencies</loc>
+    <lastmod>2026-08-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://wiser-tools.com/wordpress-hosting-for-woocommerce</loc>
+    <lastmod>2026-08-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://wiser-tools.com/wordpress-hosting-for-small-business</loc>
+    <lastmod>2026-08-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
 </urlset>
