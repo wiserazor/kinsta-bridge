@@ -3,9 +3,10 @@
 First campaign for `wiser-tools.com`. Built to be **compliant** and **high-relevance**
 so Quality Score (and therefore CPC) stays low.
 
-> Rule reminder: do NOT bid on "Kinsta" or put "Kinsta" in ad headlines. Mentioning
-> the brand in the *landing page* is fine; bidding the brand word or headlining it
-> risks Kinsta's paid-search restriction and Google disapproval.
+> Rule reminder: do NOT bid on any hosting brand — Kinsta, Cloudways, WP Engine, SiteGround
+> (or competitors like Hostinger/Bluehost) — or put those names in ad headlines. Mentioning
+> brands in the *landing page* is fine; bidding the brand word or headlining it
+> risks the program's paid-search restriction and Google disapproval.
 
 ---
 
@@ -19,7 +20,7 @@ so Quality Score (and therefore CPC) stays low.
 | Locations | United States, United Kingdom, Canada, Australia |
 | Bid strategy | Manual CPC (start), then Maximize Clicks once data exists |
 | Daily budget | $10–20 to start |
-| Final URL | `https://wiser-tools.com/` |
+| Final URL | `https://wiser-tools.com/best-managed-wordpress-hosting.html` |
 | Ad rotation | Optimize for conversions (or clicks) |
 
 ---
@@ -34,9 +35,10 @@ so Quality Score (and therefore CPC) stays low.
 - `"fastest wordpress hosting"`
 
 **Negative keywords (campaign level):**
-`free` `cheap` `coupon` `discount` `jobs` `how to` `tutorial` `reddit` `login` `careers` `kinsta`
+`free` `cheap` `coupon` `discount` `jobs` `how to` `tutorial` `reddit` `login` `careers`
+`kinsta` `cloudways` `wp engine` `wpengine` `siteground` `hostinger` `bluehost` `godaddy` `namecheap`
 
-> Note: `kinsta` is added as a negative so you never accidentally match a branded query.
+> Note: every hosting **brand** is added as a negative so you never accidentally match a branded query. All four programs you promote (Kinsta, Cloudways, WP Engine, SiteGround) forbid bidding on their brand names — bidding or headlining them risks rejected commissions or terminated partnerships. The competitors you mention in copy (Hostinger, Bluehost, etc.) are also negatives to keep traffic commercial-intent only.
 
 ---
 
@@ -44,8 +46,8 @@ so Quality Score (and therefore CPC) stays low.
 
 Paste all; Google rotates. (≤30 chars each is ideal, but RSA allows up to 45.)
 
-1. Best Managed WP Hosting
-2. Compare Top WP Hosts 2026
+1. Best Managed WordPress Hosting
+2. Compare Top WordPress Hosts
 3. Honest Hosting Comparison
 4. Managed WordPress, Explained
 5. Fast Managed WordPress
