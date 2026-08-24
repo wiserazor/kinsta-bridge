@@ -29,6 +29,8 @@
   a.cta:hover{background:var(--brand-d)}
   a.cta.green{background:var(--accent)}
   a.cta.green:hover{filter:brightness(.95)}
+  .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:14px}
+  .cta-label{font-weight:600;margin:26px 0 0}
   table{width:100%;border-collapse:collapse;margin:18px 0;font-size:15px}
   th,td{border:1px solid var(--line);padding:12px 14px;text-align:left;vertical-align:top}
   th{background:var(--card);font-weight:600}
@@ -133,7 +135,7 @@
         <td class="price">$30/mo</td>
         <td>Per-site containers, agency dashboard</td>
         <td>Billing hosting back to clients; clean hand-off</td>
-        <td><a class="cta green" href="REPLACE_WITH_YOUR_KINSTA_AFFILIATE_LINK" rel="sponsored">Visit Kinsta</a></td>
+        <td><a class="cta" href="REPLACE_WITH_YOUR_KINSTA_AFFILIATE_LINK" rel="sponsored">Visit Kinsta</a></td>
       </tr>
       <tr>
         <td><strong>Cloudways</strong></td>
@@ -175,7 +177,7 @@
         <tr><th>Your client mix is…</th><th>Best fit</th><th></th></tr>
       </thead>
       <tbody>
-        <tr><td>Revenue-dependent clients (ecommerce, membership, lead-gen)</td><td><strong>Kinsta Business tier</strong></td><td><a class="cta green" href="REPLACE_WITH_YOUR_KINSTA_AFFILIATE_LINK" rel="sponsored">See Kinsta</a></td></tr>
+        <tr><td>Revenue-dependent clients (ecommerce, membership, lead-gen)</td><td><strong>Kinsta Business tier</strong></td><td><a class="cta" href="REPLACE_WITH_YOUR_KINSTA_AFFILIATE_LINK" rel="sponsored">See Kinsta</a></td></tr>
         <tr><td>Developer-heavy clients who want cloud control</td><td><strong>Cloudways</strong></td><td><a class="cta" href="REPLACE_WITH_YOUR_CLOUDWAYS_AFFILIATE_LINK" rel="sponsored">See Cloudways</a></td></tr>
         <tr><td>Enterprise / brand clients with compliance needs</td><td><strong>WP Engine</strong></td><td><a class="cta" href="REPLACE_WITH_YOUR_WPENGINE_AFFILIATE_LINK" rel="sponsored">See WP Engine</a></td></tr>
         <tr><td>A handful of small brochure clients</td><td><strong>SiteGround</strong></td><td><a class="cta" href="REPLACE_WITH_YOUR_SITEGROUND_AFFILIATE_LINK" rel="sponsored">See SiteGround</a></td></tr>
@@ -196,7 +198,6 @@
   </ul>
   <p class="pros"><strong>Pros:</strong> Best operational fit for client work; isolated containers; genuine hand-off tool; engineer-level support.</p>
   <p class="cons"><strong>Cons:</strong> Higher entry price than Cloudways/SiteGround; Redis is a paid add-on; visit caps need monitoring across clients.</p>
-  <a class="cta green" href="REPLACE_WITH_YOUR_KINSTA_AFFILIATE_LINK" rel="sponsored">Try Kinsta (30-day money-back)</a>
 
   <h2 id="cloudways">Cloudways for agencies</h2>
   <p>Cloudways is the "control" option: you pick the cloud (DigitalOcean, AWS, Google Cloud), they manage the stack, and you get a reseller-style billing model. Great when you have developers who want the knobs and clients who don't need hand-holding on infrastructure.</p>
@@ -251,7 +252,14 @@
     </ul>
   </div>
 
-  <p style="margin-top:8px"><a class="cta green" href="best-managed-wordpress-hosting">Compare all four hosts side by side →</a></p>
+  <p class="cta-label">Ready to look closer? Visit each host:</p>
+  <div class="cta-row">
+    <a class="cta" href="REPLACE_WITH_YOUR_KINSTA_AFFILIATE_LINK" rel="sponsored">Visit Kinsta</a>
+    <a class="cta" href="REPLACE_WITH_YOUR_CLOUDWAYS_AFFILIATE_LINK" rel="sponsored">Visit Cloudways</a>
+    <a class="cta" href="REPLACE_WITH_YOUR_WPENGINE_AFFILIATE_LINK" rel="sponsored">Visit WP Engine</a>
+    <a class="cta" href="REPLACE_WITH_YOUR_SITEGROUND_AFFILIATE_LINK" rel="sponsored">Visit SiteGround</a>
+    <a class="cta" href="REPLACE_WITH_YOUR_HOSTING_AFFILIATE_LINK" rel="sponsored">Visit hosting.com</a>
+  </div>
 
 </main>
 
