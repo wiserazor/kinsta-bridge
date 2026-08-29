@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Best Managed WordPress Hosting 2026 — Honest Comparison</title>
-<meta name="description" content="A hands-on comparison of Kinsta, Cloudways, WP Engine and SiteGround for managed WordPress hosting in 2026. Real plans, performance, and who each is actually for.">
+<title>Wiser Tools — Honest, No-Hype Reviews of Tools &amp; Services</title>
+<meta name="description" content="Wiser Tools is an independent review site. We compare services on real pricing, real performance, and who each option is actually built for — no hype, and no single winner.">
 <style>
   :root{
     --bg:#ffffff; --fg:#1a1a2e; --muted:#5b6472; --line:#e6e9ef;
@@ -25,27 +25,29 @@
   h3{font-size:20px;margin:26px 0 8px}
   p{margin:0 0 16px;color:var(--muted)}
   .lead{font-size:19px;color:var(--fg)}
-  a.cta{display:inline-block;background:var(--brand);color:#fff;text-decoration:none;padding:12px 22px;border-radius:10px;font-weight:600;transition:.15s}
-  a.cta:hover{background:var(--brand-d)}
-  a.cta.green{background:var(--accent)}
-  a.cta.green:hover{filter:brightness(.95)}
-  .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:14px}
-  .cta-label{font-weight:600;margin:26px 0 0}
-  table{width:100%;border-collapse:collapse;margin:18px 0;font-size:15px}
-  th,td{border:1px solid var(--line);padding:12px 14px;text-align:left;vertical-align:top}
-  th{background:var(--card);font-weight:600}
-  td.price{font-weight:700;color:var(--fg)}
-  .pick{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:14px;padding:22px;margin:22px 0}
-  .pick .tag{display:inline-block;background:var(--accent);color:#fff;font-size:12px;font-weight:700;padding:3px 10px;border-radius:20px;letter-spacing:.4px;text-transform:uppercase}
   .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;margin:16px 0}
-  .pros{color:#047857}.cons{color:#b91c1c}
   ul{margin:0 0 16px;padding-left:22px}
   li{margin:4px 0;color:var(--muted)}
-  .faq{margin:10px 0}
-  .faq h3{margin-bottom:4px}
   footer{border-top:1px solid var(--line);margin-top:48px;padding:28px 0 56px;font-size:14px;color:var(--muted)}
   .small{font-size:14px}
   .note{background:#eff6ff;border:1px solid #bfdbfe;color:#1e40af;border-radius:10px;padding:12px 16px;font-size:14px;margin:16px 0}
+
+  /* Hub-specific styles */
+  .hub-cat{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px;margin:20px 0}
+  .hub-cat h3{margin-top:0;font-size:22px}
+  .hub-cat p:last-of-type{margin-bottom:18px}
+  .guide-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin-top:6px}
+  .guide-card{
+    display:block;background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 18px;
+    text-decoration:none;color:inherit;transition:.15s
+  }
+  .guide-card:hover{border-color:var(--brand);background:#fbfbff;transform:translateY(-1px)}
+  .guide-card strong{display:block;color:var(--brand);font-size:16px;margin-bottom:4px}
+  .guide-card span{display:block;font-size:14px;color:var(--muted);line-height:1.5}
+  .method{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin:16px 0}
+  .method-item{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+  .method-item strong{display:block;color:var(--fg);margin-bottom:4px}
+  .method-item span{font-size:14px;color:var(--muted)}
 </style>
 </head>
 <body>
@@ -58,181 +60,71 @@
 </div>
 
 <div class="disclosure">
-  <strong>Disclosure:</strong> This page contains affiliate links. If you click through and purchase a hosting plan, Wiser Tools may earn a commission — at no extra cost to you. We only recommend hosts we have genuinely researched.
+  <strong>Disclosure:</strong> Some pages on this site contain affiliate links. If you click through and purchase, Wiser Tools may earn a commission — at no extra cost to you. This never influences our comparisons.
 </div>
 
 <header class="wrap">
-  <h1>Best Managed WordPress Hosting in 2026: An Honest, No-Hype Comparison</h1>
-  <p class="lead">Choosing a host is boring until your site slows down, gets hacked, or spikes on launch day. This guide compares four managed WordPress hosts on the things that actually matter — speed, support, pricing, and who each one is really built for — so you can pick without trial-and-error.</p>
-  <a class="cta" href="#pick">Skip to which host fits you →</a>
+  <h1>Honest reviews of the tools and services you actually pay for</h1>
+  <p class="lead">Wiser Tools is an independent review site. We compare services on the things that affect your day-to-day — real pricing, performance under load, and support you can actually reach. No "10 best" lists padded with products we've never touched, and no single winner — because the right choice depends on your situation, not ours.</p>
 </header>
 
 <main class="wrap">
 
-  <h2>Quick comparison</h2>
-  <p>All prices are monthly, billed monthly (annual billing typically saves ~2 months). Prices and features change — verify current details on each host's official site before purchasing.</p>
-  <table>
-    <thead>
-      <tr>
-        <th>Host</th>
-        <th>Starts at</th>
-        <th>Built on</th>
-        <th>Best for</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><strong>Kinsta</strong></td>
-        <td class="price">$30/mo</td>
-        <td>Google Cloud C2, isolated containers</td>
-        <td>Agencies, high-traffic &amp; revenue-dependent sites</td>
-        <td><a class="cta" href="REPLACE_WITH_YOUR_KINSTA_AFFILIATE_LINK" rel="sponsored">Visit Kinsta</a></td>
-      </tr>
-      <tr>
-        <td><strong>Cloudways</strong></td>
-        <td class="price">$11/mo</td>
-        <td>DigitalOcean / AWS / GCP (your choice)</td>
-        <td>Developers who want cloud flexibility</td>
-        <td><a class="cta" href="REPLACE_WITH_YOUR_CLOUDWAYS_AFFILIATE_LINK" rel="sponsored">Visit Cloudways</a></td>
-      </tr>
-      <tr>
-        <td><strong>WP Engine</strong></td>
-        <td class="price">$20/mo</td>
-        <td>Own platform, 200k+ sites</td>
-        <td>Enterprise &amp; big-brand WordPress</td>
-        <td><a class="cta" href="REPLACE_WITH_YOUR_WPENGINE_AFFILIATE_LINK" rel="sponsored">Visit WP Engine</a></td>
-      </tr>
-      <tr>
-        <td><strong>SiteGround</strong></td>
-        <td class="price">$3–15/mo</td>
-        <td>Google Cloud, shared resources</td>
-        <td>Beginners &amp; small blogs on a budget</td>
-        <td><a class="cta" href="REPLACE_WITH_YOUR_SITEGROUND_AFFILIATE_LINK" rel="sponsored">Visit SiteGround</a></td>
-      </tr>
-      <tr>
-        <td><strong>hosting.com</strong></td>
-        <td class="price">From $3/mo</td>
-        <td>LiteSpeed/Turbo, developer tools</td>
-        <td>Speed-seekers on a budget</td>
-        <td><a class="cta" href="REPLACE_WITH_YOUR_HOSTING_AFFILIATE_LINK" rel="sponsored">Visit hosting.com</a></td>
-      </tr>
-    </tbody>
-  </table>
+  <h2>Browse by category</h2>
 
-  <div class="pick" id="pick">
-    <span class="tag">Match your situation — not our opinion</span>
-    <h3 style="margin-top:10px">Which host fits you?</h3>
-    <p>No single host wins for everyone. Find the row that matches your situation, then verify current pricing on the host's site:</p>
-    <table>
-      <thead>
-        <tr><th>You are…</th><th>Best fit</th><th></th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Starting a blog or first site on a budget</td><td><strong>SiteGround</strong></td><td><a class="cta" href="REPLACE_WITH_YOUR_SITEGROUND_AFFILIATE_LINK" rel="sponsored">See SiteGround</a></td></tr>
-        <tr><td>Agency managing client sites</td><td><strong>Kinsta</strong></td><td><a class="cta" href="REPLACE_WITH_YOUR_KINSTA_AFFILIATE_LINK" rel="sponsored">See Kinsta</a></td></tr>
-        <tr><td>Developer who wants cloud control</td><td><strong>Cloudways</strong></td><td><a class="cta" href="REPLACE_WITH_YOUR_CLOUDWAYS_AFFILIATE_LINK" rel="sponsored">See Cloudways</a></td></tr>
-        <tr><td>Large brand with compliance needs</td><td><strong>WP Engine</strong></td><td><a class="cta" href="REPLACE_WITH_YOUR_WPENGINE_AFFILIATE_LINK" rel="sponsored">See WP Engine</a></td></tr>
-        <tr><td>WooCommerce / membership (logged-in traffic)</td><td><strong>Kinsta Business tier</strong></td><td><a class="cta" href="REPLACE_WITH_YOUR_KINSTA_AFFILIATE_LINK" rel="sponsored">See Kinsta</a></td></tr>
-        <tr><td>Want fast hosting without the premium price</td><td><strong>hosting.com</strong></td><td><a class="cta" href="REPLACE_WITH_YOUR_HOSTING_AFFILIATE_LINK" rel="sponsored">See hosting.com</a></td></tr>
-      </tbody>
-    </table>
-    <p class="small">Every host above is a managed platform we've researched. We earn a commission if you sign up via these links, at no extra cost — but the match is based on your situation, not our payout.</p>
-  </div>
-
-  <h2>Why "managed" matters</h2>
-  <p>Managed WordPress hosting means the host handles caching, security patches, daily backups, PHP versions, and staging — so you focus on content, not server config. The difference shows up exactly when it's expensive to be wrong: a traffic spike, a plugin conflict, or a malware scan at 2am. With managed hosts, that's their problem, not yours.</p>
-
-  <h2>Kinsta — deep dive</h2>
-  <p>Kinsta is a premium managed WordPress host founded in 2013, now serving 25,000+ companies. Every plan includes free migrations, a 30-day money-back guarantee, Cloudflare-powered CDN, automatic SSL, and 24/7/365 support staffed by WordPress engineers (not a generic helpdesk).</p>
-  <div class="card">
-    <h3>Plans (2026, monthly)</h3>
-    <ul>
-      <li><strong>Starter</strong> — $30/mo · 1 site · 20,000 visits · 10 GB</li>
-      <li><strong>Pro</strong> — $60/mo · 2 sites · 40,000 visits · 20 GB</li>
-      <li><strong>Business 1</strong> — $100/mo · 5 sites · 100,000 visits · 30 GB</li>
-      <li><strong>Business 2</strong> — $200/mo · 10 sites · 250,000 visits · 40 GB</li>
-      <li><strong>Enterprise</strong> — from $600/mo · 60+ sites</li>
-    </ul>
-    <p class="small">Annual billing gives 2 months free. Visits are metered; overages are billed, not throttled. Redis object cache is a $100/mo account add-on — relevant mainly for busy WooCommerce stores.</p>
-  </div>
-  <p class="pros"><strong>Pros:</strong> Fastest origin TTFB we've seen for managed WP; true site isolation; excellent MyKinsta dashboard; engineer-level support; free migrations.</p>
-  <p class="cons"><strong>Cons:</strong> Priced 3–10× budget hosts; Redis is a paid add-on; visit caps need monitoring; no built-in email hosting.</p>
-
-  <h2 id="cloudways">Cloudways</h2>
-  <p>Cloudways sits between raw cloud (DigitalOcean, AWS, Google Cloud) and fully managed. You pick the infrastructure; they manage the stack. Great if you want control and a lower entry price, but you'll do more of the WordPress-level tuning yourself.</p>
-  <p class="pros"><strong>Pros:</strong> Choose your cloud provider; flexible vertical scaling; pay only for the server you pick.</p>
-  <p class="cons"><strong>Cons:</strong> Steeper learning curve than fully managed; bandwidth overages; you manage more of the WordPress layer.</p>
-
-  <h2 id="wpengine">WP Engine</h2>
-  <p>WP Engine is the enterprise-grade option — trusted by large brands and agencies. Strong for big sites, but the premium is real and some plugins are restricted.</p>
-  <p class="pros"><strong>Pros:</strong> Brand trust; huge knowledge base; premium managed platform.</p>
-  <p class="cons"><strong>Cons:</strong> Pricier at entry; stricter plugin policies; overkill for small sites.</p>
-
-  <h2 id="siteground">SiteGround</h2>
-  <p>SiteGround is the friendly on-ramp: cheap, fast onboarding, great support. Ideal if you're just starting and don't need enterprise scale.</p>
-  <p class="pros"><strong>Pros:</strong> Lowest first-term cost; excellent support; easy for beginners.</p>
-  <p class="cons"><strong>Cons:</strong> Shared resources (noisy-neighbor risk); renewal prices jump significantly.</p>
-
-  <h2>How we'd choose</h2>
-  <ul>
-    <li><strong>Starting a blog / first site on a budget:</strong> SiteGround — lowest first-term cost, friendly onboarding, doesn't overprovision.</li>
-    <li><strong>Agency managing client sites:</strong> Kinsta — site isolation plus free white-glove migrations make client hand-off clean and billable.</li>
-    <li><strong>Developer who wants cloud control:</strong> Cloudways — pick your infrastructure (DigitalOcean, AWS, GCP) without managing the stack yourself.</li>
-    <li><strong>Large brand / compliance & governance:</strong> WP Engine — enterprise platform, big-site knowledge base, premium SLAs.</li>
-    <li><strong>WooCommerce / membership (logged-in traffic):</strong> Kinsta Business tier — uncached origin performance matters for authenticated visitors.</li>
-  </ul>
-
-  <h2>FAQ</h2>
-  <div class="faq">
-    <h3>Is Kinsta worth the price?</h3>
-    <p>Only if performance or uptime affects your revenue. For a hobby blog, no. For anything mission-critical, the predictability pays for itself in avoided downtime.</p>
-  </div>
-  <div class="faq">
-    <h3>Can I migrate my existing site?</h3>
-    <p>Yes — Kinsta migrates sites from other hosts for free on plans above Starter, including DNS cutover.</p>
-  </div>
-  <div class="faq">
-    <h3>What happens if I exceed visits?</h3>
-    <p>You're billed for overages; your site stays online. Monitor visit counts in the dashboard and upgrade tiers as needed.</p>
-  </div>
-  <div class="faq">
-    <h3>Do I need technical skills?</h3>
-    <p>No. That's the point of "managed." The dashboard handles staging, backups, and PHP switching with a click.</p>
-  </div>
-  <div class="faq">
-    <h3>Is there a money-back guarantee?</h3>
-    <p>Kinsta offers a 30-day money-back guarantee on all WordPress plans.</p>
-  </div>
+  <section class="hub-cat">
+    <h3>Managed WordPress Hosting</h3>
+    <p>A slow site costs you customers; a down site costs you money. Choosing a host feels low-stakes until it isn't — a launch-day crawl, a 2 a.m. hack, or a checkout that quietly bleeds sales. Our hosting guides compare providers on speed under real load, support quality, honest renewal pricing, and which host fits which situation.</p>
+    <div class="guide-grid">
+      <a class="guide-card" href="best-managed-wordpress-hosting">
+        <strong>Which host fits you?</strong>
+        <span>The full 5-host comparison for 2026 — matched by your situation, not our opinion.</span>
+      </a>
+      <a class="guide-card" href="managed-wordpress-hosting-for-agencies">
+        <strong>For agencies</strong>
+        <span>Site isolation, client billing, staging, and clean hand-off when a client moves on.</span>
+      </a>
+      <a class="guide-card" href="wordpress-hosting-for-woocommerce">
+        <strong>For WooCommerce stores</strong>
+        <span>Checkout speed under logged-in traffic, object caching, and safe update staging.</span>
+      </a>
+      <a class="guide-card" href="wordpress-hosting-for-small-business">
+        <strong>For small business</strong>
+        <span>Reliability, support you can reach, and moving off GoDaddy or cPanel without drama.</span>
+      </a>
+    </div>
+  </section>
 
   <div class="note">
-    <strong>Tip:</strong> Start on the lowest tier that fits your traffic, then scale up. Managed hosts make upgrading painless — no migration weekend required.
+    <strong>More categories coming.</strong> Wiser Tools is built to cover more than one niche — hosting is the first. Each category gets its own section here and its own set of in-depth guides.
   </div>
 
-  <p class="cta-label">Ready to look closer? Visit each host:</p>
-  <div class="cta-row">
-    <a class="cta" href="REPLACE_WITH_YOUR_KINSTA_AFFILIATE_LINK" rel="sponsored">Visit Kinsta</a>
-    <a class="cta" href="REPLACE_WITH_YOUR_CLOUDWAYS_AFFILIATE_LINK" rel="sponsored">Visit Cloudways</a>
-    <a class="cta" href="REPLACE_WITH_YOUR_WPENGINE_AFFILIATE_LINK" rel="sponsored">Visit WP Engine</a>
-    <a class="cta" href="REPLACE_WITH_YOUR_SITEGROUND_AFFILIATE_LINK" rel="sponsored">Visit SiteGround</a>
-    <a class="cta" href="REPLACE_WITH_YOUR_HOSTING_AFFILIATE_LINK" rel="sponsored">Visit hosting.com</a>
-  </div>
-
-  <div class="related">
-    <strong>Related guides:</strong>
-    <ul style="margin:8px 0 0;padding-left:0;list-style:none">
-      <li style="margin:8px 0"><a href="best-managed-wordpress-hosting">→ Which host fits you? (5-situation decision matrix, 2026)</a></li>
-      <li style="margin:8px 0"><a href="managed-wordpress-hosting-for-agencies">→ Managed WordPress hosting for agencies: clients, billing &amp; hand-off</a></li>
-      <li style="margin:8px 0"><a href="wordpress-hosting-for-woocommerce">→ Managed WordPress hosting for WooCommerce stores</a></li>
-      <li style="margin:8px 0"><a href="wordpress-hosting-for-small-business">→ Best WordPress hosting for small business</a></li>
-    </ul>
+  <h2>How we review</h2>
+  <p>Most "best of" lists are written to rank, not to help. We hold ourselves to four rules, and they apply to every category on this site:</p>
+  <div class="method">
+    <div class="method-item">
+      <strong>Compare on merits</strong>
+      <span>Real pricing (including renewal rates), measured performance, and support quality — not marketing badges.</span>
+    </div>
+    <div class="method-item">
+      <strong>No single winner</strong>
+      <span>We match options to situations. The best choice for an agency is rarely the best choice for a first-time blogger.</span>
+    </div>
+    <div class="method-item">
+      <strong>Name the trade-offs</strong>
+      <span>Every option has a downside. If a host is expensive, slow to scale, or strict about plugins, we say so plainly.</span>
+    </div>
+    <div class="method-item">
+      <strong>Affiliate-neutral</strong>
+      <span>We may earn a commission if you sign up through our links. It costs you nothing and never changes our rankings or conclusions.</span>
+    </div>
   </div>
 
 </main>
 
 <footer class="wrap">
-  <p><strong>Affiliate disclosure:</strong> Wiser Tools participates in affiliate programs including Kinsta, Cloudways, WP Engine, and SiteGround. Some links on this page are affiliate links, meaning we may receive a commission if you sign up — at no additional cost to you. This does not influence our recommendations; we compare on merits. Affiliate links on this site carry a <code>rel="sponsored"</code> attribute in line with Google's guidelines.</p>
-  <p class="small">Pricing and program terms change. Verify current details on each host's official site before purchasing. Last reviewed: August 2026.</p>
+  <p><strong>Affiliate disclosure:</strong> Wiser Tools participates in affiliate programs for several of the services reviewed on this site. Some links are affiliate links, meaning we may receive a commission if you sign up — at no additional cost to you. This does not influence our comparisons. Affiliate links carry a <code>rel="sponsored"</code> attribute in line with Google's guidelines.</p>
+  <p class="small">Pricing and program terms change. Verify current details on each provider's official site before purchasing.</p>
 </footer>
 
 <script type="application/ld+json">
@@ -248,14 +140,10 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    { "@type": "Question", "name": "Is Kinsta worth the price?", "acceptedAnswer": { "@type": "Answer", "text": "Only if performance or uptime affects your revenue. For a hobby blog, no. For anything mission-critical, the predictability pays for itself in avoided downtime." } },
-    { "@type": "Question", "name": "Can I migrate my existing site?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — Kinsta migrates sites from other hosts for free on plans above Starter, including DNS cutover." } },
-    { "@type": "Question", "name": "What happens if I exceed visits?", "acceptedAnswer": { "@type": "Answer", "text": "You're billed for overages; your site stays online. Monitor visit counts in the dashboard and upgrade tiers as needed." } },
-    { "@type": "Question", "name": "Do I need technical skills?", "acceptedAnswer": { "@type": "Answer", "text": "No. That's the point of 'managed.' The dashboard handles staging, backups, and PHP switching with a click." } },
-    { "@type": "Question", "name": "Is there a money-back guarantee?", "acceptedAnswer": { "@type": "Answer", "text": "Kinsta offers a 30-day money-back guarantee on all WordPress plans." } }
-  ]
+  "@type": "Organization",
+  "name": "Wiser Tools",
+  "url": "https://wiser-tools.com/",
+  "description": "Independent review site comparing managed hosting, SaaS tools, and developer services on real pricing, performance, and support."
 }
 </script>
 

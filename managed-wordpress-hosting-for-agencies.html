@@ -199,15 +199,65 @@
   <p class="pros"><strong>Pros:</strong> Best operational fit for client work; isolated containers; genuine hand-off tool; engineer-level support.</p>
   <p class="cons"><strong>Cons:</strong> Higher entry price than Cloudways/SiteGround; Redis is a paid add-on; visit caps need monitoring across clients.</p>
 
-  <h2 id="cloudways">Cloudways for agencies</h2>
-  <p>Cloudways is the "control" option: you pick the cloud (DigitalOcean, AWS, Google Cloud), they manage the stack, and you get a reseller-style billing model. Great when you have developers who want the knobs and clients who don't need hand-holding on infrastructure.</p>
-  <p class="pros"><strong>Pros:</strong> Lower entry cost; choose your cloud; flexible vertical scaling; reseller billing.</p>
-  <p class="cons"><strong>Cons:</strong> More WordPress-level tuning is on you; bandwidth overages surprise new agencies; steeper learning curve than fully managed.</p>
+  <h2 id="cloudways">Cloudways for agencies — deep dive</h2>
+  <p>Cloudways launched in 2012 as a managed layer on top of raw cloud infrastructure. For agencies, the appeal is control: you pick the cloud (DigitalOcean, AWS, Google Cloud, Vultr, Linode), they manage the stack, and you get a reseller-style billing model. This works well when you have developers who want infrastructure knobs and clients who don't need hand-holding on server decisions.</p>
+  <div class="card">
+    <h3>Agency-relevant features</h3>
+    <ul>
+      <li><strong>Reseller billing:</strong> you pay Cloudways, bill clients at your own markup</li>
+      <li><strong>Team collaboration:</strong> add team members with role-based access per project</li>
+      <li><strong>Staging per app:</strong> clone any application to a staging URL for client review</li>
+      <li><strong>Vertical scaling:</strong> upgrade server specs as a client grows, no migration</li>
+      <li><strong>Built-in Redis/object cache:</strong> included on all plans, no add-on cost</li>
+    </ul>
+  </div>
+  <p class="pros"><strong>Pros for agencies:</strong> Lower entry cost than Kinsta; choose your cloud provider; flexible vertical scaling; reseller billing model; built-in object caching; no visit caps (bandwidth-based instead).</p>
+  <p class="cons"><strong>Cons for agencies:</strong> Steeper learning curve — you manage more of the WordPress layer; bandwidth overages can surprise; support is good but not as WordPress-specialized as Kinsta's; no white-glove migration service (automated tool only).</p>
 
-  <h2 id="wpengine">WP Engine for agencies</h2>
-  <p>WP Engine targets larger, brand-name clients and enterprise governance. If your roster includes big brands with compliance and plugin-policy requirements, its agency tiers and transferable installs are a fit — at a premium.</p>
-  <p class="pros"><strong>Pros:</strong> Enterprise trust; mature staging; transferable installs for hand-off.</p>
-  <p class="cons"><strong>Cons:</strong> Pricier at entry; stricter plugin policies; overkill for small brochure clients.</p>
+  <h2 id="wpengine">WP Engine for agencies — deep dive</h2>
+  <p>WP Engine is the enterprise-grade option, founded in 2010 and now powering 200,000+ sites. For agencies working with large brands, regulated industries, or clients who need governance and compliance features, WP Engine's mature platform and agency-specific tiers are purpose-built.</p>
+  <div class="card">
+    <h3>Agency-relevant features</h3>
+    <ul>
+      <li><strong>Transferable installs:</strong> build a site, transfer ownership to client's account while retaining agency access</li>
+      <li><strong>Agency partner program:</strong> revenue share, co-marketing, priority support</li>
+      <li><strong>EverCache:</strong> proprietary caching tuned specifically for WordPress, handles logged-in traffic well</li>
+      <li><strong>Strict plugin policy:</strong> prevents conflicts, but limits some client flexibility</li>
+      <li><strong>Enterprise support:</strong> dedicated account managers on higher tiers</li>
+    </ul>
+  </div>
+  <p class="pros"><strong>Pros for agencies:</strong> Enterprise trust and brand recognition; mature staging and deployment workflows; transferable installs for clean hand-off; proprietary caching handles WooCommerce well; enormous knowledge base and community.</p>
+  <p class="cons"><strong>Cons for agencies:</strong> Higher entry price than Cloudways or SiteGround; strict plugin restrictions can break some client setups; overkill for small brochure sites; no email hosting included; some legacy UI patterns show the platform's age.</p>
+
+  <h2 id="siteground">SiteGround for agencies — deep dive</h2>
+  <p>SiteGround, founded in 2004, is the budget-friendly option for agencies managing a handful of small brochure sites. The first-term pricing is the hook — but renewal rates jump significantly, so budget accordingly. For agencies with price-sensitive clients who don't need heavy traffic or complex workflows, it's a sane entry point.</p>
+  <div class="card">
+    <h3>Agency-relevant features</h3>
+    <ul>
+      <li><strong>Unlimited sites on GrowBig+:</strong> manage multiple clients on one account</li>
+      <li><strong>Site Tools dashboard:</strong> cleaner than cPanel, client-friendly</li>
+      <li><strong>Collaborator access:</strong> add clients as collaborators with limited permissions</li>
+      <li><strong>Staging on GoGeek:</strong> one-click staging for client review before push</li>
+      <li><strong>Free automated migration:</strong> bring client sites over without manual work</li>
+    </ul>
+  </div>
+  <p class="pros"><strong>Pros for agencies:</strong> Lowest first-term cost; excellent 24/7 support with fast response times; beginner-friendly for non-technical clients; free CDN and SSL; solid performance on Google Cloud infrastructure.</p>
+  <p class="cons"><strong>Cons for agencies:</strong> Shared resources mean noisy-neighbor risk — one client's traffic spike can slow others; renewal prices are 3-5× intro rate; no true site isolation (shared container); visit estimates are soft limits — heavy traffic can trigger throttling or forced upgrade; collaborator access less granular than Kinsta's agency tools.</p>
+
+  <h2 id="hostingcom">hosting.com for agencies — deep dive</h2>
+  <p>hosting.com (formerly A2 Hosting) is the speed-conscious budget option. Their Turbo plans use LiteSpeed + NVMe storage, which delivers genuinely fast TTFB for the price. For agencies with developer-friendly clients who want speed without premium managed pricing, it's a middle path — but the brand recognition post-rebrand is still building.</p>
+  <div class="card">
+    <h3>Agency-relevant features</h3>
+    <ul>
+      <li><strong>Turbo plans:</strong> LiteSpeed + NVMe + Turbo caching for faster origin performance</li>
+      <li><strong>Developer tools:</strong> SSH, Git, WP-CLI even on shared plans</li>
+      <li><strong>Free migration:</strong> automated tool, or assisted on higher tiers</li>
+      <li><strong>Anytime money-back:</strong> prorated refund, not just 30 days</li>
+      <li><strong>Managed WP option:</strong> pre-installed WordPress, auto-updates, staging</li>
+    </ul>
+  </div>
+  <p class="pros"><strong>Pros for agencies:</strong> Turbo speed at budget prices; developer tools even on shared plans; anytime money-back guarantee; free migration; 24/7 "Guru Crew" support.</p>
+  <p class="cons"><strong>Cons for agencies:</strong> Turbo speed requires higher-tier plans (base plans are standard Apache); renewal prices jump; support quality inconsistent — some report excellent help, others long waits; interface less polished than Kinsta or SiteGround; brand recognition still building post-rebrand; shared resources mean noisy-neighbor risk.</p>
 
   <h2 id="stack">How we'd set up an agency stack</h2>
   <p>A pragmatic mix, not a single host for everyone:</p>
@@ -216,8 +266,44 @@
     <li><strong>Developer-heavy clients who want cloud control:</strong> Cloudways — you get the knobs without building the stack.</li>
     <li><strong>Enterprise / compliance clients:</strong> WP Engine — governance and brand trust.</li>
     <li><strong>A handful of small brochure clients:</strong> SiteGround — don't overpay for capacity they won't use.</li>
+    <li><strong>Speed-conscious clients on a budget:</strong> hosting.com Turbo plans — LiteSpeed + NVMe without Kinsta pricing.</li>
   </ul>
   <p>Keep one "house" host (Kinsta for most) for operational consistency, and use the others where a client's needs genuinely diverge. That way your dashboard, your billing, and your support playbook stay predictable.</p>
+
+  <h2>Agency workflow: from onboarding to hand-off</h2>
+  <p>The hosting choice is only half the battle. Here's the operational workflow that makes agencies scale:</p>
+  <div class="card">
+    <h3>1. Client onboarding checklist</h3>
+    <ul>
+      <li>Document current hosting, DNS registrar, and any custom configurations</li>
+      <li>Set expectations: what's included in hosting vs. what's billable</li>
+      <li>Get written approval for hosting costs and renewal pricing</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3>2. Migration &amp; staging</h3>
+    <ul>
+      <li>Run the host's free migration tool or request white-glove service</li>
+      <li>Clone to staging, test thoroughly (forms, checkout, contact pages)</li>
+      <li>Client review on staging URL before DNS cutover</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3>3. Ongoing management</h3>
+    <ul>
+      <li>Monitor visit counts / bandwidth in dashboard</li>
+      <li>Test plugin updates on staging before production push</li>
+      <li>Document all changes for client billing transparency</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3>4. Hand-off (when client leaves)</h3>
+    <ul>
+      <li>Use Kinsta's site-transfer tool or WP Engine's transferable installs</li>
+      <li>Document all admin credentials, custom configurations, and renewal dates</li>
+      <li>Provide a "what's included" doc so the client knows what they're taking over</li>
+    </ul>
+  </div>
 
   <div class="note">
     <strong>Tip:</strong> Standardize client onboarding — one staging checklist, one hand-off template, one "what's included" doc. The host handles infrastructure; your process handles the rest. The agencies that scale are the ones with a repeatable playbook, not the ones chasing the cheapest server.
@@ -230,19 +316,31 @@
   </div>
   <div class="faq">
     <h3>How do I hand a site to a client?</h3>
-    <p>On Kinsta, use the site-transfer tool to move a site to the client's own account while keeping agency access with their permission. No migration weekend, no DNS scramble.</p>
+    <p>On Kinsta, use the site-transfer tool to move a site to the client's own account while keeping agency access with their permission. On WP Engine, use transferable installs. On Cloudways, you'd typically migrate the site to the client's own Cloudways account or export it. No migration weekend, no DNS scramble.</p>
   </div>
   <div class="faq">
     <h3>Is site isolation really necessary?</h3>
-    <p>For client work, yes. If one client site shares resources with another and gets hit by a spike or malware, isolation is what keeps the rest online. It's the difference between one angry client and five.</p>
+    <p>For client work, yes. If one client site shares resources with another and gets hit by a spike or malware, isolation is what keeps the rest online. It's the difference between one angry client and five. Kinsta's per-site containers and Cloudways' per-server isolation both solve this; SiteGround's shared resources don't.</p>
   </div>
   <div class="faq">
     <h3>Which host is cheapest for a new agency?</h3>
-    <p>Cloudways has the lowest entry price and a reseller model; SiteGround is fine for a few tiny brochure sites. But "cheapest" ignores the support and isolation you'll wish you had at 9 p.m. — price the operational risk, not just the server.</p>
+    <p>Cloudways has the lowest entry price and a reseller model; SiteGround is fine for a few tiny brochure sites. But "cheapest" ignores the support and isolation you'll wish you had at 9 p.m. — price the operational risk, not just the server. A $30/mo Kinsta plan that prevents one emergency call pays for itself.</p>
   </div>
   <div class="faq">
     <h3>Do my clients need to be technical?</h3>
-    <p>No. Managed hosting means staging, backups and PHP switching are one-click in the dashboard. You can hand a non-technical client a stable site and retain admin access as agreed.</p>
+    <p>No. Managed hosting means staging, backups and PHP switching are one-click in the dashboard. You can hand a non-technical client a stable site and retain admin access as agreed. SiteGround's Site Tools and Kinsta's MyKinsta are particularly client-friendly.</p>
+  </div>
+  <div class="faq">
+    <h3>Can I white-label the hosting for my clients?</h3>
+    <p>Not directly on any of these hosts. You can mark up the hosting cost in your retainer and manage the client relationship, but the hosting dashboard will show the host's branding. True white-label hosting requires reseller programs (which these hosts don't offer) or building your own infrastructure.</p>
+  </div>
+  <div class="faq">
+    <h3>What if a client site gets hacked?</h3>
+    <p>All five hosts include malware scanning and some level of cleanup on managed plans. Kinsta and WP Engine have more proactive security (firewalls, DDoS protection, automatic patching). On shared hosts (SiteGround, hosting.com), you're more responsible for security plugins and monitoring. Budget for a security retainer or use a service like Sucuri if clients are high-risk.</p>
+  </div>
+  <div class="faq">
+    <h3>Should I use one host for all clients or mix and match?</h3>
+    <p>Mix and match based on client needs, but keep one "house" host for operational consistency. Most agencies standardize on Kinsta or Cloudways for the majority of clients, then use WP Engine for enterprise clients or SiteGround for tiny brochure sites. The operational overhead of managing five different dashboards isn't worth it unless client needs genuinely diverge.</p>
   </div>
 
   <div class="related">
@@ -308,10 +406,13 @@
   "@type": "FAQPage",
   "mainEntity": [
     { "@type": "Question", "name": "Can I bill Kinsta back to my clients?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Agencies typically mark up the cost in their monthly retainer, or use Kinsta's agency tooling to manage client accounts. The exact billing model depends on the plan you're on — verify current options on Kinsta's agency page." } },
-    { "@type": "Question", "name": "How do I hand a site to a client?", "acceptedAnswer": { "@type": "Answer", "text": "On Kinsta, use the site-transfer tool to move a site to the client's own account while keeping agency access with their permission. No migration weekend, no DNS scramble." } },
-    { "@type": "Question", "name": "Is site isolation really necessary?", "acceptedAnswer": { "@type": "Answer", "text": "For client work, yes. If one client site shares resources with another and gets hit by a spike or malware, isolation is what keeps the rest online. It's the difference between one angry client and five." } },
-    { "@type": "Question", "name": "Which host is cheapest for a new agency?", "acceptedAnswer": { "@type": "Answer", "text": "Cloudways has the lowest entry price and a reseller model; SiteGround is fine for a few tiny brochure sites. But 'cheapest' ignores the support and isolation you'll wish you had at 9 p.m. — price the operational risk, not just the server." } },
-    { "@type": "Question", "name": "Do my clients need to be technical?", "acceptedAnswer": { "@type": "Answer", "text": "No. Managed hosting means staging, backups and PHP switching are one-click in the dashboard. You can hand a non-technical client a stable site and retain admin access as agreed." } }
+    { "@type": "Question", "name": "How do I hand a site to a client?", "acceptedAnswer": { "@type": "Answer", "text": "On Kinsta, use the site-transfer tool to move a site to the client's own account while keeping agency access with their permission. On WP Engine, use transferable installs. On Cloudways, you'd typically migrate the site to the client's own Cloudways account or export it. No migration weekend, no DNS scramble." } },
+    { "@type": "Question", "name": "Is site isolation really necessary?", "acceptedAnswer": { "@type": "Answer", "text": "For client work, yes. If one client site shares resources with another and gets hit by a spike or malware, isolation is what keeps the rest online. It's the difference between one angry client and five. Kinsta's per-site containers and Cloudways' per-server isolation both solve this; SiteGround's shared resources don't." } },
+    { "@type": "Question", "name": "Which host is cheapest for a new agency?", "acceptedAnswer": { "@type": "Answer", "text": "Cloudways has the lowest entry price and a reseller model; SiteGround is fine for a few tiny brochure sites. But 'cheapest' ignores the support and isolation you'll wish you had at 9 p.m. — price the operational risk, not just the server. A $30/mo Kinsta plan that prevents one emergency call pays for itself." } },
+    { "@type": "Question", "name": "Do my clients need to be technical?", "acceptedAnswer": { "@type": "Answer", "text": "No. Managed hosting means staging, backups and PHP switching are one-click in the dashboard. You can hand a non-technical client a stable site and retain admin access as agreed. SiteGround's Site Tools and Kinsta's MyKinsta are particularly client-friendly." } },
+    { "@type": "Question", "name": "Can I white-label the hosting for my clients?", "acceptedAnswer": { "@type": "Answer", "text": "Not directly on any of these hosts. You can mark up the hosting cost in your retainer and manage the client relationship, but the hosting dashboard will show the host's branding. True white-label hosting requires reseller programs (which these hosts don't offer) or building your own infrastructure." } },
+    { "@type": "Question", "name": "What if a client site gets hacked?", "acceptedAnswer": { "@type": "Answer", "text": "All five hosts include malware scanning and some level of cleanup on managed plans. Kinsta and WP Engine have more proactive security (firewalls, DDoS protection, automatic patching). On shared hosts (SiteGround, hosting.com), you're more responsible for security plugins and monitoring. Budget for a security retainer or use a service like Sucuri if clients are high-risk." } },
+    { "@type": "Question", "name": "Should I use one host for all clients or mix and match?", "acceptedAnswer": { "@type": "Answer", "text": "Mix and match based on client needs, but keep one 'house' host for operational consistency. Most agencies standardize on Kinsta or Cloudways for the majority of clients, then use WP Engine for enterprise clients or SiteGround for tiny brochure sites. The operational overhead of managing five different dashboards isn't worth it unless client needs genuinely diverge." } }
   ]
 }
 </script>

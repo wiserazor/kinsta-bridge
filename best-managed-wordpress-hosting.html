@@ -179,22 +179,67 @@
   <p class="pros"><strong>Pros:</strong> Fastest origin TTFB we've measured for managed WP; genuine site isolation; best-in-class MyKinsta dashboard; engineer-level support; free white-glove migrations.</p>
   <p class="cons"><strong>Cons:</strong> Priced 3–10× budget hosts; Redis is a paid add-on; visit caps need monitoring; no bundled email hosting.</p>
 
-  <h2 id="others">Cloudways, WP Engine &amp; SiteGround</h2>
+  <h2 id="others">Cloudways, WP Engine, SiteGround &amp; hosting.com — deep dives</h2>
 
   <h3>Cloudways</h3>
-  <p>Cloudways sits between raw cloud (DigitalOcean, AWS, Google Cloud) and fully managed. You choose the infrastructure; they manage the stack. Ideal if you want control and a lower entry price, but expect to do more of the WordPress-level tuning yourself.</p>
-  <p class="pros"><strong>Pros:</strong> Pick your cloud provider; flexible vertical scaling; pay only for the server you pick.</p>
-  <p class="cons"><strong>Cons:</strong> Steeper learning curve than fully managed; bandwidth can surprise you; more WordPress-level tuning yourself.</p>
+  <p>Cloudways launched in 2012 as a managed layer on top of raw cloud infrastructure. Instead of renting you a slot on their own servers, they let you deploy on DigitalOcean, AWS, Google Cloud, Vultr, or Linode — then handle the server management, security patching, and stack optimization. The result is cloud flexibility without needing a DevOps degree.</p>
+  <div class="card">
+    <h3>Plans (2026, monthly — DigitalOcean baseline)</h3>
+    <ul>
+      <li><strong>1 GB</strong> — $11/mo · 1 vCPU · 25 GB storage · 1 TB bandwidth</li>
+      <li><strong>2 GB</strong> — $23/mo · 1 vCPU · 50 GB storage · 2 TB bandwidth</li>
+      <li><strong>4 GB</strong> — $43/mo · 2 vCPU · 80 GB storage · 4 TB bandwidth</li>
+      <li><strong>8 GB+</strong> — $81/mo and up · for production workloads</li>
+    </ul>
+    <p class="small">AWS and GCP plans cost more due to provider pricing. Bandwidth overages are billed per GB. Vertical scaling is one-click — upgrade RAM or CPU without migrating.</p>
+  </div>
+  <p class="pros"><strong>Pros:</strong> Choose your infrastructure provider; true vertical scaling; pay-as-you-grow pricing; built-in Redis/object cache; free automated migration tool; staging per application.</p>
+  <p class="cons"><strong>Cons:</strong> Steeper learning curve than fully managed hosts; bandwidth overages can surprise; you manage more of the WordPress layer (plugin conflicts, some performance tuning); support is good but not as WordPress-specialized as Kinsta's.</p>
 
   <h3>WP Engine</h3>
-  <p>The enterprise-grade option — trusted by large brands and agencies. Strong for big sites, but the premium is real and some plugins are restricted.</p>
-  <p class="pros"><strong>Pros:</strong> Brand trust; enormous knowledge base; premium managed platform.</p>
-  <p class="cons"><strong>Cons:</strong> Pricier at entry; stricter plugin policies; overkill for small sites.</p>
+  <p>WP Engine is the oldest and largest managed WordPress host, founded in 2010 and now powering 200,000+ sites. It's the enterprise-grade option — trusted by brands like AMD, SoundCloud, and National Geographic — with a mature platform, proprietary EverCache technology, and a strict plugin policy that trades flexibility for stability.</p>
+  <div class="card">
+    <h3>Plans (2026, monthly)</h3>
+    <ul>
+      <li><strong>Startup</strong> — $20/mo · 1 site · 25,000 visits · 10 GB storage</li>
+      <li><strong>Professional</strong> — $39/mo · 3 sites · 75,000 visits · 15 GB</li>
+      <li><strong>Growth</strong> — $77/mo · 10 sites · 100,000 visits · 20 GB</li>
+      <li><strong>Scale</strong> — $194/mo · 30 sites · 400,000 visits · 50 GB</li>
+      <li><strong>Enterprise</strong> — custom · 60+ sites · dedicated infrastructure</li>
+    </ul>
+    <p class="small">Annual billing saves ~2 months. Visit overages are billed. Some plugins (caching, backup, related posts) are restricted to prevent conflicts with EverCache.</p>
+  </div>
+  <p class="pros"><strong>Pros:</strong> Enterprise trust and brand recognition; mature staging and deployment workflows; proprietary EverCache tuned specifically for WordPress; enormous knowledge base and community; 24/7 support with WordPress expertise; transferable installs for agency hand-off.</p>
+  <p class="cons"><strong>Cons:</strong> Higher entry price than Cloudways or SiteGround; strict plugin restrictions can break some setups; overkill for small brochure sites; no email hosting included; the platform's age shows in some legacy UI patterns.</p>
 
   <h3>SiteGround</h3>
-  <p>The friendly on-ramp: cheap, fast onboarding, excellent support. Perfect if you're starting out and don't need enterprise scale.</p>
-  <p class="pros"><strong>Pros:</strong> Lowest first-term cost; excellent support; beginner-friendly.</p>
-  <p class="cons"><strong>Cons:</strong> Shared resources (noisy-neighbor risk); renewal prices jump significantly.</p>
+  <p>SiteGround, founded in 2004, is the friendly on-ramp to managed WordPress hosting. It's the host most beginners start with — cheap first-term pricing, one-click WordPress install, and support that actually answers in plain English. In 2020 they migrated their entire platform to Google Cloud, which improved baseline performance significantly.</p>
+  <div class="card">
+    <h3>Plans (2026, monthly — first-term pricing)</h3>
+    <ul>
+      <li><strong>StartUp</strong> — $2.99/mo · 1 site · ~10,000 visits · 10 GB storage</li>
+      <li><strong>GrowBig</strong> — $4.99/mo · unlimited sites · ~25,000 visits · 20 GB</li>
+      <li><strong>GoGeek</strong> — $7.99/mo · unlimited sites · ~100,000 visits · 40 GB · priority support · staging</li>
+    </ul>
+    <p class="small">Renewal prices jump significantly — StartUp renews at $14.99/mo, GrowBig at $24.99/mo. First-term discounts are the hook; budget for renewal. Dynamic caching and memcached are included on all plans.</p>
+  </div>
+  <p class="pros"><strong>Pros:</strong> Lowest first-term cost in managed WP; excellent 24/7 support with fast response times; beginner-friendly Site Tools dashboard; free automated migration; free CDN and SSL; solid performance on Google Cloud infrastructure.</p>
+  <p class="cons"><strong>Cons:</strong> Shared resources mean noisy-neighbor risk on busy servers; renewal prices are 3-5× the intro rate; no true site isolation (shared container); visit estimates are soft limits — heavy traffic can trigger throttling or forced upgrade.</p>
+
+  <h3>hosting.com (formerly A2 Hosting)</h3>
+  <p>hosting.com is the 2026 rebrand of A2 Hosting, a Michigan-based host founded in 2001 known for its "Turbo" speed-optimized servers. The rebrand consolidated their branding but kept the same infrastructure: LiteSpeed web servers, NVMe storage on Turbo plans, and a developer-friendly feature set. They position as the speed-conscious budget option — faster than generic shared hosts, cheaper than premium managed platforms.</p>
+  <div class="card">
+    <h3>Plans (2026, monthly — shared hosting baseline)</h3>
+    <ul>
+      <li><strong>Startup</strong> — $2.99/mo · 1 site · 100 GB NVMe storage</li>
+      <li><strong>Drive</strong> — $5.99/mo · unlimited sites · unlimited storage</li>
+      <li><strong>Turbo Boost</strong> — $6.99/mo · NVMe + LiteSpeed + Turbo caching</li>
+      <li><strong>Turbo Max</strong> — $14.99/mo · 5× more resources + priority support</li>
+    </ul>
+    <p class="small">Managed WordPress plans start at $11.99/mo with pre-installed WP, auto-updates, and their Turbo stack. VPS and dedicated options available. Renewal prices higher than intro.</p>
+  </div>
+  <p class="pros"><strong>Pros:</strong> LiteSpeed + NVMe on Turbo plans delivers genuinely fast TTFB for the price; developer tools (SSH, Git, WP-CLI) even on shared plans; anytime money-back guarantee; free site migration; 24/7 "Guru Crew" support.</p>
+  <p class="cons"><strong>Cons:</strong> Turbo speed requires higher-tier plans (base plans are standard Apache); renewal prices jump; support quality inconsistent — some report excellent help, others long waits; interface less polished than Kinsta or SiteGround; brand recognition still building post-rebrand.</p>
 
   <h2 id="choose">How to choose (by situation)</h2>
   <ul>
@@ -208,6 +253,108 @@
   <h2 id="perf">Speed &amp; performance, explained</h2>
   <p>Three numbers matter more than any "turbo" badge: <strong>TTFB</strong> (time to first byte — how fast the server responds), <strong>LCP</strong> (largest contentful paint — when the main content shows), and <strong>TTFB under load</strong> (does it hold up when traffic spikes). Kinsta's container isolation keeps TTFB stable under load because your container isn't sharing CPU with a surge on someone else's site. Budget shared hosts often win on a single cached request but fall apart exactly when you need them — during the traffic you paid for.</p>
   <p>A CDN (Cloudflare on Kinsta, Bunny or Cloudflare elsewhere) handles static assets close to the visitor, but the origin TTFB is the floor everything else builds on. Cheap hosting with a great CDN still has a slow floor.</p>
+  <p>For WooCommerce and membership sites, the dynamic origin matters even more: cart and checkout pages can't be cached, so PHP workers and object cache (Redis) do the heavy lifting. This is where Kinsta's paid Redis add-on or Cloudways' built-in object cache become real differentiators, not marketing bullet points.</p>
+
+  <h2>Real-world comparison data</h2>
+  <p>Numbers beat adjectives. Here's how the five hosts compare on the metrics that actually affect your day-to-day:</p>
+  <table>
+    <thead>
+      <tr>
+        <th>Metric</th>
+        <th>Kinsta</th>
+        <th>Cloudways</th>
+        <th>WP Engine</th>
+        <th>SiteGround</th>
+        <th>hosting.com</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Entry price (monthly)</strong></td>
+        <td class="price">$30</td>
+        <td class="price">$11</td>
+        <td class="price">$20</td>
+        <td class="price">$3</td>
+        <td class="price">$3</td>
+      </tr>
+      <tr>
+        <td><strong>Typical TTFB (cached page)</strong></td>
+        <td>~150–250ms</td>
+        <td>~200–400ms</td>
+        <td>~180–300ms</td>
+        <td>~300–500ms</td>
+        <td>~250–450ms (Turbo)</td>
+      </tr>
+      <tr>
+        <td><strong>Site isolation</strong></td>
+        <td>✓ Per-site container</td>
+        <td>✓ Per-server</td>
+        <td>✓ Shared container, isolated accounts</td>
+        <td>✗ Shared resources</td>
+        <td>✗ Shared resources</td>
+      </tr>
+      <tr>
+        <td><strong>Object cache (Redis)</strong></td>
+        <td>Paid add-on ($100/mo)</td>
+        <td>Built-in / free</td>
+        <td>Proprietary EverCache</td>
+        <td>Memcached included</td>
+        <td>LiteSpeed cache (Turbo plans)</td>
+      </tr>
+      <tr>
+        <td><strong>Free migration</strong></td>
+        <td>✓ White-glove</td>
+        <td>✓ Automated tool</td>
+        <td>✓ Automated + assisted</td>
+        <td>✓ Automated tool</td>
+        <td>✓ Free migration</td>
+      </tr>
+      <tr>
+        <td><strong>Staging</strong></td>
+        <td>✓ One-click</td>
+        <td>✓ Per app</td>
+        <td>✓ Mature workflow</td>
+        <td>✓ One-click (GoGeek+)</td>
+        <td>✓ One-click (managed WP)</td>
+      </tr>
+      <tr>
+        <td><strong>Support quality</strong></td>
+        <td>WP engineers, 24/7</td>
+        <td>Good, generalist</td>
+        <td>WP experts, 24/7</td>
+        <td>Excellent, fast response</td>
+        <td>Inconsistent reports</td>
+      </tr>
+      <tr>
+        <td><strong>Money-back guarantee</strong></td>
+        <td>30 days</td>
+        <td>3-day free trial</td>
+        <td>60 days</td>
+        <td>30 days</td>
+        <td>Anytime (prorated)</td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="small">TTFB ranges are based on independent benchmarks and user reports; your mileage varies by location, theme, and plugins. Prices are monthly-billed entry tiers; annual billing typically saves 2 months.</p>
+
+  <h2>How to choose: a decision framework</h2>
+  <p>Forget "best overall." Ask these four questions in order, and the right host usually surfaces:</p>
+  <div class="card">
+    <h3>1. Does your site earn revenue directly?</h3>
+    <p>If yes (ecommerce, membership, lead-gen), prioritize <strong>predictable origin performance</strong> and <strong>support quality</strong> over price. A slow checkout or a down site during a campaign costs more than the hosting premium. → Lean Kinsta or WP Engine.</p>
+  </div>
+  <div class="card">
+    <h3>2. Do you have (or want) technical control?</h3>
+    <p>If you or your team wants to pick the cloud provider, tune the stack, and scale resources granularly, Cloudways gives you those knobs without building everything from scratch. If you'd rather have it all handled, stay fully managed.</p>
+  </div>
+  <div class="card">
+    <h3>3. What's your real budget — including renewal?</h3>
+    <p>SiteGround's $2.99/mo becomes $14.99/mo at renewal. hosting.com's $2.99/mo becomes $8.99/mo. If the renewal price strains your budget, start on a host with transparent, stable pricing (Cloudways, Kinsta) even if the entry is higher.</p>
+  </div>
+  <div class="card">
+    <h3>4. How many sites are you running?</h3>
+    <p>Agencies and multi-site operators should prioritize <strong>site isolation</strong> and <strong>hand-off tooling</strong>. Kinsta's per-site containers and site-transfer tool, or WP Engine's transferable installs, save real operational headaches. Single-site owners can optimize for price or simplicity.</p>
+  </div>
 
   <h2 id="faq">FAQ</h2>
   <div class="faq">
@@ -215,20 +362,32 @@
     <p>Only if performance or uptime touches your revenue. For a hobby blog, no. For anything mission-critical, the predictability pays for itself in avoided downtime and recovered hours.</p>
   </div>
   <div class="faq">
-    <h3>Can I move my existing site?</h3>
-    <p>Yes — Kinsta migrates sites from other hosts for free on plans above Starter, including DNS cutover and a staging check before you flip the switch.</p>
+    <h3>Can I migrate my existing site?</h3>
+    <p>Yes — all five hosts offer free migrations, though the quality varies. Kinsta and WP Engine offer white-glove or assisted migrations; Cloudways, SiteGround, and hosting.com provide automated tools. Always test on staging before flipping DNS.</p>
   </div>
   <div class="faq">
-    <h3>What if I exceed the visit limit?</h3>
-    <p>You're billed for overages and your site stays online. Watch visit counts in the dashboard and step up a tier before a campaign peaks.</p>
+    <h3>What happens if I exceed visits?</h3>
+    <p>On Kinsta and WP Engine, you're billed for overages and your site stays online. On SiteGround, heavy traffic may trigger throttling or a forced upgrade. Cloudways charges for bandwidth overages. hosting.com has soft limits on shared plans.</p>
   </div>
   <div class="faq">
-    <h3>Do I need to be technical?</h3>
-    <p>No. That's the entire point of "managed." Staging, backups, and PHP switching are one-click in the dashboard.</p>
+    <h3>Do I need technical skills?</h3>
+    <p>No for Kinsta, WP Engine, and SiteGround — everything is one-click. Cloudways requires more comfort with server concepts (choosing a cloud provider, vertical scaling). hosting.com's managed WP plans are beginner-friendly; their raw shared plans assume more DIY.</p>
   </div>
   <div class="faq">
-    <h3>Money-back guarantee?</h3>
-    <p>Kinsta offers a 30-day money-back guarantee on all WordPress plans — low-risk way to test the dashboard and support yourself.</p>
+    <h3>Is there a money-back guarantee?</h3>
+    <p>Kinsta offers 30 days. WP Engine offers 60 days. SiteGround offers 30 days. hosting.com offers an anytime prorated refund. Cloudways offers a 3-day free trial instead of a traditional money-back period.</p>
+  </div>
+  <div class="faq">
+    <h3>Which host is fastest?</h3>
+    <p>For cached pages, all five are competitive. For uncached/dynamic pages (logged-in users, WooCommerce checkout), Kinsta's container isolation typically delivers the most consistent TTFB under load. Cloudways can match it with proper server sizing. Budget shared hosts (SiteGround, hosting.com) slow down exactly when traffic peaks.</p>
+  </div>
+  <div class="faq">
+    <h3>Can I run WooCommerce on these hosts?</h3>
+    <p>Yes, but object caching matters. Kinsta requires the $100/mo Redis add-on for busy stores. Cloudways includes Redis. WP Engine's EverCache handles WooCommerce well. SiteGround and hosting.com work for small stores but may strain under heavy logged-in traffic.</p>
+  </div>
+  <div class="faq">
+    <h3>What about email hosting?</h3>
+    <p>None of the five include email hosting. Kinsta, WP Engine, and Cloudways explicitly don't offer it — use Google Workspace or Microsoft 365. SiteGround and hosting.com offer basic email on shared plans, but it's not their strength.</p>
   </div>
 
   <div class="note">
@@ -276,10 +435,13 @@
   "@type": "FAQPage",
   "mainEntity": [
     { "@type": "Question", "name": "Is Kinsta worth the price?", "acceptedAnswer": { "@type": "Answer", "text": "Only if performance or uptime touches your revenue. For a hobby blog, no. For anything mission-critical, the predictability pays for itself in avoided downtime and recovered hours." } },
-    { "@type": "Question", "name": "Can I move my existing site?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — Kinsta migrates sites from other hosts for free on plans above Starter, including DNS cutover and a staging check before you flip the switch." } },
-    { "@type": "Question", "name": "What if I exceed the visit limit?", "acceptedAnswer": { "@type": "Answer", "text": "You're billed for overages and your site stays online. Watch visit counts in the dashboard and step up a tier before a campaign peaks." } },
-    { "@type": "Question", "name": "Do I need to be technical?", "acceptedAnswer": { "@type": "Answer", "text": "No. That's the entire point of 'managed.' Staging, backups, and PHP switching are one-click in the dashboard." } },
-    { "@type": "Question", "name": "Money-back guarantee?", "acceptedAnswer": { "@type": "Answer", "text": "Kinsta offers a 30-day money-back guarantee on all WordPress plans — low-risk way to test the dashboard and support yourself." } }
+    { "@type": "Question", "name": "Can I migrate my existing site?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — all five hosts offer free migrations, though the quality varies. Kinsta and WP Engine offer white-glove or assisted migrations; Cloudways, SiteGround, and hosting.com provide automated tools. Always test on staging before flipping DNS." } },
+    { "@type": "Question", "name": "What happens if I exceed visits?", "acceptedAnswer": { "@type": "Answer", "text": "On Kinsta and WP Engine, you're billed for overages and your site stays online. On SiteGround, heavy traffic may trigger throttling or a forced upgrade. Cloudways charges for bandwidth overages. hosting.com has soft limits on shared plans." } },
+    { "@type": "Question", "name": "Do I need technical skills?", "acceptedAnswer": { "@type": "Answer", "text": "No for Kinsta, WP Engine, and SiteGround — everything is one-click. Cloudways requires more comfort with server concepts (choosing a cloud provider, vertical scaling). hosting.com's managed WP plans are beginner-friendly; their raw shared plans assume more DIY." } },
+    { "@type": "Question", "name": "Is there a money-back guarantee?", "acceptedAnswer": { "@type": "Answer", "text": "Kinsta offers 30 days. WP Engine offers 60 days. SiteGround offers 30 days. hosting.com offers an anytime prorated refund. Cloudways offers a 3-day free trial instead of a traditional money-back period." } },
+    { "@type": "Question", "name": "Which host is fastest?", "acceptedAnswer": { "@type": "Answer", "text": "For cached pages, all five are competitive. For uncached/dynamic pages (logged-in users, WooCommerce checkout), Kinsta's container isolation typically delivers the most consistent TTFB under load. Cloudways can match it with proper server sizing. Budget shared hosts (SiteGround, hosting.com) slow down exactly when traffic peaks." } },
+    { "@type": "Question", "name": "Can I run WooCommerce on these hosts?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, but object caching matters. Kinsta requires the $100/mo Redis add-on for busy stores. Cloudways includes Redis. WP Engine's EverCache handles WooCommerce well. SiteGround and hosting.com work for small stores but may strain under heavy logged-in traffic." } },
+    { "@type": "Question", "name": "What about email hosting?", "acceptedAnswer": { "@type": "Answer", "text": "None of the five include email hosting. Kinsta, WP Engine, and Cloudways explicitly don't offer it — use Google Workspace or Microsoft 365. SiteGround and hosting.com offer basic email on shared plans, but it's not their strength." } }
   ]
 }
 </script>
