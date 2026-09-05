@@ -18,6 +18,10 @@
   .topbar-inner{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
   .brand{font-weight:700;font-size:18px;letter-spacing:-.3px}
   .brand-tag{font-size:13px;color:#a5b0c0}
+  a.brand{color:#fff;text-decoration:none}
+  a.brand:hover{text-decoration:underline}
+  .topbar-home{margin-left:auto;font-size:14px;color:#a5b0c0;text-decoration:none}
+  .topbar-home:hover{color:#fff;text-decoration:underline}
   .disclosure{background:#fff7ed;border-bottom:1px solid #fed7aa;color:#7c2d12;font-size:14px;padding:10px 20px;text-align:center}
   header{padding:48px 0 24px}
   h1{font-size:38px;line-height:1.2;margin:0 0 12px;letter-spacing:-.5px}
@@ -58,8 +62,9 @@
 
 <div class="topbar">
   <div class="wrap topbar-inner">
-    <span class="brand">Wiser Tools</span>
+    <a class="brand" href="/">Wiser Tools</a>
     <span class="brand-tag">Honest, no-hype tool &amp; service reviews</span>
+    <a class="topbar-home" href="/">&larr; All categories</a>
   </div>
 </div>
 
@@ -69,7 +74,7 @@
 
 <header class="wrap">
   <h1>Managed WordPress Hosting for WooCommerce in 2026</h1>
-  <p class="lead">A brochure site survives a slow server. A store doesn't. On WooCommerce, every extra second of checkout load is abandoned carts, and every minute of downtime is money leaving the building. This guide compares four managed hosts on what actually moves the needle for stores: checkout speed under logged-in traffic, object caching, staging for product changes, and support that answers at 9 p.m. during a sale — matched to your store type, not our opinion.</p>
+  <p class="lead">A brochure site survives a slow server. A store doesn't. On WooCommerce, every extra second of checkout load is abandoned carts, and every minute of downtime is money leaving the building. This guide compares five managed hosts on what actually moves the needle for stores: checkout speed under logged-in traffic, object caching, staging for product changes, and support that answers at 9 p.m. during a sale — matched to your store type, not our opinion.</p>
   <a class="cta" href="#pick">Jump to which host fits your store →</a>
 </header>
 
@@ -82,8 +87,10 @@
       <li><a href="#compare">Store comparison table</a></li>
       <li><a href="#pick">Which host fits your store</a></li>
       <li><a href="#cache">Caching &amp; the logged-in problem</a></li>
+      <li><a href="#metrics">What to measure (not just homepage speed)</a></li>
       <li><a href="#kinsta">Kinsta for stores</a></li>
-      <li><a href="#others">Cloudways, WP Engine &amp; SiteGround</a></li>
+      <li><a href="#others">Cloudways, WP Engine, SiteGround &amp; hosting.com</a></li>
+      <li><a href="#choose">How we'd choose for your store</a></li>
       <li><a href="#faq">FAQ</a></li>
     </ul>
   </div>
@@ -171,6 +178,19 @@
   </ul>
   <p>The takeaway: judge a host for WooCommerce by its <em>origin</em> performance and object caching, not by a cached-blog speed test someone screenshotted.</p>
 
+  <h2 id="metrics">What to measure (not just homepage speed)</h2>
+  <p>Almost every hosting review you'll read benchmarks a logged-out homepage. For a store that number is close to meaningless — it measures the CDN, not the checkout. If you want to know whether a host can handle your store, these are the four numbers that actually predict revenue:</p>
+  <ul>
+    <li><strong>TTFB on a logged-in cart page.</strong> Log in, add a product, and load the cart. That request can't be served from a page cache, so it exercises PHP, the database, and your object cache. This is your floor.</li>
+    <li><strong>Checkout time under concurrency.</strong> Twenty people browsing is a different problem from twenty people checking out. Run a modest concurrent test (20–50 virtual users) against cart and checkout, not the homepage, and watch whether response times hold flat or climb.</li>
+    <li><strong>Object cache hit rate.</strong> If Redis or memcached is configured, a healthy store should be hitting cache on the large majority of queries. A low hit rate usually means the cache is too small or a plugin is bypassing it.</li>
+    <li><strong>Admin responsiveness.</strong> WooCommerce's order and product screens are database-heavy. If saving an edit or filtering orders takes five seconds, your origin is struggling — and that same strain shows up at checkout during a sale.</li>
+  </ul>
+  <div class="note">
+    <strong>Before you load-test:</strong> don't fire aggressive traffic at a host you don't have an account with, and check the acceptable-use policy of any host you're already on — some treat unannounced load testing as abuse and will throttle or suspend you. The safe path is to test inside your own money-back window on a staging clone, at modest concurrency, and to tell support what you're doing if you plan to push hard.
+  </div>
+  <p>One more honest caveat: published benchmark numbers age badly. Hosts change infrastructure, plans, and PHP versions constantly, and a single-site test says more about that site's plugins than about the platform. Treat any third-party benchmark — including ours — as a starting hypothesis, then verify on your own store during the trial window.</p>
+
   <h2 id="kinsta">Kinsta for stores</h2>
   <p>Kinsta's container isolation keeps PHP workers dedicated to your site, so a traffic spike on a neighbor can't steal your checkout capacity. For stores, the relevant notes:</p>
   <ul>
@@ -182,26 +202,97 @@
   <p class="pros"><strong>Pros:</strong> Predictable origin performance under load; isolated containers; smooth staging; strong support.</p>
   <p class="cons"><strong>Cons:</strong> Redis is a paid add-on; visit caps need monitoring; entry price higher than Cloudways/SiteGround.</p>
 
-  <h2 id="others">Cloudways, WP Engine &amp; SiteGround</h2>
+  <h2 id="others">Cloudways, WP Engine, SiteGround &amp; hosting.com for stores</h2>
 
   <h3>Cloudways</h3>
-  <p>Cloudways gives you a managed stack on the cloud you pick (DigitalOcean, AWS, Google Cloud) with built-in Redis/object-cache options. Lower entry cost and vertical scaling make it attractive for growing stores whose owners want control. Expect to handle more of the WordPress-level tuning yourself.</p>
-  <p class="pros"><strong>Pros:</strong> Low entry price; choose your cloud; scale the server as the store grows; flexible.</p>
-  <p class="cons"><strong>Cons:</strong> More tuning on you; bandwidth overages can surprise; steeper learning curve.</p>
+  <p>Cloudways gives you a managed stack on the cloud you pick (DigitalOcean, AWS, Google Cloud) with object caching available at the server level. For stores, the appeal is control and cost: you can scale the server as order volume grows, and you're not paying a per-site premium for capacity you haven't grown into yet. The trade-off is that tuning is on you — or on your developer.</p>
+  <div class="card">
+    <h3 style="margin-top:0">Store-relevant notes</h3>
+    <ul style="margin-bottom:0">
+      <li><strong>Object caching:</strong> available at the server level rather than as a per-site paid add-on, which changes the cost math materially for a busy store.</li>
+      <li><strong>Vertical scaling:</strong> resize the server as traffic grows without rebuilding anything.</li>
+      <li><strong>Staging per application:</strong> clone the store, test a WooCommerce or payment-plugin update, then push live.</li>
+      <li><strong>Bandwidth is metered:</strong> image-heavy catalogs can push you into overages — worth modelling before you commit.</li>
+    </ul>
+  </div>
+  <p class="pros"><strong>Pros:</strong> Low entry price; choose your cloud; scale the server as the store grows; object caching without a per-site add-on.</p>
+  <p class="cons"><strong>Cons:</strong> More tuning on you; bandwidth overages can surprise image-heavy catalogs; steeper learning curve than fully managed.</p>
 
   <h3>WP Engine</h3>
-  <p>WP Engine's proprietary EverCache and enterprise posture suit larger, brand-name stores with compliance and plugin-policy needs. Strong and mature, but the premium is real and some plugins are restricted.</p>
-  <p class="pros"><strong>Pros:</strong> Enterprise trust; mature staging; proprietary caching tuned for WordPress.</p>
+  <p>WP Engine's proprietary EverCache and enterprise posture suit larger, brand-name stores with compliance and governance needs. It's a mature platform with mature processes — which is exactly what a regulated business wants and exactly what a two-person store doesn't need. The two things to check before committing are the plugin policy and the price at renewal.</p>
+  <div class="card">
+    <h3 style="margin-top:0">Store-relevant notes</h3>
+    <ul style="margin-bottom:0">
+      <li><strong>EverCache:</strong> a proprietary caching layer tuned for WordPress, handling much of the tuning for you.</li>
+      <li><strong>Plugin policy:</strong> some plugins — including certain caching and WooCommerce extensions — are restricted or discouraged. Audit your must-have extensions against their list before you migrate.</li>
+      <li><strong>Governance:</strong> audit trails and enterprise-grade process, which matters if procurement or compliance is involved.</li>
+    </ul>
+  </div>
+  <p class="pros"><strong>Pros:</strong> Enterprise trust; mature staging; proprietary caching tuned for WordPress; governance features.</p>
   <p class="cons"><strong>Cons:</strong> Pricier at entry; stricter plugin policies; overkill for a small store.</p>
 
   <h3>SiteGround</h3>
-  <p>SiteGround's dynamic cache and memcached work well for smaller stores just getting started, at the friendliest price. If you're under ~50 products and not yet high-traffic, it's a sane on-ramp. Just watch renewal pricing and shared-resource limits as you grow.</p>
-  <p class="pros"><strong>Pros:</strong> Lowest first-term cost; excellent support; beginner-friendly.</p>
-  <p class="cons"><strong>Cons:</strong> Shared resources (noisy-neighbor risk at scale); renewal prices jump.</p>
+  <p>SiteGround's dynamic cache and memcached work well for smaller stores just getting started, at the friendliest entry price. If you're under ~50 products and not yet high-traffic, it's a sane on-ramp — the support is genuinely good, which counts for a lot when you're learning WooCommerce. The ceiling is the issue: shared resources mean a neighbour's spike can affect you, and renewal pricing rises well above the intro rate.</p>
+  <div class="card">
+    <h3 style="margin-top:0">Store-relevant notes</h3>
+    <ul style="margin-bottom:0">
+      <li><strong>Dynamic cache + memcached:</strong> handles the object-caching basics without you configuring Redis by hand.</li>
+      <li><strong>Support quality:</strong> consistently the strongest point for non-technical owners.</li>
+      <li><strong>Shared resources:</strong> plan your exit before a big campaign, not during it.</li>
+      <li><strong>Renewal pricing:</strong> read the renewal rate, not just the intro rate, when you do the maths.</li>
+    </ul>
+  </div>
+  <p class="pros"><strong>Pros:</strong> Lowest first-term cost; excellent support; beginner-friendly; caching basics handled.</p>
+  <p class="cons"><strong>Cons:</strong> Shared resources (noisy-neighbor risk at scale); renewal prices jump significantly; not built for high-concurrency checkout.</p>
+
+  <h3>hosting.com</h3>
+  <p>hosting.com is the budget-performance option — the former A2 Hosting, rebranded in 2026. Its LiteSpeed/Turbo stack is genuinely quick on cached and semi-dynamic requests, and the entry price undercuts every fully-managed host here. For a store, treat it as a fit when speed matters more than hand-holding: you get a fast server and developer tools, and you take on more of the WooCommerce tuning yourself.</p>
+  <div class="card">
+    <h3 style="margin-top:0">Store-relevant notes</h3>
+    <ul style="margin-bottom:0">
+      <li><strong>LiteSpeed / Turbo tiers:</strong> strong on cached throughput, which helps catalog browsing.</li>
+      <li><strong>Developer tools:</strong> SSH, staging, and WP-CLI access are part of the pitch rather than upsells.</li>
+      <li><strong>Verify WooCommerce specifics:</strong> object-cache support and PHP-worker allocation differ by plan tier — confirm what your specific plan includes before assuming parity with the managed hosts.</li>
+    </ul>
+  </div>
+  <p class="pros"><strong>Pros:</strong> Strong cached performance for the price; low entry cost; developer tooling included.</p>
+  <p class="cons"><strong>Cons:</strong> Less hand-holding than fully managed; plan tiers vary in what's included — verify object caching and worker counts; you own more of the tuning.</p>
 
   <div class="note">
     <strong>Tip:</strong> Before you switch, run your current store through a checkout-load test (not just a homepage speed test). The number that matters is "time to first byte on a logged-in cart page during concurrent traffic" — that's what your hosting actually handles.
   </div>
+
+  <h2 id="choose">How we'd choose for your store</h2>
+  <p>There isn't a best host for WooCommerce — there's a best host for your store <em>right now</em>, and it changes as you grow. Here's the honest mapping by stage:</p>
+  <table>
+    <thead>
+      <tr><th>Your store stage</th><th>Where the pressure is</th><th>Reasonable fit</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Validating</strong> — under ~50 products, testing whether the idea sells</td>
+        <td>Cost. You don't yet know if revenue justifies infrastructure.</td>
+        <td>SiteGround or hosting.com. Keep fixed costs low; revisit once orders are consistent.</td>
+      </tr>
+      <tr>
+        <td><strong>Growing</strong> — consistent orders, campaigns starting to work</td>
+        <td>Checkout under concurrency. Traffic spikes now cost real money.</td>
+        <td>Cloudways if you (or your developer) want server control; Kinsta if you'd rather not think about servers.</td>
+      </tr>
+      <tr>
+        <td><strong>Revenue-critical</strong> — the store is a primary income line</td>
+        <td>Predictability. A slow Black Friday is a measurable loss.</td>
+        <td>Kinsta on a tier sized for your concurrency, with object caching enabled.</td>
+      </tr>
+      <tr>
+        <td><strong>Regulated / brand-scale</strong> — procurement, compliance, audits</td>
+        <td>Governance and accountability more than raw speed.</td>
+        <td>WP Engine. Audit your must-have plugins against their policy first.</td>
+      </tr>
+    </tbody>
+  </table>
+  <p><strong>Signals it's time to move up a tier:</strong> checkout slows noticeably during campaigns; the WooCommerce order screen takes more than a couple of seconds to filter or save; you're hitting visit or bandwidth caps; or support response time becomes the thing you complain about. Any one of those is worth more than a marginal price difference.</p>
+  <p><strong>When <em>not</em> to upgrade:</strong> if your store is slow because of unoptimised images, a bloated page builder, or a dozen redundant plugins, a faster server will hide the problem briefly and then the bloat catches up. Fix the site first, then judge the host — otherwise you're paying a premium to compensate for code.</p>
 
   <h2 id="faq">FAQ</h2>
   <div class="faq">
@@ -214,7 +305,7 @@
   </div>
   <div class="faq">
     <h3>Can I stage a WooCommerce update safely?</h3>
-    <p>Yes on all four managed hosts — one-click staging lets you clone the store, apply the update, and push to live after testing. Never update WooCommerce or payment plugins directly on a live store.</p>
+    <p>Yes on all five managed hosts — one-click staging lets you clone the store, apply the update, and push to live after testing. Never update WooCommerce or payment plugins directly on a live store.</p>
   </div>
   <div class="faq">
     <h3>Does hosting affect PCI compliance?</h3>
@@ -222,7 +313,19 @@
   </div>
   <div class="faq">
     <h3>What if my store outgrows the plan?</h3>
-    <p>All four let you scale up without a migration weekend — that's the point of managed hosting. Watch PHP-worker saturation and visit counts in the dashboard, and step up a tier before a campaign peaks.</p>
+    <p>All five let you scale up without a migration weekend — that's the point of managed hosting. Watch PHP-worker saturation and visit counts in the dashboard, and step up a tier before a campaign peaks.</p>
+  </div>
+  <div class="faq">
+    <h3>Can I just run WooCommerce on cheap shared hosting?</h3>
+    <p>You can, and many stores start there. The constraint isn't whether it works — it's what happens under concurrency. Shared plans give you a small, shared pool of PHP workers, so a burst of simultaneous checkouts queues behind each other. If you're doing a handful of orders a day, that never bites. If you're running paid traffic to a sale, it's the most expensive place to save money.</p>
+  </div>
+  <div class="faq">
+    <h3>Will a faster host fix my slow store?</h3>
+    <p>Sometimes. If the bottleneck is server capacity — checkout queues during traffic, slow admin under load — then yes, better hosting is the fix. If the bottleneck is your own site (unoptimised product images, a heavy page builder, nine plugins doing the job of two), a faster server masks it briefly and then the bloat catches up. Diagnose before you spend: run the store through a profiler, fix the obvious wins, and then judge whether the host is actually the problem.</p>
+  </div>
+  <div class="faq">
+    <h3>Should the store and the marketing site live on the same host?</h3>
+    <p>Usually yes — one dashboard, one bill, one support contact, and modern managed hosts isolate sites from each other. Splitting them adds operational overhead that only makes sense at real scale, or when the store has compliance requirements the marketing site doesn't. If you do keep them together, make sure they're separate installations, not one WordPress multisite carrying both.</p>
   </div>
 
   <div class="related">
@@ -246,7 +349,7 @@
 </main>
 
 <footer class="wrap">
-  <p><strong>Affiliate disclosure:</strong> Wiser Tools participates in affiliate programs including Kinsta, Cloudways, WP Engine, and SiteGround. Some links on this page are affiliate links, meaning we may receive a commission if you sign up — at no additional cost to you. This does not influence our recommendations; we compare on merits. Affiliate links on this site carry a <code>rel="sponsored"</code> attribute in line with Google's guidelines.</p>
+  <p><strong>Affiliate disclosure:</strong> Wiser Tools participates in affiliate programs including Kinsta, Cloudways, WP Engine, SiteGround and hosting.com. Some links on this page are affiliate links, meaning we may receive a commission if you sign up — at no additional cost to you. This does not influence our recommendations; we compare on merits. Affiliate links on this site carry a <code>rel="sponsored"</code> attribute in line with Google's guidelines.</p>
   <p class="small">Pricing and program terms change. Verify current details on each host's official site before purchasing. Last reviewed: August 2026.</p>
 </footer>
 
@@ -269,7 +372,7 @@
   "author": { "@type": "Organization", "name": "Wiser Tools" },
   "publisher": { "@type": "Organization", "name": "Wiser Tools", "url": "https://wiser-tools.com/" },
   "datePublished": "2026-08-24",
-  "dateModified": "2026-08-24",
+  "dateModified": "2026-09-05",
   "mainEntityOfPage": { "@type": "WebPage", "@id": "https://wiser-tools.com/wordpress-hosting-for-woocommerce" }
 }
 </script>
@@ -291,9 +394,12 @@
   "mainEntity": [
     { "@type": "Question", "name": "Do I need Redis for a small store?", "acceptedAnswer": { "@type": "Answer", "text": "Not at first. A small store on SiteGround or Cloudways with built-in object caching is fine. Add Redis (or a paid object-cache add-on) once query load grows — usually when you're past a few hundred concurrent shoppers or a slow admin." } },
     { "@type": "Question", "name": "Is a CDN enough to speed up checkout?", "acceptedAnswer": { "@type": "Answer", "text": "Partly. A CDN accelerates static assets (images, scripts) but not the dynamic cart and checkout, which are served from origin. The origin's PHP workers and object cache still decide checkout speed." } },
-    { "@type": "Question", "name": "Can I stage a WooCommerce update safely?", "acceptedAnswer": { "@type": "Answer", "text": "Yes on all four managed hosts — one-click staging lets you clone the store, apply the update, and push to live after testing. Never update WooCommerce or payment plugins directly on a live store." } },
+    { "@type": "Question", "name": "Can I stage a WooCommerce update safely?", "acceptedAnswer": { "@type": "Answer", "text": "Yes on all five managed hosts — one-click staging lets you clone the store, apply the update, and push to live after testing. Never update WooCommerce or payment plugins directly on a live store." } },
     { "@type": "Question", "name": "Does hosting affect PCI compliance?", "acceptedAnswer": { "@type": "Answer", "text": "Hosting is one layer; your store's payment flow matters more. Using a hosted payment gateway (Stripe, PayPal) keeps card data off your server, which simplifies compliance regardless of host. Verify your gateway's requirements." } },
-    { "@type": "Question", "name": "What if my store outgrows the plan?", "acceptedAnswer": { "@type": "Answer", "text": "All four let you scale up without a migration weekend — that's the point of managed hosting. Watch PHP-worker saturation and visit counts in the dashboard, and step up a tier before a campaign peaks." } }
+    { "@type": "Question", "name": "What if my store outgrows the plan?", "acceptedAnswer": { "@type": "Answer", "text": "All five let you scale up without a migration weekend — that's the point of managed hosting. Watch PHP-worker saturation and visit counts in the dashboard, and step up a tier before a campaign peaks." } },
+    { "@type": "Question", "name": "Can I just run WooCommerce on cheap shared hosting?", "acceptedAnswer": { "@type": "Answer", "text": "You can, and many stores start there. The constraint isn't whether it works — it's what happens under concurrency. Shared plans give you a small, shared pool of PHP workers, so a burst of simultaneous checkouts queues behind each other. If you're doing a handful of orders a day, that never bites. If you're running paid traffic to a sale, it's the most expensive place to save money." } },
+    { "@type": "Question", "name": "Will a faster host fix my slow store?", "acceptedAnswer": { "@type": "Answer", "text": "Sometimes. If the bottleneck is server capacity — checkout queues during traffic, slow admin under load — then yes, better hosting is the fix. If the bottleneck is your own site (unoptimised product images, a heavy page builder, nine plugins doing the job of two), a faster server masks it briefly and then the bloat catches up. Diagnose before you spend: run the store through a profiler, fix the obvious wins, and then judge whether the host is actually the problem." } },
+    { "@type": "Question", "name": "Should the store and the marketing site live on the same host?", "acceptedAnswer": { "@type": "Answer", "text": "Usually yes — one dashboard, one bill, one support contact, and modern managed hosts isolate sites from each other. Splitting them adds operational overhead that only makes sense at real scale, or when the store has compliance requirements the marketing site doesn't. If you do keep them together, make sure they're separate installations, not one WordPress multisite carrying both." } }
   ]
 }
 </script>

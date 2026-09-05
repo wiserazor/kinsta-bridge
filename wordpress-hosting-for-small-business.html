@@ -18,6 +18,10 @@
   .topbar-inner{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
   .brand{font-weight:700;font-size:18px;letter-spacing:-.3px}
   .brand-tag{font-size:13px;color:#a5b0c0}
+  a.brand{color:#fff;text-decoration:none}
+  a.brand:hover{text-decoration:underline}
+  .topbar-home{margin-left:auto;font-size:14px;color:#a5b0c0;text-decoration:none}
+  .topbar-home:hover{color:#fff;text-decoration:underline}
   .disclosure{background:#fff7ed;border-bottom:1px solid #fed7aa;color:#7c2d12;font-size:14px;padding:10px 20px;text-align:center}
   header{padding:48px 0 24px}
   h1{font-size:38px;line-height:1.2;margin:0 0 12px;letter-spacing:-.5px}
@@ -58,8 +62,9 @@
 
 <div class="topbar">
   <div class="wrap topbar-inner">
-    <span class="brand">Wiser Tools</span>
+    <a class="brand" href="/">Wiser Tools</a>
     <span class="brand-tag">Honest, no-hype tool &amp; service reviews</span>
+    <a class="topbar-home" href="/">&larr; All categories</a>
   </div>
 </div>
 
@@ -69,7 +74,7 @@
 
 <header class="wrap">
   <h1>Best WordPress Hosting for Small Business in 2026</h1>
-  <p class="lead">For a small business, the website isn't a hobby — it's the phone line, the storefront, and the proof you're real, all at once. The wrong host means a site that's slow on the day a customer finally googles you, or down when you're at a trade show. This guide compares four managed hosts on what a business owner actually cares about: reliability, support you can reach, an easy move from wherever you are now, and honest cost — matched to your business type, not our opinion.</p>
+  <p class="lead">For a small business, the website isn't a hobby — it's the phone line, the storefront, and the proof you're real, all at once. The wrong host means a site that's slow on the day a customer finally googles you, or down when you're at a trade show. This guide compares five managed hosts on what a business owner actually cares about: reliability, support you can reach, an easy move from wherever you are now, and honest cost — matched to your business type, not our opinion.</p>
   <a class="cta" href="#pick">Jump to which host fits your business →</a>
 </header>
 
@@ -82,8 +87,10 @@
       <li><a href="#compare">Business comparison table</a></li>
       <li><a href="#pick">Which host fits your business</a></li>
       <li><a href="#migrate">Moving from GoDaddy / cPanel</a></li>
+      <li><a href="#cost">What managed hosting actually costs</a></li>
       <li><a href="#kinsta">Kinsta for business</a></li>
-      <li><a href="#others">Cloudways, WP Engine &amp; SiteGround</a></li>
+      <li><a href="#others">Cloudways, WP Engine, SiteGround &amp; hosting.com</a></li>
+      <li><a href="#choose">How we'd choose for your business</a></li>
       <li><a href="#faq">FAQ</a></li>
     </ul>
   </div>
@@ -96,7 +103,7 @@
     <li><strong>Moving is painless.</strong> Most small businesses are stuck on oversold shared hosting (often GoDaddy or a cPanel box). A good managed host migrates you in for free.</li>
     <li><strong>The bill is predictable.</strong> No surprise overages, no "renewal" doubling after year one that you didn't see coming.</li>
   </ul>
-  <p>That's the whole checklist. Everything else — CDN, staging, edge caching — is a bonus. Let's see how the four hosts score on it.</p>
+  <p>That's the whole checklist. Everything else — CDN, staging, edge caching — is a bonus. Let's see how the five hosts score on it.</p>
 
   <h2 id="compare">Business comparison</h2>
   <p>All prices monthly, billed monthly (annual usually saves ~2 months). Program details change — verify current terms on each host's official site.</p>
@@ -169,7 +176,7 @@
   </div>
 
   <h2 id="migrate">Moving from GoDaddy / cPanel</h2>
-  <p>Most small businesses start on a cheap shared plan and stay because moving feels risky. It usually isn't. All four managed hosts offer <strong>free migrations</strong>, and the rough sequence is:</p>
+  <p>Most small businesses start on a cheap shared plan and stay because moving feels risky. It usually isn't. All five managed hosts offer <strong>free migrations</strong>, and the rough sequence is:</p>
   <ul>
     <li>Sign up for the new host (most have a money-back window — test the dashboard and support first).</li>
     <li>Hand over your current credentials or run their migration plugin; they clone the site.</li>
@@ -178,6 +185,27 @@
     <li>Keep the old plan running a week as a fallback, then cancel.</li>
   </ul>
   <p>The biggest myth is "I'll lose my email." If your email is on the same provider as your old hosting, ask the new host or your domain registrar how to keep mail flowing — it's a configuration step, not a reason to stay stuck.</p>
+
+  <h2 id="cost">What managed hosting actually costs</h2>
+  <p>The number on the pricing page is the beginning of the maths, not the end of it. Three things routinely surprise business owners:</p>
+  <ul>
+    <li><strong>Intro price ≠ renewal price.</strong> Budget shared hosting in particular discounts the first term heavily and renews higher. Always read the renewal rate before you compare — a $3/mo plan that renews at $15/mo is a $15/mo plan.</li>
+    <li><strong>The cheap plan excludes the thing you'll need.</strong> Daily backups, staging, email, and object caching are sometimes bundled and sometimes metered add-ons. Two hosts at the same sticker price can differ meaningfully once you add what your business actually uses.</li>
+    <li><strong>Your time is a line item.</strong> On unmanaged or oversold hosting, you (or whoever you pay) become the sysadmin: updates, security patches, "why is the site slow," recovery after a bad plugin. That cost doesn't appear on any invoice.</li>
+  </ul>
+  <p>Here's the rough split of what's usually bundled versus what's commonly billed separately. Treat it as a checklist to verify with each host, not gospel — inclusions change and vary by plan tier:</p>
+  <table>
+    <thead>
+      <tr><th>Typically included</th><th>Often an add-on or tier-dependent</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>SSL certificate, CDN, automatic WordPress core updates, some form of daily backup, staging on most managed plans</td>
+        <td>Email hosting, extended backup retention, object caching (Redis), additional visits or bandwidth, premium support tiers, higher PHP-worker allocation</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>A useful way to frame the decision: compare the annual hosting cost against the value of a single lost enquiry. If a slow or down site costs you one good lead a month, the gap between a $10 plan and a $30 plan has already paid for itself. If your site is a static brochure that generates nothing directly, that same gap is just overhead — and it's perfectly reasonable to stay cheap.</p>
 
   <h2 id="kinsta">Kinsta for business</h2>
   <p>For a business where the website earns money — bookings, leads, sales — Kinsta's pitch is <strong>predictability</strong>. The relevant points:</p>
@@ -190,26 +218,102 @@
   <p class="pros"><strong>Pros:</strong> Reliable origin performance; genuine isolation; strong support; painless migration; easy restores.</p>
   <p class="cons"><strong>Cons:</strong> Higher entry price than budget hosts; no bundled email; visit caps need light monitoring.</p>
 
-  <h2 id="others">Cloudways, WP Engine &amp; SiteGround</h2>
+  <h2 id="others">Cloudways, WP Engine, SiteGround &amp; hosting.com for business</h2>
 
   <h3>Cloudways</h3>
-  <p>Cloudways is the "control" option: you pick the cloud (DigitalOcean, AWS, Google Cloud) and they manage the stack. Great if you have a developer or want to scale the server as you grow, at a lower entry price. Expect to own more of the WordPress-level tuning.</p>
+  <p>Cloudways is the "control" option: you pick the cloud (DigitalOcean, AWS, Google Cloud) and they manage the stack. It makes the most sense for a business that has — or can afford — someone technical, and wants server-level control without building the stack from scratch. The entry price is attractive; the learning curve is the real cost.</p>
+  <div class="card">
+    <h3 style="margin-top:0">Business-relevant notes</h3>
+    <ul style="margin-bottom:0">
+      <li><strong>Lower entry cost</strong> than fully managed, with the flexibility to resize the server as the business grows.</li>
+      <li><strong>Free migration tooling</strong> is available, though it's more self-serve than the white-glove service premium hosts offer.</li>
+      <li><strong>Metered bandwidth:</strong> model your traffic before committing — a busy month can cost more than the sticker price suggests.</li>
+      <li><strong>You own more</strong> of the WordPress-level tuning, updates, and troubleshooting.</li>
+    </ul>
+  </div>
   <p class="pros"><strong>Pros:</strong> Lower entry cost; choose your cloud; flexible scaling; free migration tool.</p>
-  <p class="cons"><strong>Cons:</strong> Steeper learning curve; bandwidth overages can surprise; more tuning on you.</p>
+  <p class="cons"><strong>Cons:</strong> Steeper learning curve without a developer; bandwidth overages can surprise; more tuning on you.</p>
 
   <h3>WP Engine</h3>
-  <p>WP Engine targets larger, brand-name businesses with compliance and governance needs. Mature platform and support, but the premium is real and some plugins are restricted — often more than a typical small business needs.</p>
-  <p class="pros"><strong>Pros:</strong> Enterprise trust; mature staging; strong platform.</p>
-  <p class="cons"><strong>Cons:</strong> Pricier at entry; stricter plugin policies; overkill for a simple site.</p>
+  <p>WP Engine targets larger, brand-name businesses with compliance and governance needs. For a typical small business it's usually more platform than necessary — you'd be paying for process and procurement features you won't use. It becomes the right answer when a client, insurer, or regulator is asking questions about how the site is run.</p>
+  <div class="card">
+    <h3 style="margin-top:0">Business-relevant notes</h3>
+    <ul style="margin-bottom:0">
+      <li><strong>Governance and accountability:</strong> the differentiator is process, not raw speed.</li>
+      <li><strong>Plugin policy:</strong> some plugins are restricted — check your must-haves against their list before migrating.</li>
+      <li><strong>Mature support and staging</strong> suited to teams with formal release processes.</li>
+    </ul>
+  </div>
+  <p class="pros"><strong>Pros:</strong> Enterprise trust; mature staging; strong governance; reliable platform.</p>
+  <p class="cons"><strong>Cons:</strong> Pricier at entry; stricter plugin policies; often overkill for a simple brochure or lead-gen site.</p>
 
   <h3>SiteGround</h3>
-  <p>SiteGround is the friendly on-ramp: cheap to start, fast onboarding, excellent support. Perfect if you're launching your first business site and don't need enterprise scale. Just watch renewal pricing — first-term discounts don't last.</p>
+  <p>SiteGround is the friendly on-ramp: cheap to start, fast onboarding, and genuinely good support — which matters a lot when you're non-technical and something breaks. It's the sane default for a first business site. The two things to plan for are shared resources as you grow, and the renewal rate once the intro discount ends.</p>
+  <div class="card">
+    <h3 style="margin-top:0">Business-relevant notes</h3>
+    <ul style="margin-bottom:0">
+      <li><strong>Support quality</strong> is the standout — reachable humans who know WordPress.</li>
+      <li><strong>Free migration</strong> gets you off oversold shared hosting without paying a developer.</li>
+      <li><strong>Read the renewal price</strong> before you sign; the intro rate is temporary.</li>
+      <li><strong>Shared resources:</strong> fine early, a constraint once traffic becomes meaningful.</li>
+    </ul>
+  </div>
   <p class="pros"><strong>Pros:</strong> Lowest first-term cost; excellent support; beginner-friendly; free migration.</p>
-  <p class="cons"><strong>Cons:</strong> Shared resources (noisy-neighbor risk); renewal prices jump significantly.</p>
+  <p class="cons"><strong>Cons:</strong> Shared resources (noisy-neighbor risk as you grow); renewal prices jump significantly.</p>
+
+  <h3>hosting.com</h3>
+  <p>hosting.com — the former A2 Hosting, rebranded in 2026 — is the budget-performance option. Its LiteSpeed/Turbo stack delivers strong speed for the money, and it undercuts every fully-managed host here on entry price. The trade-off is hand-holding: you get a fast server and good developer tooling, and you take on more of the day-to-day WordPress care yourself.</p>
+  <div class="card">
+    <h3 style="margin-top:0">Business-relevant notes</h3>
+    <ul style="margin-bottom:0">
+      <li><strong>Speed for the price</strong> is the headline — LiteSpeed/Turbo tiers perform well on cached requests.</li>
+      <li><strong>Developer tooling</strong> (SSH, staging, WP-CLI) is part of the package rather than an upsell.</li>
+      <li><strong>Verify what your tier includes:</strong> backup retention, staging, and resource allocation vary by plan — confirm before assuming parity with managed hosts.</li>
+    </ul>
+  </div>
+  <p class="pros"><strong>Pros:</strong> Strong performance per pound/dollar; low entry cost; developer tooling included.</p>
+  <p class="cons"><strong>Cons:</strong> Less hand-holding than fully managed; inclusions vary by tier — verify backups and resource limits; you own more of the upkeep.</p>
 
   <div class="note">
     <strong>Tip:</strong> Whatever you pick, turn on automatic backups and make sure you know where the restore button is <em>before</em> you need it. The businesses that survive a bad update are the ones with a one-click rollback, not the ones with a frantic developer on speed dial.
   </div>
+
+  <h2 id="choose">How we'd choose for your business</h2>
+  <p>Rather than rank the five, here's the reasoning we'd actually walk through with a business owner. Start with the honest question: <em>what does this site do for the business?</em></p>
+  <table>
+    <thead>
+      <tr><th>Your situation</th><th>The real priority</th><th>Reasonable fit</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>First site, non-technical, watching costs</strong></td>
+        <td>Reachable support and a low first-term price. Nothing else matters yet.</td>
+        <td>SiteGround. Check the renewal rate so you're not surprised in year two.</td>
+      </tr>
+      <tr>
+        <td><strong>Speed matters but the budget is tight</strong></td>
+        <td>Fast cached performance without a managed premium.</td>
+        <td>hosting.com. Verify which tier includes staging and backups.</td>
+      </tr>
+      <tr>
+        <td><strong>The site generates leads or revenue</strong></td>
+        <td>Predictability. Slow load or downtime has a measurable cost.</td>
+        <td>Kinsta for predictability, or Cloudways if you have someone technical and want the cost lower.</td>
+      </tr>
+      <tr>
+        <td><strong>You have a developer or agency</strong></td>
+        <td>Control over the stack and room to scale.</td>
+        <td>Cloudways. You get server knobs without maintaining the stack itself.</td>
+      </tr>
+      <tr>
+        <td><strong>Regulated, brand-scale, or procurement-driven</strong></td>
+        <td>Governance, accountability, audit trail.</td>
+        <td>WP Engine. Audit your plugins against their policy first.</td>
+      </tr>
+    </tbody>
+  </table>
+  <p><strong>When managed hosting genuinely isn't worth it:</strong> if your site is a static brochure that generates no enquiries, no sales, and no bookings, a premium managed plan is overhead you don't need. A cheap shared plan with good support is a perfectly rational choice — and you can always move up when the site starts earning something. The mistake isn't buying cheap; it's buying cheap for a site that revenue already depends on.</p>
+  <p><strong>Signals it's time to move up:</strong> the site slows visibly during campaigns or seasonal peaks; you've had more than one outage you found out about from a customer; your developer bills more for firefighting than the upgrade would cost; or you're dreading the renewal quote. Any one of those outweighs a modest monthly saving.</p>
 
   <h2 id="faq">FAQ</h2>
   <div class="faq">
@@ -230,7 +334,19 @@
   </div>
   <div class="faq">
     <h3>Which host is "safest" for a non-technical owner?</h3>
-    <p>The one whose support you can actually reach and whose backups restore in one click. All four qualify; the difference is price tier and how much control you want versus how much you want handled for you.</p>
+    <p>The one whose support you can actually reach and whose backups restore in one click. All five qualify; the difference is price tier and how much control you want versus how much you want handled for you.</p>
+  </div>
+  <div class="faq">
+    <h3>Do I need to buy email hosting from my web host?</h3>
+    <p>No, and often you shouldn't. Many managed WordPress hosts deliberately don't bundle email — it's a different reliability problem than serving web pages. Most businesses are better off with a dedicated mail provider (Google Workspace or Microsoft 365) and web hosting separately, which also means moving hosts later doesn't touch your email at all. If email currently lives with your old host, plan that separation during the migration.</p>
+  </div>
+  <div class="faq">
+    <h3>Is managed hosting worth it for a simple brochure site?</h3>
+    <p>Often not. If the site exists so people can confirm you're real and find your phone number, a premium managed plan is money you could spend elsewhere — a cheap shared plan with decent support is rational. Managed hosting earns its premium when the site does something: captures leads, takes bookings, sells products, or is slow enough to cost you customers. Upgrade when the site starts earning, not before.</p>
+  </div>
+  <div class="faq">
+    <h3>What should I check before I sign up?</h3>
+    <p>Five things: the <strong>renewal</strong> price (not the intro price); whether <strong>backups</strong> are included and how far back they go; whether <strong>staging</strong> is available on your tier; what happens when you exceed <strong>visits or bandwidth</strong>; and the <strong>refund window</strong> so you can test support and the dashboard before you're committed. Most hosting regret comes from skipping one of these.</p>
   </div>
 
   <div class="related">
@@ -254,7 +370,7 @@
 </main>
 
 <footer class="wrap">
-  <p><strong>Affiliate disclosure:</strong> Wiser Tools participates in affiliate programs including Kinsta, Cloudways, WP Engine, and SiteGround. Some links on this page are affiliate links, meaning we may receive a commission if you sign up — at no additional cost to you. This does not influence our recommendations; we compare on merits. Affiliate links on this site carry a <code>rel="sponsored"</code> attribute in line with Google's guidelines.</p>
+  <p><strong>Affiliate disclosure:</strong> Wiser Tools participates in affiliate programs including Kinsta, Cloudways, WP Engine, SiteGround and hosting.com. Some links on this page are affiliate links, meaning we may receive a commission if you sign up — at no additional cost to you. This does not influence our recommendations; we compare on merits. Affiliate links on this site carry a <code>rel="sponsored"</code> attribute in line with Google's guidelines.</p>
   <p class="small">Pricing and program terms change. Verify current details on each host's official site before purchasing. Last reviewed: August 2026.</p>
 </footer>
 
@@ -277,7 +393,7 @@
   "author": { "@type": "Organization", "name": "Wiser Tools" },
   "publisher": { "@type": "Organization", "name": "Wiser Tools", "url": "https://wiser-tools.com/" },
   "datePublished": "2026-08-24",
-  "dateModified": "2026-08-24",
+  "dateModified": "2026-09-05",
   "mainEntityOfPage": { "@type": "WebPage", "@id": "https://wiser-tools.com/wordpress-hosting-for-small-business" }
 }
 </script>
@@ -301,7 +417,10 @@
     { "@type": "Question", "name": "Will moving hosts break my site?", "acceptedAnswer": { "@type": "Answer", "text": "It shouldn't. Free migrations clone the site to a staging URL first so you can verify everything works before flipping DNS. Keep the old plan for a week as a safety net." } },
     { "@type": "Question", "name": "What about my email?", "acceptedAnswer": { "@type": "Answer", "text": "If email lives with your old host, coordinate mail separately during the move — it's a DNS setting, not a reason to stay. Many businesses move mail to Google Workspace or Microsoft 365 and host the site separately." } },
     { "@type": "Question", "name": "Is the cheap first-term price real?", "acceptedAnswer": { "@type": "Answer", "text": "The intro price is real but temporary. Budget hosts especially raise rates at renewal. Read the renewal price, not just the first-term price, when comparing." } },
-    { "@type": "Question", "name": "Which host is safest for a non-technical owner?", "acceptedAnswer": { "@type": "Answer", "text": "The one whose support you can actually reach and whose backups restore in one click. All four qualify; the difference is price tier and how much control you want versus how much you want handled for you." } }
+    { "@type": "Question", "name": "Which host is safest for a non-technical owner?", "acceptedAnswer": { "@type": "Answer", "text": "The one whose support you can actually reach and whose backups restore in one click. All five qualify; the difference is price tier and how much control you want versus how much you want handled for you." } },
+    { "@type": "Question", "name": "Do I need to buy email hosting from my web host?", "acceptedAnswer": { "@type": "Answer", "text": "No, and often you shouldn't. Many managed WordPress hosts deliberately don't bundle email — it's a different reliability problem than serving web pages. Most businesses are better off with a dedicated mail provider (Google Workspace or Microsoft 365) and web hosting separately, which also means moving hosts later doesn't touch your email at all. If email currently lives with your old host, plan that separation during the migration." } },
+    { "@type": "Question", "name": "Is managed hosting worth it for a simple brochure site?", "acceptedAnswer": { "@type": "Answer", "text": "Often not. If the site exists so people can confirm you're real and find your phone number, a premium managed plan is money you could spend elsewhere — a cheap shared plan with decent support is rational. Managed hosting earns its premium when the site does something: captures leads, takes bookings, sells products, or is slow enough to cost you customers. Upgrade when the site starts earning, not before." } },
+    { "@type": "Question", "name": "What should I check before I sign up?", "acceptedAnswer": { "@type": "Answer", "text": "Five things: the renewal price (not the intro price); whether backups are included and how far back they go; whether staging is available on your tier; what happens when you exceed visits or bandwidth; and the refund window so you can test support and the dashboard before you're committed. Most hosting regret comes from skipping one of these." } }
   ]
 }
 </script>
