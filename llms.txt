@@ -17,6 +17,8 @@
 - WordPress PHP Workers, Explained — https://wiser-tools.com/wordpress-php-workers-explained : Why a site that is fast at ten visitors crawls at a hundred, how to estimate how many workers you need, and why more workers do not make a slow page faster.
 - WordPress Backup Strategies That Actually Restore — https://wiser-tools.com/wordpress-backup-strategies-explained : The 3-2-1 rule for WordPress, backup frequency by site type, and the mistakes that make backups useless.
 - Move WordPress to a New Host Without Downtime — https://wiser-tools.com/move-wordpress-to-new-host-without-downtime : Stage on the new host first, handle serialized URLs correctly, lower DNS TTL early, and avoid the email trap.
+- WordPress Staging Environments, Explained — https://wiser-tools.com/wordpress-staging-environments-explained : What a staging site is, the clone-test-push cycle, what staging does and does not protect you from, and why one-click staging is a real managed-hosting feature that varies by host.
+- WordPress Database Optimization, Explained — https://wiser-tools.com/wordpress-database-optimization-explained : Which tables actually bloat (autoloaded wp_options, revisions, transients), what is safe to clean, and when the database is not the cause of a slow site.
 
 ## What Wiser Tools is
 Wiser Tools is an independent review publisher. Our recommendations are based on genuine product research. We may earn a commission from some partner links at no extra cost to readers; this does not affect our rankings or recommendations.
