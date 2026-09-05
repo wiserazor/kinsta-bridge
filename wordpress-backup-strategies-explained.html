@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WordPress Backup Strategies That Actually Restore (2026)</title>
+<meta name="description" content="A backup you have never restored is a hypothesis, not a backup. The 3-2-1 rule for WordPress, how often to back up by site type, and the mistakes that quietly make backups worthless.">
+<link rel="canonical" href="https://wiser-tools.com/wordpress-backup-strategies-explained">
+<style>
+  :root{
+    --bg:#ffffff; --fg:#1a1a2e; --muted:#5b6472; --line:#e6e9ef;
+    --brand:#4a2cff; --brand-d:#3a1fd6; --accent:#0bbf8a; --warn:#d97706;
+    --card:#f7f9fc;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--fg);background:var(--bg);line-height:1.65;font-size:17px}
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px}
+  .topbar{background:#1a1a2e;color:#fff;padding:12px 0}
+  .topbar-inner{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .brand{font-weight:700;font-size:18px;letter-spacing:-.3px}
+  .brand-tag{font-size:13px;color:#a5b0c0}
+  a.brand{color:#fff;text-decoration:none}
+  a.brand:hover{text-decoration:underline}
+  .topbar-home{margin-left:auto;font-size:14px;color:#a5b0c0;text-decoration:none}
+  .topbar-home:hover{color:#fff;text-decoration:underline}
+  .disclosure{background:#fff7ed;border-bottom:1px solid #fed7aa;color:#7c2d12;font-size:14px;padding:10px 20px;text-align:center}
+  .disclosure.neutral{background:#f0fdf4;border-bottom:1px solid #bbf7d0;color:#166534}
+  header{padding:48px 0 24px}
+  h1{font-size:38px;line-height:1.2;margin:0 0 12px;letter-spacing:-.5px}
+  h2{font-size:26px;margin:44px 0 14px;letter-spacing:-.3px}
+  h3{font-size:20px;margin:26px 0 8px}
+  p{margin:0 0 16px;color:var(--muted)}
+  .lead{font-size:19px;color:var(--fg)}
+  a.cta{display:inline-block;background:var(--brand);color:#fff;text-decoration:none;padding:12px 22px;border-radius:10px;font-weight:600;transition:.15s}
+  a.cta:hover{background:var(--brand-d)}
+  .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:14px}
+  .cta-label{font-weight:600;margin:26px 0 0}
+  table{width:100%;border-collapse:collapse;margin:18px 0;font-size:15px}
+  th,td{border:1px solid var(--line);padding:12px 14px;text-align:left;vertical-align:top}
+  th{background:var(--card);font-weight:600}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;margin:16px 0}
+  ul,ol{margin:0 0 16px;padding-left:22px}
+  li{margin:4px 0;color:var(--muted)}
+  .faq{margin:10px 0}
+  .faq h3{margin-bottom:4px}
+  footer{border-top:1px solid var(--line);margin-top:48px;padding:28px 0 56px;font-size:14px;color:var(--muted)}
+  .small{font-size:14px}
+  .note{background:#eff6ff;border:1px solid #bfdbfe;color:#1e40af;border-radius:10px;padding:12px 16px;font-size:14px;margin:16px 0}
+  .warn{background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;border-radius:10px;padding:12px 16px;font-size:15px;margin:16px 0}
+  .related{background:#f7f9fc;border:1px solid var(--line);border-radius:14px;padding:18px 22px;margin:24px 0}
+  .related a{color:var(--brand);text-decoration:none}
+  .related a:hover{text-decoration:underline}
+  .toc{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 22px;margin:20px 0}
+  .toc a{color:var(--brand);text-decoration:none}
+  .toc a:hover{text-decoration:underline}
+  .toc ol{margin:8px 0 0}
+  main a{color:var(--brand)}
+  code{background:#f1f5f9;border:1px solid var(--line);border-radius:4px;padding:1px 5px;font-size:14px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+  pre{background:#0f172a;color:#e2e8f0;border-radius:10px;padding:14px 16px;overflow-x:auto;font-size:14px;line-height:1.55;margin:14px 0}
+  pre code{background:none;border:0;padding:0;color:inherit;font-size:14px}
+  .step{background:#fff;border:1px solid var(--line);border-left:4px solid var(--brand);border-radius:10px;padding:16px 18px;margin:14px 0}
+  .step h3{margin-top:0}
+  .step p:last-child,.step ul:last-child,.step ol:last-child{margin-bottom:0}
+  .meta{font-size:14px;color:var(--muted)}
+  .guide-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin-top:6px}
+  .guide-card{
+    display:block;background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 18px;
+    text-decoration:none;color:inherit;transition:.15s
+  }
+  .guide-card:hover{border-color:var(--brand);background:#fbfbff;transform:translateY(-1px)}
+  .guide-card strong{display:block;color:var(--brand);font-size:16px;margin-bottom:4px}
+  .guide-card span{display:block;font-size:14px;color:var(--muted);line-height:1.5}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="brand" href="/">Wiser Tools</a>
+    <span class="brand-tag">Honest, no-hype tool &amp; service reviews</span>
+    <a class="topbar-home" href="/">&larr; All categories</a>
+  </div>
+</div>
+
+<div class="disclosure neutral">
+  <strong>No affiliate links on this page.</strong> This guide is purely instructional — we earn nothing from it. Other pages on this site do carry affiliate links, and they're always labelled.
+</div>
+
+<header class="wrap">
+  <p class="meta"><a href="/">Home</a> &rsaquo; <a href="wordpress-guides">WordPress Guides</a></p>
+  <h1>WordPress Backup Strategies That Actually Restore</h1>
+  <p class="lead">Most people discover their backup doesn't work at the exact moment they need it. This guide covers what a WordPress backup has to contain, how often to take one for your type of site, the five mistakes that make backups useless, and how to test a restore before you're relying on it.</p>
+</header>
+
+<main class="wrap">
+
+  <div class="toc">
+    <strong>On this page:</strong>
+    <ol>
+      <li><a href="#rule">The 3-2-1 rule, adapted for WordPress</a></li>
+      <li><a href="#contains">What a WordPress backup must contain</a></li>
+      <li><a href="#frequency">How often to back up, by site type</a></li>
+      <li><a href="#mistakes">The mistakes that make backups useless</a></li>
+      <li><a href="#options">Your options: host, plugin, or command line</a></li>
+      <li><a href="#test">How to actually test a restore</a></li>
+    </ol>
+  </div>
+
+
+  <h2 id="rule">The 3-2-1 rule, adapted for WordPress</h2>
+  <p>The standard framework is 3-2-1: three copies of your data, on two different kinds of storage, with one copy offsite. It survives because it's simple and it accounts for the ways backups actually fail. Applied to WordPress, it looks like this:</p>
+  <ul>
+    <li><strong>Copy 1 &mdash; the live site.</strong> Not really a backup, but it's the copy you care about.</li>
+    <li><strong>Copy 2 &mdash; your host's backup.</strong> Automatic, fast to restore, usually short retention.</li>
+    <li><strong>Copy 3 &mdash; an independent offsite backup</strong> that you control, stored somewhere else entirely: object storage like S3 or Backblaze B2, or a cloud drive.</li>
+  </ul>
+  <p>The "two different kinds of storage" part isn't pedantry. It's what saves you when the failure mode is <em>the account itself</em> &mdash; a compromised password, a lapsed payment, a host that closes your account over a disputed charge. In that scenario every copy your host holds for you is inaccessible at exactly the moment you need it.</p>
+  <div class="warn"><strong>Host backups are not a strategy.</strong> They're excellent and you should absolutely use them &mdash; for "I broke something ten minutes ago" they're the fastest recovery available. But they're usually short-retention, restored by support rather than by you, and useless if the account is compromised. Treat them as one copy out of three, not as the plan.</div>
+
+  <h2 id="contains">What a WordPress backup must contain</h2>
+  <p>A WordPress site is two things, and you need both:</p>
+  <ul>
+    <li><strong>The database</strong> &mdash; every post, page, comment, user, order, and setting. This is the part people forget, and it's the part that changes constantly.</li>
+    <li><strong>The <code>wp-content</code> folder</strong> &mdash; your themes, plugins, and uploads (every image you've ever uploaded).</li>
+  </ul>
+  <p>That's it. You do <em>not</em> need to back up <code>wp-admin</code>, <code>wp-includes</code>, or the core files in the site root &mdash; those are identical on every WordPress install and can be re-downloaded from wordpress.org in a minute. Backing them up is harmless but wasteful, and restoring them over the top of a current version can actively cause problems.</p>
+  <p>What people forget to include, and then miss on restore:</p>
+  <ul>
+    <li><strong><code>wp-config.php</code></strong> &mdash; small, but it holds your database credentials and any custom constants you've set.</li>
+    <li><strong><code>.htaccess</code></strong> or your nginx config &mdash; redirects and access rules live here and vanish with a fresh install.</li>
+    <li><strong>Any file outside wp-content</strong> that you edited &mdash; custom endpoints, static HTML pages, cron scripts.</li>
+    <li><strong>Email</strong> &mdash; not part of WordPress at all, and not covered by any site backup. If your domain's mail is hosted with your hosting provider, it needs its own arrangement.</li>
+  </ul>
+
+  <h2 id="frequency">How often to back up, by site type</h2>
+  <p>The right frequency is a function of how much you'd lose. Think about what changed since the last backup, not about what a calendar says.</p>
+  <table>
+    <thead>
+      <tr><th>Site type</th><th>Suggested frequency</th><th>Reasoning</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Brochure site, updated monthly</td><td>Weekly, keep 4</td><td>Little changes; the risk of loss is low</td></tr>
+      <tr><td>Active blog</td><td>Daily, keep 14</td><td>Content is the asset and it changes constantly</td></tr>
+      <tr><td>WooCommerce store</td><td>Daily minimum; hourly or real-time during sales</td><td>Orders, inventory and customer records change every minute</td></tr>
+      <tr><td>Membership, course or community site</td><td>Daily, plus more frequent for user-generated data</td><td>Content you cannot recreate if it's lost</td></tr>
+      <tr><td>Anything, immediately before a big change</td><td>On-demand snapshot</td><td>The cheapest insurance there is</td></tr>
+    </tbody>
+  </table>
+  <p>Retention matters as much as frequency. A daily backup that only keeps seven days is useless against the most common disaster of all: a problem you notice three weeks after it started. Slow corruption, a bad plugin update that quietly broke something, a hack that went unnoticed &mdash; these all surface late, and by then the seven-day window has rolled past the clean copy.</p>
+  <p>For a store there's an additional subtlety. Restoring a database backup also <em>rolls back</em> every order, customer signup and comment placed since that backup was taken. If you're restoring because of a hack at 3 p.m., you don't want to lose the morning's orders. Plan for file-level restore where possible, and know that a full database restore is a genuinely destructive operation on a busy store.</p>
+
+  <h2 id="mistakes">The mistakes that make backups useless</h2>
+  <ol>
+    <li><strong>Keeping the backup on the same server.</strong> A plugin that writes backup files into <code>wp-content/uploads</code> has produced a backup that dies with the site. Ransomware, a compromised account, a deleted server &mdash; all of them take the backup along with the original.</li>
+    <li><strong>Never testing a restore.</strong> An untested backup is a hypothesis, not a backup. The failure modes are mundane: the archive was truncated, the credentials to the offsite destination expired months ago, the file was never uploaded at all.</li>
+    <li><strong>Undefined retention.</strong> You discover you needed the copy from three weeks ago and discover at the same moment that you keep seven days.</li>
+    <li><strong>Treating a staging site as a backup.</strong> Staging gets overwritten the next time someone pushes to it, usually without warning.</li>
+    <li><strong>Assuming "it's automatic" means "it's working."</strong> Automatic backups fail quietly and for boring reasons &mdash; an expired API token, a full disk, a plugin update that changed a setting. Check that they're actually running.</li>
+  </ol>
+
+  <h2 id="options">Your options: host, plugin, or command line</h2>
+  <table>
+    <thead>
+      <tr><th>Approach</th><th>Good at</th><th>Weak at</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Host-native backups</strong></td><td>Fastest possible restore; no setup; often automatic and included</td><td>Short retention; restored by support, not you; useless if the account is lost</td></tr>
+      <tr><td><strong>Backup plugins</strong> (UpdraftPlus, BackWPup, BlogVault)</td><td>You control schedule and destination; easy offsite setup; granular restore</td><td>Runs inside WordPress, so it can't help if WordPress itself is broken</td></tr>
+      <tr><td><strong>Real-time incremental</strong> (Jetpack Backup, BlogVault)</td><td>Every change captured; excellent for stores; point-in-time restore</td><td>Costs more; restoring still needs care with live order data</td></tr>
+      <tr><td><strong>Manual / WP-CLI</strong></td><td>Full control; scriptable; reliable for large sites</td><td>You own the scheduling, the offsite copy and the testing</td></tr>
+    </tbody>
+  </table>
+  <p>If you want the manual route, it's two commands &mdash; one for the database, one for the files:</p>
+  <pre><code>wp db export backup.sql
+tar -czf wp-content.tar.gz wp-content</code></pre>
+  <p>Then copy both somewhere else. The copy step is the one people skip, and it's the only part that satisfies the "offsite" requirement.</p>
+  <p>Offsite destinations worth considering: Backblaze B2 (usually the cheapest for this volume), Amazon S3, Google Drive, or Dropbox. Cost for a typical small site is pennies per month &mdash; the obstacle is setup effort, not price.</p>
+
+  <h2 id="test">How to actually test a restore</h2>
+  <p>Do this quarterly, and always before you depend on it. Restore into a staging environment or a local copy &mdash; never over your live site during a test.</p>
+  <ol>
+    <li>Restore the files and the database to the staging environment.</li>
+    <li>Load the home page and confirm it renders, including images.</li>
+    <li>Log in to wp-admin with a known account.</li>
+    <li>Confirm a recent post or order &mdash; something created just before the backup &mdash; is present.</li>
+    <li>Submit a form and confirm it sends.</li>
+    <li>If it's a store, complete a test transaction end to end.</li>
+    <li>Time the whole thing and write the duration down.</li>
+  </ol>
+  <p>That last step is the one everyone skips and everyone regrets. Knowing that a restore takes eleven minutes, rather than "a while," is the difference between a calm recovery and a panicked one. And if you ever do need help, this is where support quality matters &mdash; worth weighing when you <a href="best-managed-wordpress-hosting">compare managed hosts</a>, because backup granularity and restore speed vary more between hosts than almost any other feature.</p>
+
+  <h2 id="faq">FAQ</h2>
+  <div class="faq">
+    <h3>Are my host's automatic backups enough?</h3>
+    <p>They're necessary but not sufficient. Host backups are excellent for recovering from something you broke in the last few hours, and they're the fastest restore available. What they don't cover is the scenario where the account itself is the problem: a compromise, a billing dispute, or a provider mistake. Keep one copy somewhere your host can't reach and doesn't control.</p>
+  </div>
+  <div class="faq">
+    <h3>How long should I keep backups?</h3>
+    <p>Long enough to reach back past the point where you'd notice a problem. Thirty days of dailies plus a few monthly archives covers most sites and costs very little. The failure this protects against is the slow one: a hack that went undetected for a fortnight, or an update that broke something you only found a month later. A seven-day window is the most common regret.</p>
+  </div>
+  <div class="faq">
+    <h3>Does a backup include my theme customisations and widget layout?</h3>
+    <p>Yes, but split across the two halves. Customiser settings, widget placement and menu assignments live in the database; custom CSS stored in files and any child theme you built live in wp-content. That's precisely why you need both halves &mdash; restoring files without the database gives you a theme with none of its settings, and restoring the database without files gives you settings pointing at a theme that isn't there.</p>
+  </div>
+  <div class="faq">
+    <h3>Can I restore just one thing instead of the whole site?</h3>
+    <p>Files, yes &mdash; that's routine and safe. The database is harder. There's no clean 'restore just that one post' button in a standard backup; you restore the whole database or you extract the specific rows manually, which is fiddly. This is why granular and real-time backup services exist, and why they're worth the money on a busy store where a full database restore would roll back live orders.</p>
+  </div>
+  <div class="faq">
+    <h3>Is a staging site a backup?</h3>
+    <p>No. A staging site is a working copy that gets overwritten the next time someone pushes to it, often without telling anyone. It's genuinely useful as a place to test a restore, and useless as the restore source itself.</p>
+  </div>
+  <div class="faq">
+    <h3>What about my email?</h3>
+    <p>Not covered, and this catches people during migrations. A WordPress backup contains your site &mdash; database and files &mdash; and nothing else. If your domain's email is hosted by your hosting provider, it lives in a separate system with its own retention. Back it up separately, or move it to a dedicated provider so it stops depending on where your site happens to live.</p>
+  </div>
+
+
+  <div class="related">
+    <strong>Related on Wiser Tools</strong>
+        <p><a href="move-wordpress-to-new-host-without-downtime">Move WordPress to a new host without downtime</a> — Backups are step one of any migration &mdash; here's the full sequence.</p>
+    <p><a href="best-managed-wordpress-hosting">Which managed WordPress host fits you?</a> — Backup granularity and restore speed vary enormously between hosts.</p>
+  </div>
+
+</main>
+
+<footer class="wrap">
+  <p><strong>About this guide:</strong> Wiser Tools publishes practical WordPress guides alongside its hosting comparisons. This page contains no affiliate links and no sponsored recommendations. Our hosting comparison pages do carry affiliate links, which are marked with a <code>rel="sponsored"</code> attribute and disclosed at the top of each page.</p>
+  <p class="small">WordPress, plugin and hosting details change over time. Verify current requirements and pricing on each vendor's official site before making changes to a live site. Last reviewed: September 2026.</p>
+</footer>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Wiser Tools",
+  "url": "https://wiser-tools.com/",
+  "description": "Independent, hands-on reviews and comparisons of managed hosting, SaaS tools, and developer services.",
+  "publisher": { "@type": "Organization", "name": "Wiser Tools", "url": "https://wiser-tools.com/" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "WordPress Backup Strategies That Actually Restore",
+  "description": "A backup you have never restored is a hypothesis, not a backup. The 3-2-1 rule for WordPress, how often to back up by site type, and the mistakes that quietly make backups worthless.",
+  "author": { "@type": "Organization", "name": "Wiser Tools" },
+  "publisher": { "@type": "Organization", "name": "Wiser Tools", "url": "https://wiser-tools.com/" },
+  "datePublished": "2026-09-05",
+  "dateModified": "2026-09-05",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://wiser-tools.com/wordpress-backup-strategies-explained" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://wiser-tools.com/" },
+    { "@type": "ListItem", "position": 2, "name": "WordPress Guides", "item": "https://wiser-tools.com/wordpress-guides" },
+    { "@type": "ListItem", "position": 3, "name": "Backup Strategies", "item": "https://wiser-tools.com/wordpress-backup-strategies-explained" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "Are my host's automatic backups enough?", "acceptedAnswer": { "@type": "Answer", "text": "They're necessary but not sufficient. Host backups are excellent for recovering from something you broke in the last few hours, and they're the fastest restore available. What they don't cover is the scenario where the account itself is the problem: a compromise, a billing dispute, or a provider mistake. Keep one copy somewhere your host can't reach and doesn't control." } },
+    { "@type": "Question", "name": "How long should I keep backups?", "acceptedAnswer": { "@type": "Answer", "text": "Long enough to reach back past the point where you'd notice a problem. Thirty days of dailies plus a few monthly archives covers most sites and costs very little. The failure this protects against is the slow one: a hack that went undetected for a fortnight, or an update that broke something you only found a month later. A seven-day window is the most common regret." } },
+    { "@type": "Question", "name": "Does a backup include my theme customisations and widget layout?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, but split across the two halves. Customiser settings, widget placement and menu assignments live in the database; custom CSS stored in files and any child theme you built live in wp-content. That's precisely why you need both halves &mdash; restoring files without the database gives you a theme with none of its settings, and restoring the database without files gives you settings pointing at a theme that isn't there." } },
+    { "@type": "Question", "name": "Can I restore just one thing instead of the whole site?", "acceptedAnswer": { "@type": "Answer", "text": "Files, yes &mdash; that's routine and safe. The database is harder. There's no clean 'restore just that one post' button in a standard backup; you restore the whole database or you extract the specific rows manually, which is fiddly. This is why granular and real-time backup services exist, and why they're worth the money on a busy store where a full database restore would roll back live orders." } },
+    { "@type": "Question", "name": "Is a staging site a backup?", "acceptedAnswer": { "@type": "Answer", "text": "No. A staging site is a working copy that gets overwritten the next time someone pushes to it, often without telling anyone. It's genuinely useful as a place to test a restore, and useless as the restore source itself." } },
+    { "@type": "Question", "name": "What about my email?", "acceptedAnswer": { "@type": "Answer", "text": "Not covered, and this catches people during migrations. A WordPress backup contains your site &mdash; database and files &mdash; and nothing else. If your domain's email is hosted by your hosting provider, it lives in a separate system with its own retention. Back it up separately, or move it to a dedicated provider so it stops depending on where your site happens to live." } }
+  ]
+}
+</script>
+
+</body>
+</html>

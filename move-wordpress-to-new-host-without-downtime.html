@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Move WordPress to a New Host Without Downtime (2026)</title>
+<meta name="description" content="Stage the site on the new host first, handle serialized URLs correctly, lower your DNS TTL a day early, and keep the old host running - the migration order that keeps you live throughout.">
+<link rel="canonical" href="https://wiser-tools.com/move-wordpress-to-new-host-without-downtime">
+<style>
+  :root{
+    --bg:#ffffff; --fg:#1a1a2e; --muted:#5b6472; --line:#e6e9ef;
+    --brand:#4a2cff; --brand-d:#3a1fd6; --accent:#0bbf8a; --warn:#d97706;
+    --card:#f7f9fc;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--fg);background:var(--bg);line-height:1.65;font-size:17px}
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px}
+  .topbar{background:#1a1a2e;color:#fff;padding:12px 0}
+  .topbar-inner{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .brand{font-weight:700;font-size:18px;letter-spacing:-.3px}
+  .brand-tag{font-size:13px;color:#a5b0c0}
+  a.brand{color:#fff;text-decoration:none}
+  a.brand:hover{text-decoration:underline}
+  .topbar-home{margin-left:auto;font-size:14px;color:#a5b0c0;text-decoration:none}
+  .topbar-home:hover{color:#fff;text-decoration:underline}
+  .disclosure{background:#fff7ed;border-bottom:1px solid #fed7aa;color:#7c2d12;font-size:14px;padding:10px 20px;text-align:center}
+  .disclosure.neutral{background:#f0fdf4;border-bottom:1px solid #bbf7d0;color:#166534}
+  header{padding:48px 0 24px}
+  h1{font-size:38px;line-height:1.2;margin:0 0 12px;letter-spacing:-.5px}
+  h2{font-size:26px;margin:44px 0 14px;letter-spacing:-.3px}
+  h3{font-size:20px;margin:26px 0 8px}
+  p{margin:0 0 16px;color:var(--muted)}
+  .lead{font-size:19px;color:var(--fg)}
+  a.cta{display:inline-block;background:var(--brand);color:#fff;text-decoration:none;padding:12px 22px;border-radius:10px;font-weight:600;transition:.15s}
+  a.cta:hover{background:var(--brand-d)}
+  .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:14px}
+  .cta-label{font-weight:600;margin:26px 0 0}
+  table{width:100%;border-collapse:collapse;margin:18px 0;font-size:15px}
+  th,td{border:1px solid var(--line);padding:12px 14px;text-align:left;vertical-align:top}
+  th{background:var(--card);font-weight:600}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;margin:16px 0}
+  ul,ol{margin:0 0 16px;padding-left:22px}
+  li{margin:4px 0;color:var(--muted)}
+  .faq{margin:10px 0}
+  .faq h3{margin-bottom:4px}
+  footer{border-top:1px solid var(--line);margin-top:48px;padding:28px 0 56px;font-size:14px;color:var(--muted)}
+  .small{font-size:14px}
+  .note{background:#eff6ff;border:1px solid #bfdbfe;color:#1e40af;border-radius:10px;padding:12px 16px;font-size:14px;margin:16px 0}
+  .warn{background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;border-radius:10px;padding:12px 16px;font-size:15px;margin:16px 0}
+  .related{background:#f7f9fc;border:1px solid var(--line);border-radius:14px;padding:18px 22px;margin:24px 0}
+  .related a{color:var(--brand);text-decoration:none}
+  .related a:hover{text-decoration:underline}
+  .toc{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 22px;margin:20px 0}
+  .toc a{color:var(--brand);text-decoration:none}
+  .toc a:hover{text-decoration:underline}
+  .toc ol{margin:8px 0 0}
+  main a{color:var(--brand)}
+  code{background:#f1f5f9;border:1px solid var(--line);border-radius:4px;padding:1px 5px;font-size:14px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+  pre{background:#0f172a;color:#e2e8f0;border-radius:10px;padding:14px 16px;overflow-x:auto;font-size:14px;line-height:1.55;margin:14px 0}
+  pre code{background:none;border:0;padding:0;color:inherit;font-size:14px}
+  .step{background:#fff;border:1px solid var(--line);border-left:4px solid var(--brand);border-radius:10px;padding:16px 18px;margin:14px 0}
+  .step h3{margin-top:0}
+  .step p:last-child,.step ul:last-child,.step ol:last-child{margin-bottom:0}
+  .meta{font-size:14px;color:var(--muted)}
+  .guide-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin-top:6px}
+  .guide-card{
+    display:block;background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 18px;
+    text-decoration:none;color:inherit;transition:.15s
+  }
+  .guide-card:hover{border-color:var(--brand);background:#fbfbff;transform:translateY(-1px)}
+  .guide-card strong{display:block;color:var(--brand);font-size:16px;margin-bottom:4px}
+  .guide-card span{display:block;font-size:14px;color:var(--muted);line-height:1.5}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="brand" href="/">Wiser Tools</a>
+    <span class="brand-tag">Honest, no-hype tool &amp; service reviews</span>
+    <a class="topbar-home" href="/">&larr; All categories</a>
+  </div>
+</div>
+
+<div class="disclosure neutral">
+  <strong>No affiliate links on this page.</strong> This guide is purely instructional — we earn nothing from it. Other pages on this site do carry affiliate links, and they're always labelled.
+</div>
+
+<header class="wrap">
+  <p class="meta"><a href="/">Home</a> &rsaquo; <a href="wordpress-guides">WordPress Guides</a></p>
+  <h1>Move WordPress to a New Host Without Downtime</h1>
+  <p class="lead">Migrations fail in two ways: downtime from switching DNS before the new site works, and email that dies silently three days later. Both come from the same mistake - pointing visitors at the new server before it's ready. Here's the sequence that avoids them.</p>
+</header>
+
+<main class="wrap">
+
+  <div class="toc">
+    <strong>On this page:</strong>
+    <ol>
+      <li><a href="#why">Why migrations go wrong</a></li>
+      <li><a href="#prepare">Phase 1: Prepare (do this a day early)</a></li>
+      <li><a href="#stage">Phase 2: Build the site on the new host</a></li>
+      <li><a href="#urls">Phase 3: The URL problem</a></li>
+      <li><a href="#test">Phase 4: Test before anyone is affected</a></li>
+      <li><a href="#cutover">Phase 5: Cut over</a></li>
+      <li><a href="#after">Phase 6: After the switch</a></li>
+      <li><a href="#email">The email trap</a></li>
+    </ol>
+  </div>
+
+
+  <h2 id="why">Why migrations go wrong</h2>
+  <p>Site migrations fail in two ways, and they're opposites.</p>
+  <p>The first is <strong>downtime that shouldn't have happened</strong>: you copy files, switch DNS, and then discover a problem — a missing database table, a broken URL, an SSL certificate that hasn't been issued — while visitors are already hitting the new server. You're now debugging live.</p>
+  <p>The second is <strong>email silently dying</strong>. This one is worse, because it doesn't announce itself. The site looks perfect, and three days later you realise nobody has received an enquiry since the move.</p>
+  <p>Both are avoidable with the same principle: <strong>get the site fully working on the new host before anyone is pointed at it</strong>. Everything below follows from that.</p>
+
+  <h2 id="prepare">Phase 1: Prepare (do this a day early)</h2>
+  <ol>
+    <li><strong>Take a full backup.</strong> Database and <code>wp-content</code>. Verify you could restore it — <a href="wordpress-backup-strategies-explained">our backup guide</a> covers testing a restore properly.</li>
+    <li><strong>Write down what's running.</strong> Every plugin, any custom code, cron jobs, integrations, and where your DNS currently points. You'll want this list when something behaves differently afterwards.</li>
+    <li><strong>Lower your DNS TTL.</strong> This is the step people skip and then regret. TTL (time to live) tells resolvers how long to cache your DNS record. If it's 14400 seconds (4 hours), some visitors will keep hitting the old server for hours after you switch. Set it to 300 seconds <strong>at least 24 hours before</strong> the migration, so when you do switch, propagation takes minutes rather than a day.</li>
+    <li><strong>Inventory your DNS records.</strong> Screenshot everything — A, CNAME, MX, TXT, SPF, DKIM, DMARC. Especially the mail records.</li>
+  </ol>
+
+  <h2 id="stage">Phase 2: Build the site on the new host</h2>
+  <p>Set up the site on the new host while the old one keeps serving visitors. Don't touch DNS yet.</p>
+  <p>Three ways to get the files and database across:</p>
+  <ul>
+    <li><strong>A migration plugin</strong> (All-in-One WP Migration, Duplicator, Migrate Guru) — the accessible option. These handle the URL replacement problem for you, which is the main reason to use one if you're not comfortable on the command line.</li>
+    <li><strong>Manual copy</strong> — export the database, copy <code>wp-content</code> over SFTP or with <code>rsync</code>, import the database on the new host. Fast and reliable for large sites, but you own the URL replacement.</li>
+    <li><strong>Ask the new host.</strong> Most managed hosts will migrate you for free. If you're moving to managed hosting specifically, this is usually the best option — it costs nothing and there's someone to escalate to.</li>
+  </ul>
+  <p>Get SSL working at this stage too. Many hosts provision a certificate automatically once DNS points at them, but if you want a genuinely zero-downtime cutover, sort the certificate out beforehand — either through the host's temporary URL or with a DNS-validated certificate.</p>
+
+  <h2 id="urls">Phase 3: The URL problem</h2>
+  <p>This is the part that quietly ruins migrations. WordPress stores some settings as <strong>serialized</strong> data — strings that encode both a value and its length. A naive find-and-replace of your domain across the database changes the value without updating the recorded length, which corrupts those entries. The site loads, but widgets vanish, menus break, and customizer settings reset.</p>
+  <p>Never do a raw SQL replace on your domain. Use a tool that understands serialized data:</p>
+  <pre><code>wp search-replace 'https://oldsite.com' 'https://newsite.com' --dry-run
+wp search-replace 'https://oldsite.com' 'https://newsite.com'</code></pre>
+  <p>Always run the <code>--dry-run</code> first and read the summary — it tells you how many tables and rows will change, which is your last chance to catch a typo before it's applied everywhere.</p>
+  <p>If you don't have command-line access, this is exactly what migration plugins and the Better Search Replace plugin do for you. Either is fine; what matters is that the replacement is serialization-aware.</p>
+  <p>One note on scope: if you're keeping the same domain, you may not need to replace anything at all. The URLs only change if the domain changes, or if you're moving between a temporary staging URL and the real one.</p>
+
+  <h2 id="test">Phase 4: Test before anyone is affected</h2>
+  <p>Your site is now running on the new host and nobody has been pointed at it. Verify it properly, because this is the only window where a problem is cheap.</p>
+  <p>To reach the new server under your real domain before DNS points there, either use the host's preview or temporary URL, or edit your own computer's hosts file to map the domain to the new server's IP. Only you are affected, and you see exactly what visitors will see.</p>
+  <p>Work through:</p>
+  <ul>
+    <li>Home page, several inner pages, a single post, and an archive page</li>
+    <li>Images and other media load (a very common failure — check the browser console)</li>
+    <li>wp-admin loads and you can log in</li>
+    <li>Forms submit and arrive</li>
+    <li>Search returns results</li>
+    <li>Any payment flow, including webhooks</li>
+    <li>Site works over HTTPS with no mixed-content warnings</li>
+  </ul>
+
+  <h2 id="cutover">Phase 5: Cut over</h2>
+  <p>Point DNS at the new host — either by updating your A record to the new IP, or by switching nameservers to the new provider. If you lowered the TTL in phase 1, most visitors move across within minutes. Some ISPs ignore TTL regardless, which is why the next phase matters.</p>
+  <p>If the domain stays the same and your URLs are unchanged, there is nothing else to do for SEO. If any URL structure changed, set up 301 redirects from old to new and update your sitemap.</p>
+
+  <h2 id="after">Phase 6: After the switch</h2>
+  <p><strong>Keep the old host running for 48 to 72 hours.</strong> This is your rollback, and it costs a few days of duplicate hosting. Cancel it only once you're confident.</p>
+  <p>Post-migration checklist:</p>
+  <ul>
+    <li>Re-save permalinks (Settings &rarr; Permalinks &rarr; Save) — clears rewrite rules, fixes sudden 404s</li>
+    <li>Confirm SSL is active and there's no mixed content</li>
+    <li>Test a form submission and, if relevant, a real transaction</li>
+    <li>Confirm scheduled posts publish — WP-Cron behaves differently depending on host configuration</li>
+    <li>Check that analytics and any tag manager are still firing</li>
+    <li>Verify the property in Search Console and resubmit your sitemap</li>
+    <li>Watch for 404s in the first few days and redirect them</li>
+    <li>Only then cancel the old hosting</li>
+  </ul>
+
+  <h2 id="email">The email trap</h2>
+  <div class="warn"><strong>If your email runs on your old host, switching nameservers can take your email with it.</strong> This is the single most common migration disaster, and it's invisible until someone notices that enquiries stopped arriving.</div>
+  <p>Here's the mechanism. If <code>you@yourdomain.com</code> is hosted by your current provider, the MX records that direct your mail live in that provider's DNS. Move the domain to a new host by pointing nameservers, and those MX records are no longer being served — so mail has nowhere to go.</p>
+  <p>Before you switch anything, find out where your MX records point. Then pick one of these:</p>
+  <ol>
+    <li><strong>Move email to a dedicated provider first</strong> (Google Workspace, Microsoft 365, Fastmail). This is the cleanest answer: email stops depending on where your website lives, which is better architecture regardless of migrations.</li>
+    <li><strong>Migrate DNS records individually</strong> rather than switching nameservers wholesale — keep MX, SPF, DKIM and DMARC pointed at the old provider, and change only the records that need to change.</li>
+    <li><strong>Keep DNS where it is</strong> and just update the A record to the new host's IP. Minimal change, minimal risk.</li>
+  </ol>
+  <p>Option 1 is the right answer for almost everyone. It costs a few dollars a month and permanently removes a category of problem. Do it a week before the site migration, confirm mail flows, and then migrate the site with no deadline pressure.</p>
+  <p>And note what no site backup covers: <strong>your email is not in your WordPress backup</strong>. It's a separate system with separate retention.</p>
+
+  <h2 id="faq">FAQ</h2>
+  <div class="faq">
+    <h3>How much downtime should I expect?</h3>
+    <p>Minutes of DNS propagation if you follow the sequence above, and zero interruption for most visitors who hit whichever server their resolver already knows about. The migrations that take hours are the ones where DNS is switched first and debugging happens afterwards. Staging the site on the new host and testing it before cutover is the entire difference.</p>
+  </div>
+  <div class="faq">
+    <h3>Will migrating hurt my SEO?</h3>
+    <p>Not if the URLs stay the same. Search engines care about URLs, not about which server answers them. Two things do cause damage: changing your URL structure without 301 redirects, and leaving the site in a broken or half-migrated state for hours while crawlers visit. If URL structure has to change, map every old URL to its new one with a 301 and resubmit your sitemap.</p>
+  </div>
+  <div class="faq">
+    <h3>Do I need a migration plugin?</h3>
+    <p>It's the accessible option and the right one if you're not comfortable with the command line, mainly because these plugins handle serialized URL replacement correctly. That's the thing you must not get wrong. The alternative is WP-CLI or a migration done by your new host. Most managed hosts will do it for free, and if you're moving to managed hosting, letting them handle it costs you nothing and gives you someone to escalate to.</p>
+  </div>
+  <div class="faq">
+    <h3>Why did my email stop working after the move?</h3>
+    <p>Because your MX records were served by your old provider's DNS, and switching nameservers stopped serving them. It's the most common migration failure precisely because it isn't visible on the site itself. Recover by repointing the MX records, or better, move email to a dedicated provider so this dependency disappears permanently.</p>
+  </div>
+  <div class="faq">
+    <h3>How long should I keep the old hosting?</h3>
+    <p>48 to 72 hours minimum after cutover. Some ISPs and resolvers ignore low TTL values, so a small share of visitors will still be arriving at the old server for a day or two. If the old site has any dynamic function — orders, form submissions, user signups — those visitors' activity lands on the old server, and you need to be able to reconcile it. A few days of duplicate hosting is cheap insurance.</p>
+  </div>
+  <div class="faq">
+    <h3>Can I move just the domain and keep my current host?</h3>
+    <p>Yes, and it's a much smaller job than a full migration — it's a registrar-level change plus a domain configuration update on the host's side. But it still involves serialized URL replacement in the database, so treat it with the same care. And it still affects email if your mail is tied to the domain's DNS.</p>
+  </div>
+
+
+  <div class="related">
+    <strong>Related on Wiser Tools</strong>
+        <p><a href="best-managed-wordpress-hosting">Which managed WordPress host fits you?</a> — If the fix keeps being "more server," compare hosts before you throw money at the current one.</p>
+    <p><a href="wordpress-hosting-for-small-business">WordPress hosting for small business</a> — Reliability, reachable support, and moving off GoDaddy or cPanel without drama.</p>
+  </div>
+
+</main>
+
+<footer class="wrap">
+  <p><strong>About this guide:</strong> Wiser Tools publishes practical WordPress guides alongside its hosting comparisons. This page contains no affiliate links and no sponsored recommendations. Our hosting comparison pages do carry affiliate links, which are marked with a <code>rel="sponsored"</code> attribute and disclosed at the top of each page.</p>
+  <p class="small">WordPress, plugin and hosting details change over time. Verify current requirements and pricing on each vendor's official site before making changes to a live site. Last reviewed: September 2026.</p>
+</footer>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Wiser Tools",
+  "url": "https://wiser-tools.com/",
+  "description": "Independent, hands-on reviews and comparisons of managed hosting, SaaS tools, and developer services.",
+  "publisher": { "@type": "Organization", "name": "Wiser Tools", "url": "https://wiser-tools.com/" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Move WordPress to a New Host Without Downtime",
+  "description": "Stage the site on the new host first, handle serialized URLs correctly, lower your DNS TTL a day early, and keep the old host running - the migration order that keeps you live throughout.",
+  "author": { "@type": "Organization", "name": "Wiser Tools" },
+  "publisher": { "@type": "Organization", "name": "Wiser Tools", "url": "https://wiser-tools.com/" },
+  "datePublished": "2026-09-05",
+  "dateModified": "2026-09-05",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://wiser-tools.com/move-wordpress-to-new-host-without-downtime" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://wiser-tools.com/" },
+    { "@type": "ListItem", "position": 2, "name": "WordPress Guides", "item": "https://wiser-tools.com/wordpress-guides" },
+    { "@type": "ListItem", "position": 3, "name": "Move to a New Host", "item": "https://wiser-tools.com/move-wordpress-to-new-host-without-downtime" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "How much downtime should I expect?", "acceptedAnswer": { "@type": "Answer", "text": "Minutes of DNS propagation if you follow the sequence above, and zero interruption for most visitors who hit whichever server their resolver already knows about. The migrations that take hours are the ones where DNS is switched first and debugging happens afterwards. Staging the site on the new host and testing it before cutover is the entire difference." } },
+    { "@type": "Question", "name": "Will migrating hurt my SEO?", "acceptedAnswer": { "@type": "Answer", "text": "Not if the URLs stay the same. Search engines care about URLs, not about which server answers them. Two things do cause damage: changing your URL structure without 301 redirects, and leaving the site in a broken or half-migrated state for hours while crawlers visit. If URL structure has to change, map every old URL to its new one with a 301 and resubmit your sitemap." } },
+    { "@type": "Question", "name": "Do I need a migration plugin?", "acceptedAnswer": { "@type": "Answer", "text": "It's the accessible option and the right one if you're not comfortable with the command line, mainly because these plugins handle serialized URL replacement correctly. That's the thing you must not get wrong. The alternative is WP-CLI or a migration done by your new host. Most managed hosts will do it for free, and if you're moving to managed hosting, letting them handle it costs you nothing and gives you someone to escalate to." } },
+    { "@type": "Question", "name": "Why did my email stop working after the move?", "acceptedAnswer": { "@type": "Answer", "text": "Because your MX records were served by your old provider's DNS, and switching nameservers stopped serving them. It's the most common migration failure precisely because it isn't visible on the site itself. Recover by repointing the MX records, or better, move email to a dedicated provider so this dependency disappears permanently." } },
+    { "@type": "Question", "name": "How long should I keep the old hosting?", "acceptedAnswer": { "@type": "Answer", "text": "48 to 72 hours minimum after cutover. Some ISPs and resolvers ignore low TTL values, so a small share of visitors will still be arriving at the old server for a day or two. If the old site has any dynamic function — orders, form submissions, user signups — those visitors' activity lands on the old server, and you need to be able to reconcile it. A few days of duplicate hosting is cheap insurance." } },
+    { "@type": "Question", "name": "Can I move just the domain and keep my current host?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, and it's a much smaller job than a full migration — it's a registrar-level change plus a domain configuration update on the host's side. But it still involves serialized URL replacement in the database, so treat it with the same care. And it still affects email if your mail is tied to the domain's DNS." } }
+  ]
+}
+</script>
+
+</body>
+</html>

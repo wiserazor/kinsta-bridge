@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Speed Up WordPress: Diagnose First (2026)</title>
+<meta name="description" content="Most speed advice is a checklist in the wrong order. Find your real bottleneck first - TTFB, LCP or bloat - then fix the thing actually costing you seconds.">
+<link rel="canonical" href="https://wiser-tools.com/how-to-speed-up-wordpress">
+<style>
+  :root{
+    --bg:#ffffff; --fg:#1a1a2e; --muted:#5b6472; --line:#e6e9ef;
+    --brand:#4a2cff; --brand-d:#3a1fd6; --accent:#0bbf8a; --warn:#d97706;
+    --card:#f7f9fc;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--fg);background:var(--bg);line-height:1.65;font-size:17px}
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px}
+  .topbar{background:#1a1a2e;color:#fff;padding:12px 0}
+  .topbar-inner{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .brand{font-weight:700;font-size:18px;letter-spacing:-.3px}
+  .brand-tag{font-size:13px;color:#a5b0c0}
+  a.brand{color:#fff;text-decoration:none}
+  a.brand:hover{text-decoration:underline}
+  .topbar-home{margin-left:auto;font-size:14px;color:#a5b0c0;text-decoration:none}
+  .topbar-home:hover{color:#fff;text-decoration:underline}
+  .disclosure{background:#fff7ed;border-bottom:1px solid #fed7aa;color:#7c2d12;font-size:14px;padding:10px 20px;text-align:center}
+  .disclosure.neutral{background:#f0fdf4;border-bottom:1px solid #bbf7d0;color:#166534}
+  header{padding:48px 0 24px}
+  h1{font-size:38px;line-height:1.2;margin:0 0 12px;letter-spacing:-.5px}
+  h2{font-size:26px;margin:44px 0 14px;letter-spacing:-.3px}
+  h3{font-size:20px;margin:26px 0 8px}
+  p{margin:0 0 16px;color:var(--muted)}
+  .lead{font-size:19px;color:var(--fg)}
+  a.cta{display:inline-block;background:var(--brand);color:#fff;text-decoration:none;padding:12px 22px;border-radius:10px;font-weight:600;transition:.15s}
+  a.cta:hover{background:var(--brand-d)}
+  .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:14px}
+  .cta-label{font-weight:600;margin:26px 0 0}
+  table{width:100%;border-collapse:collapse;margin:18px 0;font-size:15px}
+  th,td{border:1px solid var(--line);padding:12px 14px;text-align:left;vertical-align:top}
+  th{background:var(--card);font-weight:600}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;margin:16px 0}
+  ul,ol{margin:0 0 16px;padding-left:22px}
+  li{margin:4px 0;color:var(--muted)}
+  .faq{margin:10px 0}
+  .faq h3{margin-bottom:4px}
+  footer{border-top:1px solid var(--line);margin-top:48px;padding:28px 0 56px;font-size:14px;color:var(--muted)}
+  .small{font-size:14px}
+  .note{background:#eff6ff;border:1px solid #bfdbfe;color:#1e40af;border-radius:10px;padding:12px 16px;font-size:14px;margin:16px 0}
+  .warn{background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;border-radius:10px;padding:12px 16px;font-size:15px;margin:16px 0}
+  .related{background:#f7f9fc;border:1px solid var(--line);border-radius:14px;padding:18px 22px;margin:24px 0}
+  .related a{color:var(--brand);text-decoration:none}
+  .related a:hover{text-decoration:underline}
+  .toc{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 22px;margin:20px 0}
+  .toc a{color:var(--brand);text-decoration:none}
+  .toc a:hover{text-decoration:underline}
+  .toc ol{margin:8px 0 0}
+  main a{color:var(--brand)}
+  code{background:#f1f5f9;border:1px solid var(--line);border-radius:4px;padding:1px 5px;font-size:14px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+  pre{background:#0f172a;color:#e2e8f0;border-radius:10px;padding:14px 16px;overflow-x:auto;font-size:14px;line-height:1.55;margin:14px 0}
+  pre code{background:none;border:0;padding:0;color:inherit;font-size:14px}
+  .step{background:#fff;border:1px solid var(--line);border-left:4px solid var(--brand);border-radius:10px;padding:16px 18px;margin:14px 0}
+  .step h3{margin-top:0}
+  .step p:last-child,.step ul:last-child,.step ol:last-child{margin-bottom:0}
+  .meta{font-size:14px;color:var(--muted)}
+  .guide-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin-top:6px}
+  .guide-card{
+    display:block;background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 18px;
+    text-decoration:none;color:inherit;transition:.15s
+  }
+  .guide-card:hover{border-color:var(--brand);background:#fbfbff;transform:translateY(-1px)}
+  .guide-card strong{display:block;color:var(--brand);font-size:16px;margin-bottom:4px}
+  .guide-card span{display:block;font-size:14px;color:var(--muted);line-height:1.5}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="brand" href="/">Wiser Tools</a>
+    <span class="brand-tag">Honest, no-hype tool &amp; service reviews</span>
+    <a class="topbar-home" href="/">&larr; All categories</a>
+  </div>
+</div>
+
+<div class="disclosure neutral">
+  <strong>No affiliate links on this page.</strong> This guide is purely instructional — we earn nothing from it. Other pages on this site do carry affiliate links, and they're always labelled.
+</div>
+
+<header class="wrap">
+  <p class="meta"><a href="/">Home</a> &rsaquo; <a href="wordpress-guides">WordPress Guides</a></p>
+  <h1>How to Speed Up WordPress: Diagnose First</h1>
+  <p class="lead">Nearly every WordPress speed guide hands you the same list of tactics regardless of what's actually wrong with your site. This one starts with three measurements that tell you which of three problems you have, because the fix for each is different and the wrong one costs you months.</p>
+</header>
+
+<main class="wrap">
+
+  <div class="toc">
+    <strong>On this page:</strong>
+    <ol>
+      <li><a href="#measure">Start by measuring</a></li>
+      <li><a href="#numbers">What the numbers actually mean</a></li>
+      <li><a href="#profiles">Three diagnosis profiles</a></li>
+      <li><a href="#order">Fix things in this order</a></li>
+      <li><a href="#hosting">When hosting genuinely is the problem</a></li>
+    </ol>
+  </div>
+
+
+  <h2 id="measure">Start by measuring</h2>
+  <p>Almost every WordPress speed checklist you'll find is a list of tactics in a fixed order: install these plugins, convert your images, add a CDN. The problem is that the tactics aren't interchangeable. If your bottleneck is a slow server, image optimisation changes nothing. If your bottleneck is a 4 MB hero image, upgrading your hosting plan wastes a year of subscription fees.</p>
+  <p>So measure first. Three tools cover most of what you need:</p>
+  <ul>
+    <li><strong>PageSpeed Insights</strong> &mdash; gives both lab data (a simulated load) and field data (real Chrome users, once you have enough traffic). The field data is the honest one.</li>
+    <li><strong>WebPageTest</strong> &mdash; produces a waterfall showing exactly which resource blocks which, and when. The best tool for finding the specific culprit.</li>
+    <li><strong>Query Monitor</strong> (plugin) &mdash; shows slow database queries, the hooks firing on a page, and PHP errors. The best tool for problems that originate in your own code.</li>
+  </ul>
+  <p>Run the same page three times and take the median. Single runs are noisy, especially on shared hosting where your neighbours' traffic affects the result.</p>
+
+  <h2 id="numbers">What the numbers actually mean</h2>
+  <p>Four metrics matter, and they point at different causes:</p>
+  <table>
+    <thead>
+      <tr><th>Metric</th><th>What it measures</th><th>Good</th><th>What a bad score usually means</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>TTFB</strong></td><td>How long until the server sends the first byte</td><td>Under 600 ms</td><td>Server-side: no caching, slow queries, insufficient PHP workers</td></tr>
+      <tr><td><strong>LCP</strong></td><td>When the largest visible element finishes rendering</td><td>Under 2.5 s</td><td>Hero images, render-blocking CSS and JS, slow server response</td></tr>
+      <tr><td><strong>INP</strong></td><td>How quickly the page responds to interaction</td><td>Under 200 ms</td><td>Too much JavaScript running on the main thread</td></tr>
+      <tr><td><strong>CLS</strong></td><td>How much the layout shifts while loading</td><td>Under 0.1</td><td>Images or ads without dimensions, fonts swapping, injected banners</td></tr>
+    </tbody>
+  </table>
+  <p>INP replaced First Input Delay as a Core Web Vitals metric, so older guides still reference FID &mdash; if you're reading something that optimises for FID, it's out of date. The practical difference is that INP measures responsiveness across the whole session rather than just the first interaction, which makes it harder to game and more representative of how a site actually feels.</p>
+
+  <h2 id="profiles">Three diagnosis profiles</h2>
+  <p>Compare your TTFB against your LCP. That single comparison tells you which of three problems you have.</p>
+
+  <div class="step">
+    <h3>Profile 1: High TTFB, acceptable LCP</h3>
+    <p>The content renders quickly once it arrives, but the server takes too long to start sending it. This is a <strong>server-side</strong> problem: no page caching, slow database queries, no object cache on a dynamic site, or too few PHP workers for your concurrency. Plugins that optimise images and JavaScript will do nothing here. Look at caching, query performance, and capacity.</p>
+  </div>
+
+  <div class="step">
+    <h3>Profile 2: Fast TTFB, slow LCP</h3>
+    <p>The server responds quickly, then the browser spends seconds assembling the page. This is a <strong>front-end</strong> problem: oversized images, render-blocking scripts and stylesheets, heavy page-builder output, web fonts. Upgrading hosting will do nothing here. Look at images first, then JavaScript and CSS delivery.</p>
+  </div>
+
+  <div class="step">
+    <h3>Profile 3: Fine LCP, poor INP</h3>
+    <p>The page looks ready, then feels sluggish when you click. Almost always <strong>too much JavaScript</strong> on the main thread &mdash; page builder runtime, several analytics tags, chat widgets, sliders and animation libraries all competing. Look at what's loading, not at your server.</p>
+  </div>
+  <p>A fourth pattern worth naming: good LCP and INP but bad CLS means things are moving around as the page loads. That's usually images without width and height attributes, or a font that swaps in late and reflows the text. It's the least technically serious of the four and the most irritating to actually use.</p>
+
+  <h2 id="order">Fix things in this order</h2>
+  <p>Once you know your profile, work through the fixes ranked by impact per unit of effort.</p>
+
+  <h3>1. Images (usually the single biggest win)</h3>
+  <p>For most sites this is where the seconds are. Export images at the size they're actually displayed &mdash; a 300 px-wide blog column doesn't need a 4000 px original. Convert to WebP or AVIF. Lazy-load anything below the fold. Always set <code>width</code> and <code>height</code> attributes so the browser reserves space and your CLS doesn't suffer.</p>
+
+  <h3>2. Page caching and browser caching</h3>
+  <p>Serving stored HTML instead of rebuilding the page on every request is the largest available win for anonymous traffic. Check whether your host already does this before installing a plugin &mdash; <a href="wordpress-caching-plugins-compared">our caching plugins guide</a> covers the four layers and how to avoid stacking two page caches.</p>
+
+  <h3>3. Trim the front end</h3>
+  <p>Deactivate and delete plugins you aren't using &mdash; disabled plugins still sit on disk, but active ones run code on every request. Delay non-critical JavaScript, remove unused CSS on pages that don't need it, preload your most important asset, and make sure fonts use <code>font-display: swap</code>.</p>
+
+  <h3>4. Clean the database</h3>
+  <p>Post revisions, expired transients and orphaned tables left by deleted plugins accumulate for years. The effect is modest on a small site, but on a large one it slows admin screens and backups noticeably. Take a backup first, then clean.</p>
+
+  <h3>5. Put a CDN in front of static assets</h3>
+  <p>Worth doing, and often free, but be clear about what it does: it cuts the time to fetch images, CSS and JS from locations near your visitors. It does not make your server build pages faster.</p>
+
+  <h3>6. Change hosting &mdash; last, not first</h3>
+  <p>Do this only if your TTFB is the bottleneck and steps 1 to 5 haven't moved it. It's the most expensive lever and the one most often pulled prematurely.</p>
+  <div class="warn"><strong>Resist the plugin pile.</strong> Advice that opens with "install these twelve optimisation plugins" has it backwards. Every plugin is code that runs on your server. A lean site on decent hosting beats a bloated site running five overlapping optimisers every time.</div>
+
+  <h2 id="hosting">When hosting genuinely is the problem</h2>
+  <p>Hosting is the right lever when your measurements point at the server and you've already cached what can be cached. Three situations where that's genuinely true:</p>
+  <ul>
+    <li><strong>Your TTFB is high on cached pages.</strong> If a page served from cache still takes a second to start responding, the server or the network path is the constraint, not your code.</li>
+    <li><strong>Performance collapses during traffic spikes.</strong> Fast when you test it, unusable during a campaign. That's a concurrency ceiling &mdash; <a href="wordpress-php-workers-explained">PHP workers</a> &mdash; and no amount of front-end optimisation changes it.</li>
+    <li><strong>Logged-in and dynamic pages are slow, anonymous pages are fast.</strong> That's the signature of a site whose cache is doing the heavy lifting while the server can't handle uncached requests. Common on stores and membership sites.</li>
+  </ul>
+  <p>If you've reached this point, the honest comparison isn't "which host is fastest" &mdash; it's which host allocates the resources your specific profile needs. A host that gives you generous PHP workers and Redis object caching will outperform a nominally faster host that throttles you at the plan level. <a href="best-managed-wordpress-hosting">Our managed hosting comparison</a> is organised around exactly that question rather than around a single winner.</p>
+
+  <h2 id="faq">FAQ</h2>
+  <div class="faq">
+    <h3>Is a 100/100 PageSpeed score the goal?</h3>
+    <p>No, and chasing it often makes sites worse. The lab score is a simulated load on one device under one set of conditions. Field data &mdash; how real Chrome users actually experience your site &mdash; matters more, and it only appears once you have meaningful traffic. A site scoring 78 with good field data is in better shape than one scoring 98 in the lab while real users on mid-range phones wait four seconds.</p>
+  </div>
+  <div class="faq">
+    <h3>Does a CDN fix a slow server?</h3>
+    <p>No. A CDN places static files like images and CSS close to your visitors, which shortens download time. It does nothing about how long your server takes to build the page in the first place. If your TTFB is 1.5 seconds, a CDN leaves it at 1.5 seconds while delivering the images that follow slightly faster. It's a genuine improvement, just not the one people expect.</p>
+  </div>
+  <div class="faq">
+    <h3>Will a caching plugin fix everything?</h3>
+    <p>It fixes one specific problem &mdash; the cost of regenerating HTML for every visitor &mdash; and does nothing for oversized images, render-blocking JavaScript, third-party scripts, or a server that runs out of capacity under load. It's usually the highest-value single change on an uncached site, and usually the least relevant change on a site that's already cached at the server level.</p>
+  </div>
+  <div class="faq">
+    <h3>How fast is fast enough?</h3>
+    <p>Google's Core Web Vitals thresholds for 'good' are LCP under 2.5 seconds, INP under 200 milliseconds, and CLS under 0.1. Those are reasonable targets. Below them, the returns on further optimisation drop sharply for most sites. Getting LCP from 4.0s to 2.4s changes real business outcomes; getting from 1.8s to 1.4s usually doesn't.</p>
+  </div>
+  <div class="faq">
+    <h3>Do I need to upgrade my hosting?</h3>
+    <p>Only if your measurements say the server is the bottleneck. The test is simple: enable page caching, then measure TTFB on a cached page. If it's still slow, the server is your problem. If it's fast, your problems are elsewhere and a hosting upgrade will cost you money without changing what your visitors experience.</p>
+  </div>
+  <div class="faq">
+    <h3>Why is my site slow in the evening but fine in the morning?</h3>
+    <p>Usually contention. On shared hosting you're pooling CPU, memory and PHP workers with other sites, and evenings are peak time for everyone. It can also be your own scheduled tasks &mdash; backups, cron jobs and import scripts often run overnight or in the evening. Check whether your host's resource graphs spike at the same time your site slows; that distinguishes the two causes quickly.</p>
+  </div>
+
+
+  <div class="related">
+    <strong>Related on Wiser Tools</strong>
+        <p><a href="wordpress-caching-plugins-compared">WordPress caching plugins, compared</a> — The four caching layers, and why two page caches cause more problems than they solve.</p>
+    <p><a href="best-managed-wordpress-hosting">Which managed WordPress host fits you?</a> — If TTFB really is your bottleneck, compare hosts on resources rather than marketing claims.</p>
+  </div>
+
+</main>
+
+<footer class="wrap">
+  <p><strong>About this guide:</strong> Wiser Tools publishes practical WordPress guides alongside its hosting comparisons. This page contains no affiliate links and no sponsored recommendations. Our hosting comparison pages do carry affiliate links, which are marked with a <code>rel="sponsored"</code> attribute and disclosed at the top of each page.</p>
+  <p class="small">WordPress, plugin and hosting details change over time. Verify current requirements and pricing on each vendor's official site before making changes to a live site. Last reviewed: September 2026.</p>
+</footer>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Wiser Tools",
+  "url": "https://wiser-tools.com/",
+  "description": "Independent, hands-on reviews and comparisons of managed hosting, SaaS tools, and developer services.",
+  "publisher": { "@type": "Organization", "name": "Wiser Tools", "url": "https://wiser-tools.com/" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "How to Speed Up WordPress: Diagnose First",
+  "description": "Most speed advice is a checklist in the wrong order. Find your real bottleneck first - TTFB, LCP or bloat - then fix the thing actually costing you seconds.",
+  "author": { "@type": "Organization", "name": "Wiser Tools" },
+  "publisher": { "@type": "Organization", "name": "Wiser Tools", "url": "https://wiser-tools.com/" },
+  "datePublished": "2026-09-05",
+  "dateModified": "2026-09-05",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://wiser-tools.com/how-to-speed-up-wordpress" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://wiser-tools.com/" },
+    { "@type": "ListItem", "position": 2, "name": "WordPress Guides", "item": "https://wiser-tools.com/wordpress-guides" },
+    { "@type": "ListItem", "position": 3, "name": "How to Speed Up WordPress", "item": "https://wiser-tools.com/how-to-speed-up-wordpress" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "Is a 100/100 PageSpeed score the goal?", "acceptedAnswer": { "@type": "Answer", "text": "No, and chasing it often makes sites worse. The lab score is a simulated load on one device under one set of conditions. Field data &mdash; how real Chrome users actually experience your site &mdash; matters more, and it only appears once you have meaningful traffic. A site scoring 78 with good field data is in better shape than one scoring 98 in the lab while real users on mid-range phones wait four seconds." } },
+    { "@type": "Question", "name": "Does a CDN fix a slow server?", "acceptedAnswer": { "@type": "Answer", "text": "No. A CDN places static files like images and CSS close to your visitors, which shortens download time. It does nothing about how long your server takes to build the page in the first place. If your TTFB is 1.5 seconds, a CDN leaves it at 1.5 seconds while delivering the images that follow slightly faster. It's a genuine improvement, just not the one people expect." } },
+    { "@type": "Question", "name": "Will a caching plugin fix everything?", "acceptedAnswer": { "@type": "Answer", "text": "It fixes one specific problem &mdash; the cost of regenerating HTML for every visitor &mdash; and does nothing for oversized images, render-blocking JavaScript, third-party scripts, or a server that runs out of capacity under load. It's usually the highest-value single change on an uncached site, and usually the least relevant change on a site that's already cached at the server level." } },
+    { "@type": "Question", "name": "How fast is fast enough?", "acceptedAnswer": { "@type": "Answer", "text": "Google's Core Web Vitals thresholds for 'good' are LCP under 2.5 seconds, INP under 200 milliseconds, and CLS under 0.1. Those are reasonable targets. Below them, the returns on further optimisation drop sharply for most sites. Getting LCP from 4.0s to 2.4s changes real business outcomes; getting from 1.8s to 1.4s usually doesn't." } },
+    { "@type": "Question", "name": "Do I need to upgrade my hosting?", "acceptedAnswer": { "@type": "Answer", "text": "Only if your measurements say the server is the bottleneck. The test is simple: enable page caching, then measure TTFB on a cached page. If it's still slow, the server is your problem. If it's fast, your problems are elsewhere and a hosting upgrade will cost you money without changing what your visitors experience." } },
+    { "@type": "Question", "name": "Why is my site slow in the evening but fine in the morning?", "acceptedAnswer": { "@type": "Answer", "text": "Usually contention. On shared hosting you're pooling CPU, memory and PHP workers with other sites, and evenings are peak time for everyone. It can also be your own scheduled tasks &mdash; backups, cron jobs and import scripts often run overnight or in the evening. Check whether your host's resource graphs spike at the same time your site slows; that distinguishes the two causes quickly." } }
+  ]
+}
+</script>
+
+</body>
+</html>

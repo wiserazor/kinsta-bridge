@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WordPress Caching Plugins Compared (2026)</title>
+<meta name="description" content="Page cache, object cache, opcode cache and CDN explained - what each layer does, which plugins handle it well, and when your host already does the job for you.">
+<link rel="canonical" href="https://wiser-tools.com/wordpress-caching-plugins-compared">
+<style>
+  :root{
+    --bg:#ffffff; --fg:#1a1a2e; --muted:#5b6472; --line:#e6e9ef;
+    --brand:#4a2cff; --brand-d:#3a1fd6; --accent:#0bbf8a; --warn:#d97706;
+    --card:#f7f9fc;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--fg);background:var(--bg);line-height:1.65;font-size:17px}
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px}
+  .topbar{background:#1a1a2e;color:#fff;padding:12px 0}
+  .topbar-inner{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .brand{font-weight:700;font-size:18px;letter-spacing:-.3px}
+  .brand-tag{font-size:13px;color:#a5b0c0}
+  a.brand{color:#fff;text-decoration:none}
+  a.brand:hover{text-decoration:underline}
+  .topbar-home{margin-left:auto;font-size:14px;color:#a5b0c0;text-decoration:none}
+  .topbar-home:hover{color:#fff;text-decoration:underline}
+  .disclosure{background:#fff7ed;border-bottom:1px solid #fed7aa;color:#7c2d12;font-size:14px;padding:10px 20px;text-align:center}
+  .disclosure.neutral{background:#f0fdf4;border-bottom:1px solid #bbf7d0;color:#166534}
+  header{padding:48px 0 24px}
+  h1{font-size:38px;line-height:1.2;margin:0 0 12px;letter-spacing:-.5px}
+  h2{font-size:26px;margin:44px 0 14px;letter-spacing:-.3px}
+  h3{font-size:20px;margin:26px 0 8px}
+  p{margin:0 0 16px;color:var(--muted)}
+  .lead{font-size:19px;color:var(--fg)}
+  a.cta{display:inline-block;background:var(--brand);color:#fff;text-decoration:none;padding:12px 22px;border-radius:10px;font-weight:600;transition:.15s}
+  a.cta:hover{background:var(--brand-d)}
+  .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:14px}
+  .cta-label{font-weight:600;margin:26px 0 0}
+  table{width:100%;border-collapse:collapse;margin:18px 0;font-size:15px}
+  th,td{border:1px solid var(--line);padding:12px 14px;text-align:left;vertical-align:top}
+  th{background:var(--card);font-weight:600}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;margin:16px 0}
+  ul,ol{margin:0 0 16px;padding-left:22px}
+  li{margin:4px 0;color:var(--muted)}
+  .faq{margin:10px 0}
+  .faq h3{margin-bottom:4px}
+  footer{border-top:1px solid var(--line);margin-top:48px;padding:28px 0 56px;font-size:14px;color:var(--muted)}
+  .small{font-size:14px}
+  .note{background:#eff6ff;border:1px solid #bfdbfe;color:#1e40af;border-radius:10px;padding:12px 16px;font-size:14px;margin:16px 0}
+  .warn{background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;border-radius:10px;padding:12px 16px;font-size:15px;margin:16px 0}
+  .related{background:#f7f9fc;border:1px solid var(--line);border-radius:14px;padding:18px 22px;margin:24px 0}
+  .related a{color:var(--brand);text-decoration:none}
+  .related a:hover{text-decoration:underline}
+  .toc{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 22px;margin:20px 0}
+  .toc a{color:var(--brand);text-decoration:none}
+  .toc a:hover{text-decoration:underline}
+  .toc ol{margin:8px 0 0}
+  main a{color:var(--brand)}
+  code{background:#f1f5f9;border:1px solid var(--line);border-radius:4px;padding:1px 5px;font-size:14px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+  pre{background:#0f172a;color:#e2e8f0;border-radius:10px;padding:14px 16px;overflow-x:auto;font-size:14px;line-height:1.55;margin:14px 0}
+  pre code{background:none;border:0;padding:0;color:inherit;font-size:14px}
+  .step{background:#fff;border:1px solid var(--line);border-left:4px solid var(--brand);border-radius:10px;padding:16px 18px;margin:14px 0}
+  .step h3{margin-top:0}
+  .step p:last-child,.step ul:last-child,.step ol:last-child{margin-bottom:0}
+  .meta{font-size:14px;color:var(--muted)}
+  .guide-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin-top:6px}
+  .guide-card{
+    display:block;background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 18px;
+    text-decoration:none;color:inherit;transition:.15s
+  }
+  .guide-card:hover{border-color:var(--brand);background:#fbfbff;transform:translateY(-1px)}
+  .guide-card strong{display:block;color:var(--brand);font-size:16px;margin-bottom:4px}
+  .guide-card span{display:block;font-size:14px;color:var(--muted);line-height:1.5}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="brand" href="/">Wiser Tools</a>
+    <span class="brand-tag">Honest, no-hype tool &amp; service reviews</span>
+    <a class="topbar-home" href="/">&larr; All categories</a>
+  </div>
+</div>
+
+<div class="disclosure neutral">
+  <strong>No affiliate links on this page.</strong> This guide is purely instructional — we earn nothing from it. Other pages on this site do carry affiliate links, and they're always labelled.
+</div>
+
+<header class="wrap">
+  <p class="meta"><a href="/">Home</a> &rsaquo; <a href="wordpress-guides">WordPress Guides</a></p>
+  <h1>WordPress Caching Plugins, Compared</h1>
+  <p class="lead">Most caching advice treats caching as one thing, which is why so many people install a plugin and see no improvement. There are four distinct layers, they solve different problems, and the right choice depends less on which plugin is best than on what your host already handles at the server level.</p>
+</header>
+
+<main class="wrap">
+
+  <div class="toc">
+    <strong>On this page:</strong>
+    <ol>
+      <li><a href="#layers">The four caching layers</a></li>
+      <li><a href="#server">Check what your host already caches</a></li>
+      <li><a href="#stacking">Why two page caches break things</a></li>
+      <li><a href="#match">Which plugin fits your situation</a></li>
+      <li><a href="#cantfix">What caching can't fix</a></li>
+    </ol>
+  </div>
+
+
+  <h2 id="layers">The four caching layers</h2>
+  <p>Most "my WordPress site is slow" advice talks about caching as if it were one thing. It isn't &mdash; there are four separate layers, they solve different problems, and installing a plugin that does one of them won't help if your bottleneck is another.</p>
+  <table>
+    <thead>
+      <tr><th>Layer</th><th>What it stores</th><th>Handled by</th><th>Who actually needs it</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Opcode cache</strong></td>
+        <td>Compiled PHP bytecode, so PHP isn't re-parsed on every request</td>
+        <td>OPcache, at the server level</td>
+        <td>Everyone &mdash; and it's almost always already enabled</td>
+      </tr>
+      <tr>
+        <td><strong>Page cache</strong></td>
+        <td>The finished HTML of a page, served without running WordPress at all</td>
+        <td>Host-level caching, or a plugin such as WP Rocket or LiteSpeed Cache</td>
+        <td>Every public-facing page</td>
+      </tr>
+      <tr>
+        <td><strong>Object cache</strong></td>
+        <td>Database query results, so repeated queries don't hit MySQL each time</td>
+        <td>Redis or Memcached, usually offered by the host</td>
+        <td>Dynamic sites: stores, memberships, forums, anything with logged-in traffic</td>
+      </tr>
+      <tr>
+        <td><strong>Browser &amp; CDN cache</strong></td>
+        <td>Static assets &mdash; images, CSS, JS &mdash; stored close to the visitor</td>
+        <td>Cloudflare, Bunny, or your host's built-in CDN</td>
+        <td>Everyone, but it doesn't touch server response time</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>The distinction that trips people up most is <strong>page cache versus object cache</strong>. A page cache is a massive win for anonymous visitors reading blog posts. It does almost nothing for a logged-in customer's cart, because those pages are generated per user and <em>cannot</em> be served from a shared cache. That's why a store can feel fast when you browse it anonymously and slow the moment you log in and check out.</p>
+
+  <h2 id="server">Check what your host already caches</h2>
+  <p>Before installing anything, find out what your host does at the server level. This single step saves most people from installing a plugin they don't need &mdash; or one that actively conflicts.</p>
+  <p>Nearly all managed WordPress hosts run their own full-page cache in front of your site. Many also maintain a list of caching plugins they disable or forbid, precisely because a second page cache layered on top of theirs causes stale content and hard-to-reproduce bugs. Some hosts offer Redis-backed object caching, but only from a certain plan tier or as a paid add-on.</p>
+  <p>Three things worth checking in your host's documentation or by asking support:</p>
+  <ul>
+    <li>Is full-page caching enabled by default, and how do I purge it?</li>
+    <li>Are specific caching plugins disallowed?</li>
+    <li>Is object caching (Redis or Memcached) included, and on which plans?</li>
+  </ul>
+  <p>These questions matter more than most speed advice, and they're a real differentiator when you <a href="best-managed-wordpress-hosting">compare managed hosts</a> &mdash; the answers are usually buried in plan tiers rather than marketing pages.</p>
+
+  <h2 id="stacking">Why two page caches break things</h2>
+  <p>If your host caches pages at the server level <em>and</em> you install a plugin that also caches pages, you now have two systems each holding a copy of your HTML and disagreeing about when it goes stale. The classic symptoms:</p>
+  <ul>
+    <li>You edit a page, purge the plugin cache, and visitors still see the old version.</li>
+    <li>Changes appear for logged-in users but not for anonymous ones.</li>
+    <li>A contact form shows a "submission expired" error because a stale nonce was cached.</li>
+    <li>Cart contents briefly appear to belong to the wrong user &mdash; rare, but serious when it happens.</li>
+  </ul>
+  <p>None of this means plugins are bad. It means <strong>one page cache, one owner</strong>. Pick either the host's or the plugin's, understand how to purge the one you chose, and make sure you can actually do it at 9 p.m. when something needs to go live.</p>
+
+  <h2 id="match">Which plugin fits your situation</h2>
+  <p>There's no single best caching plugin, because the right answer depends mostly on what your server already does. Find your row:</p>
+  <table>
+    <thead>
+      <tr><th>Your situation</th><th>Reasonable starting point</th><th>Why</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Your host already does full-page caching</td>
+        <td>No page-cache plugin. Add an asset-loading tool if needed.</td>
+        <td>Stacking caches causes staleness bugs; you'd be paying for a duplicate</td>
+      </tr>
+      <tr>
+        <td>You're on a LiteSpeed server</td>
+        <td>LiteSpeed Cache (free)</td>
+        <td>It talks directly to the server's cache; the free tier is genuinely good</td>
+      </tr>
+      <tr>
+        <td>Non-technical, want it handled</td>
+        <td>WP Rocket</td>
+        <td>Sane defaults, preloading, minimal configuration. Paid, and worth it for the time saved</td>
+      </tr>
+      <tr>
+        <td>Simple blog on budget hosting</td>
+        <td>WP Super Cache</td>
+        <td>Free, stable, set-and-forget, no upsells</td>
+      </tr>
+      <tr>
+        <td>Developer who wants every knob</td>
+        <td>W3 Total Cache, or host cache plus your own config</td>
+        <td>Most control, and the most ways to misconfigure it</td>
+      </tr>
+      <tr>
+        <td>Store, membership or LMS</td>
+        <td>Page cache is not enough &mdash; add Redis object caching</td>
+        <td>Logged-in traffic bypasses page cache entirely; the win is in repeated queries</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>Two notes that catch people out. First, <strong>LiteSpeed Cache only works as a page cache on a LiteSpeed web server</strong>. On nginx or Apache it degrades into a general optimisation plugin, so installing it there because a review called it "the best free cache" gets you a fraction of the benefit. Second, the modern paid entrants (FlyingPress, NitroPack) and asset tools (Perfmatters, Asset CleanUp) solve a different problem &mdash; the asset tools don't cache anything, they stop unused CSS and JS from loading on pages that don't need them, which complements a cache rather than replacing one.</p>
+  <div class="note"><strong>Fewer plugins beats more.</strong> Every optimisation plugin is itself code that runs on your server. A site with three lean plugins on decent hosting will usually beat a site running four overlapping performance plugins on weak hosting.</div>
+
+  <h2 id="cantfix">What caching can't fix</h2>
+  <p>Caching is close to free performance, which is why it's always the first recommendation &mdash; but it has hard limits. None of these improve with a better cache:</p>
+  <ul>
+    <li><strong>A 3 MB hero image.</strong> Cache the page all you like; the image still has to download. Resize and convert it.</li>
+    <li><strong>Render-blocking JavaScript from a page builder.</strong> The HTML arrives quickly and then the browser waits on scripts.</li>
+    <li><strong>Third-party scripts</strong> &mdash; chat widgets, analytics, ad pixels, A/B testing tools. These run on someone else's server and are frequently the single largest slowdown on a site.</li>
+    <li><strong>Uncached requests under concurrency.</strong> If checkout is slow because there aren't enough PHP processes to handle simultaneous shoppers, a page cache does nothing. That's a capacity problem, which <a href="wordpress-php-workers-explained">our PHP workers guide</a> covers in detail.</li>
+    <li><strong>External API calls on page load.</strong> A cache stores the result, but the first visitor after expiry still waits for the slow API.</li>
+  </ul>
+  <p>The pattern: caching helps most when your bottleneck is <em>generating</em> HTML, and least when the bottleneck is <em>downloading</em> it or <em>executing</em> it in the browser. Measure which one you have before you install anything &mdash; <a href="how-to-speed-up-wordpress">our speed diagnosis guide</a> walks through how to tell the difference.</p>
+
+  <h2 id="faq">FAQ</h2>
+  <div class="faq">
+    <h3>Do I need a caching plugin if my host already caches pages?</h3>
+    <p>Usually not, and installing one can cause stale-content bugs, because two systems are then holding copies of your HTML and disagreeing about when to refresh. Check your host's documentation first. Where a plugin still helps is on the asset side &mdash; deferring JavaScript, removing unused CSS on specific pages &mdash; because that's work your server-level cache doesn't do.</p>
+  </div>
+  <div class="faq">
+    <h3>Is WP Rocket worth paying for when free options exist?</h3>
+    <p>It depends on how you value your time. Free plugins like WP Super Cache and LiteSpeed Cache are genuinely capable. What you're buying with WP Rocket is defaults that work without research, plus a cache preloader and basic asset optimisation in one place. If configuring plugins is something you enjoy, the free route is fine. If it's something you'd rather never think about, the subscription is cheap relative to an afternoon.</p>
+  </div>
+  <div class="faq">
+    <h3>Why is my store still slow when I have caching enabled?</h3>
+    <p>Because cart, checkout and account pages are personalised per visitor and are deliberately excluded from page caching &mdash; caching a shared copy would risk showing one customer another's cart. The wins for a store come from object caching with Redis to cut repeated database queries, and from having enough PHP workers to handle concurrent checkouts. Those are server-level concerns, not plugin settings.</p>
+  </div>
+  <div class="faq">
+    <h3>Can a caching plugin break my site?</h3>
+    <p>Yes, in a few predictable ways: serving stale content after you publish, caching pages that should never be cached, breaking form submissions because a security nonce expired inside the cached HTML, and in badly configured cases exposing one logged-in user's data to another. All of these are avoidable &mdash; exclude cart, checkout, account and any page with a form, and confirm you know how to purge the cache before you push changes live.</p>
+  </div>
+  <div class="faq">
+    <h3>Should I use two caching plugins to be thorough?</h3>
+    <p>No. This is one of the most common self-inflicted WordPress problems. Two page caches mean two purging systems and two opinions about freshness, which produces exactly the intermittent, hard-to-reproduce bugs that waste the most time. One page cache, one owner, and know how to purge it.</p>
+  </div>
+  <div class="faq">
+    <h3>Does a CDN replace the need for caching?</h3>
+    <p>No, they solve different problems. A CDN stores static files like images and CSS close to your visitors, cutting download time. It does not reduce how long your server takes to build a page. If your server is slow, a CDN makes the slow page's assets arrive faster while the wait for the page itself stays exactly the same.</p>
+  </div>
+
+
+  <div class="related">
+    <strong>Related on Wiser Tools</strong>
+        <p><a href="how-to-speed-up-wordpress">How to speed up WordPress: diagnose first</a> — Find your actual bottleneck before installing anything. TTFB, LCP and bloat have different fixes.</p>
+    <p><a href="wordpress-php-workers-explained">WordPress PHP workers, explained</a> — Why a site that's fast at ten visitors crawls at a hundred, and what to do about it.</p>
+  </div>
+
+</main>
+
+<footer class="wrap">
+  <p><strong>About this guide:</strong> Wiser Tools publishes practical WordPress guides alongside its hosting comparisons. This page contains no affiliate links and no sponsored recommendations. Our hosting comparison pages do carry affiliate links, which are marked with a <code>rel="sponsored"</code> attribute and disclosed at the top of each page.</p>
+  <p class="small">WordPress, plugin and hosting details change over time. Verify current requirements and pricing on each vendor's official site before making changes to a live site. Last reviewed: September 2026.</p>
+</footer>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Wiser Tools",
+  "url": "https://wiser-tools.com/",
+  "description": "Independent, hands-on reviews and comparisons of managed hosting, SaaS tools, and developer services.",
+  "publisher": { "@type": "Organization", "name": "Wiser Tools", "url": "https://wiser-tools.com/" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "WordPress Caching Plugins, Compared",
+  "description": "Page cache, object cache, opcode cache and CDN explained - what each layer does, which plugins handle it well, and when your host already does the job for you.",
+  "author": { "@type": "Organization", "name": "Wiser Tools" },
+  "publisher": { "@type": "Organization", "name": "Wiser Tools", "url": "https://wiser-tools.com/" },
+  "datePublished": "2026-09-05",
+  "dateModified": "2026-09-05",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://wiser-tools.com/wordpress-caching-plugins-compared" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://wiser-tools.com/" },
+    { "@type": "ListItem", "position": 2, "name": "WordPress Guides", "item": "https://wiser-tools.com/wordpress-guides" },
+    { "@type": "ListItem", "position": 3, "name": "Caching Plugins Compared", "item": "https://wiser-tools.com/wordpress-caching-plugins-compared" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "Do I need a caching plugin if my host already caches pages?", "acceptedAnswer": { "@type": "Answer", "text": "Usually not, and installing one can cause stale-content bugs, because two systems are then holding copies of your HTML and disagreeing about when to refresh. Check your host's documentation first. Where a plugin still helps is on the asset side &mdash; deferring JavaScript, removing unused CSS on specific pages &mdash; because that's work your server-level cache doesn't do." } },
+    { "@type": "Question", "name": "Is WP Rocket worth paying for when free options exist?", "acceptedAnswer": { "@type": "Answer", "text": "It depends on how you value your time. Free plugins like WP Super Cache and LiteSpeed Cache are genuinely capable. What you're buying with WP Rocket is defaults that work without research, plus a cache preloader and basic asset optimisation in one place. If configuring plugins is something you enjoy, the free route is fine. If it's something you'd rather never think about, the subscription is cheap relative to an afternoon." } },
+    { "@type": "Question", "name": "Why is my store still slow when I have caching enabled?", "acceptedAnswer": { "@type": "Answer", "text": "Because cart, checkout and account pages are personalised per visitor and are deliberately excluded from page caching &mdash; caching a shared copy would risk showing one customer another's cart. The wins for a store come from object caching with Redis to cut repeated database queries, and from having enough PHP workers to handle concurrent checkouts. Those are server-level concerns, not plugin settings." } },
+    { "@type": "Question", "name": "Can a caching plugin break my site?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, in a few predictable ways: serving stale content after you publish, caching pages that should never be cached, breaking form submissions because a security nonce expired inside the cached HTML, and in badly configured cases exposing one logged-in user's data to another. All of these are avoidable &mdash; exclude cart, checkout, account and any page with a form, and confirm you know how to purge the cache before you push changes live." } },
+    { "@type": "Question", "name": "Should I use two caching plugins to be thorough?", "acceptedAnswer": { "@type": "Answer", "text": "No. This is one of the most common self-inflicted WordPress problems. Two page caches mean two purging systems and two opinions about freshness, which produces exactly the intermittent, hard-to-reproduce bugs that waste the most time. One page cache, one owner, and know how to purge it." } },
+    { "@type": "Question", "name": "Does a CDN replace the need for caching?", "acceptedAnswer": { "@type": "Answer", "text": "No, they solve different problems. A CDN stores static files like images and CSS close to your visitors, cutting download time. It does not reduce how long your server takes to build a page. If your server is slow, a CDN makes the slow page's assets arrive faster while the wait for the page itself stays exactly the same." } }
+  ]
+}
+</script>
+
+</body>
+</html>

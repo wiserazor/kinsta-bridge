@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WordPress Guides — Speed, Fixes, Backups &amp; Migrations</title>
+<meta name="description" content="Practical WordPress guides on speed diagnosis, caching, the white screen of death, backups, zero-downtime migrations and PHP workers. No affiliate links, no fluff.">
+<link rel="canonical" href="https://wiser-tools.com/wordpress-guides">
+<style>
+  :root{
+    --bg:#ffffff; --fg:#1a1a2e; --muted:#5b6472; --line:#e6e9ef;
+    --brand:#4a2cff; --brand-d:#3a1fd6; --accent:#0bbf8a; --warn:#d97706;
+    --card:#f7f9fc;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--fg);background:var(--bg);line-height:1.65;font-size:17px}
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px}
+  .topbar{background:#1a1a2e;color:#fff;padding:12px 0}
+  .topbar-inner{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .brand{font-weight:700;font-size:18px;letter-spacing:-.3px}
+  .brand-tag{font-size:13px;color:#a5b0c0}
+  a.brand{color:#fff;text-decoration:none}
+  a.brand:hover{text-decoration:underline}
+  .topbar-home{margin-left:auto;font-size:14px;color:#a5b0c0;text-decoration:none}
+  .topbar-home:hover{color:#fff;text-decoration:underline}
+  .disclosure{background:#fff7ed;border-bottom:1px solid #fed7aa;color:#7c2d12;font-size:14px;padding:10px 20px;text-align:center}
+  .disclosure.neutral{background:#f0fdf4;border-bottom:1px solid #bbf7d0;color:#166534}
+  header{padding:48px 0 24px}
+  h1{font-size:38px;line-height:1.2;margin:0 0 12px;letter-spacing:-.5px}
+  h2{font-size:26px;margin:44px 0 14px;letter-spacing:-.3px}
+  h3{font-size:20px;margin:26px 0 8px}
+  p{margin:0 0 16px;color:var(--muted)}
+  .lead{font-size:19px;color:var(--fg)}
+  a.cta{display:inline-block;background:var(--brand);color:#fff;text-decoration:none;padding:12px 22px;border-radius:10px;font-weight:600;transition:.15s}
+  a.cta:hover{background:var(--brand-d)}
+  .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:14px}
+  .cta-label{font-weight:600;margin:26px 0 0}
+  table{width:100%;border-collapse:collapse;margin:18px 0;font-size:15px}
+  th,td{border:1px solid var(--line);padding:12px 14px;text-align:left;vertical-align:top}
+  th{background:var(--card);font-weight:600}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;margin:16px 0}
+  ul,ol{margin:0 0 16px;padding-left:22px}
+  li{margin:4px 0;color:var(--muted)}
+  .faq{margin:10px 0}
+  .faq h3{margin-bottom:4px}
+  footer{border-top:1px solid var(--line);margin-top:48px;padding:28px 0 56px;font-size:14px;color:var(--muted)}
+  .small{font-size:14px}
+  .note{background:#eff6ff;border:1px solid #bfdbfe;color:#1e40af;border-radius:10px;padding:12px 16px;font-size:14px;margin:16px 0}
+  .warn{background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;border-radius:10px;padding:12px 16px;font-size:15px;margin:16px 0}
+  .related{background:#f7f9fc;border:1px solid var(--line);border-radius:14px;padding:18px 22px;margin:24px 0}
+  .related a{color:var(--brand);text-decoration:none}
+  .related a:hover{text-decoration:underline}
+  .toc{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 22px;margin:20px 0}
+  .toc a{color:var(--brand);text-decoration:none}
+  .toc a:hover{text-decoration:underline}
+  .toc ol{margin:8px 0 0}
+  main a{color:var(--brand)}
+  code{background:#f1f5f9;border:1px solid var(--line);border-radius:4px;padding:1px 5px;font-size:14px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+  pre{background:#0f172a;color:#e2e8f0;border-radius:10px;padding:14px 16px;overflow-x:auto;font-size:14px;line-height:1.55;margin:14px 0}
+  pre code{background:none;border:0;padding:0;color:inherit;font-size:14px}
+  .step{background:#fff;border:1px solid var(--line);border-left:4px solid var(--brand);border-radius:10px;padding:16px 18px;margin:14px 0}
+  .step h3{margin-top:0}
+  .step p:last-child,.step ul:last-child,.step ol:last-child{margin-bottom:0}
+  .meta{font-size:14px;color:var(--muted)}
+  .guide-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin-top:6px}
+  .guide-card{
+    display:block;background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 18px;
+    text-decoration:none;color:inherit;transition:.15s
+  }
+  .guide-card:hover{border-color:var(--brand);background:#fbfbff;transform:translateY(-1px)}
+  .guide-card strong{display:block;color:var(--brand);font-size:16px;margin-bottom:4px}
+  .guide-card span{display:block;font-size:14px;color:var(--muted);line-height:1.5}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="brand" href="/">Wiser Tools</a>
+    <span class="brand-tag">Honest, no-hype tool &amp; service reviews</span>
+    <a class="topbar-home" href="/">&larr; All categories</a>
+  </div>
+</div>
+
+<div class="disclosure neutral">
+  <strong>No affiliate links on this page.</strong> The guides below are purely instructional — we earn nothing from them.
+</div>
+
+<header class="wrap">
+  <p class="meta"><a href="/">Home</a> &rsaquo; WordPress Guides</p>
+  <h1>WordPress Guides</h1>
+  <p class="lead">Practical, diagnosis-first guides to running a WordPress site: why it's slow, how to fix it when it breaks, how to back it up properly, and how to move it without losing your email. Written to be worked through in order rather than skimmed as a list of tips.</p>
+</header>
+
+<main class="wrap">
+
+  <h2>Fixing things when they break</h2>
+  <div class="guide-grid">
+    <a class="guide-card" href="fix-wordpress-white-screen-of-death">
+      <strong>The white screen of death</strong>
+      <span>Surface the real error first, then rule out memory, plugins, theme and core files — in the order that actually finds the cause.</span>
+    </a>
+  </div>
+
+  <h2>Speed &amp; performance</h2>
+  <div class="guide-grid">
+    <a class="guide-card" href="how-to-speed-up-wordpress">
+      <strong>How to speed up WordPress</strong>
+      <span>Measure first. Three numbers tell you whether your bottleneck is the server, the front end, or too much JavaScript.</span>
+    </a>
+    <a class="guide-card" href="wordpress-caching-plugins-compared">
+      <strong>Caching plugins, compared</strong>
+      <span>The four caching layers, which plugins handle each, and why stacking two page caches causes more problems than it solves.</span>
+    </a>
+    <a class="guide-card" href="wordpress-php-workers-explained">
+      <strong>PHP workers, explained</strong>
+      <span>Why a site that's fast at ten visitors crawls at a hundred — and why more workers won't fix a slow page.</span>
+    </a>
+  </div>
+
+  <h2>Protecting &amp; moving your site</h2>
+  <div class="guide-grid">
+    <a class="guide-card" href="wordpress-backup-strategies-explained">
+      <strong>Backup strategies that restore</strong>
+      <span>The 3-2-1 rule for WordPress, how often to back up by site type, and the five mistakes that make backups useless.</span>
+    </a>
+    <a class="guide-card" href="move-wordpress-to-new-host-without-downtime">
+      <strong>Move host without downtime</strong>
+      <span>Stage first, handle serialized URLs correctly, lower your DNS TTL early, and avoid the email trap.</span>
+    </a>
+  </div>
+
+  <div class="related">
+    <strong>Comparing hosts instead?</strong>
+    <p>These guides are diagnostic — they help you work out what you actually need. When the answer turns out to be "more server," our hosting comparisons look at the specifications that decide it:</p>
+    <p><a href="best-managed-wordpress-hosting">Which managed WordPress host fits you?</a> — the full five-host comparison, matched to your situation.</p>
+    <p><a href="managed-wordpress-hosting-for-agencies">For agencies</a> &middot; <a href="wordpress-hosting-for-woocommerce">For WooCommerce stores</a> &middot; <a href="wordpress-hosting-for-small-business">For small business</a></p>
+  </div>
+
+</main>
+
+<footer class="wrap">
+  <p><strong>About these guides:</strong> Wiser Tools publishes practical WordPress guides alongside its hosting comparisons. These pages contain no affiliate links and no sponsored recommendations. Our hosting comparison pages do carry affiliate links, which are marked with a <code>rel="sponsored"</code> attribute and disclosed at the top of each page.</p>
+  <p class="small">WordPress, plugin and hosting details change over time. Verify current requirements on each vendor's official site before making changes to a live site. Last reviewed: September 2026.</p>
+</footer>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Wiser Tools",
+  "url": "https://wiser-tools.com/",
+  "description": "Independent, hands-on reviews and comparisons of managed hosting, SaaS tools, and developer services.",
+  "publisher": { "@type": "Organization", "name": "Wiser Tools", "url": "https://wiser-tools.com/" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "WordPress Guides",
+  "description": "Practical WordPress guides on speed diagnosis, caching, troubleshooting, backups and migrations.",
+  "url": "https://wiser-tools.com/wordpress-guides",
+  "publisher": { "@type": "Organization", "name": "Wiser Tools", "url": "https://wiser-tools.com/" },
+  "datePublished": "2026-09-05",
+  "dateModified": "2026-09-05",
+  "mainEntity": {
+    "@type": "ItemList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "How to Fix the WordPress White Screen of Death", "url": "https://wiser-tools.com/fix-wordpress-white-screen-of-death" },
+      { "@type": "ListItem", "position": 2, "name": "How to Speed Up WordPress: Diagnose First", "url": "https://wiser-tools.com/how-to-speed-up-wordpress" },
+      { "@type": "ListItem", "position": 3, "name": "WordPress Caching Plugins, Compared", "url": "https://wiser-tools.com/wordpress-caching-plugins-compared" },
+      { "@type": "ListItem", "position": 4, "name": "WordPress PHP Workers, Explained", "url": "https://wiser-tools.com/wordpress-php-workers-explained" },
+      { "@type": "ListItem", "position": 5, "name": "WordPress Backup Strategies That Actually Restore", "url": "https://wiser-tools.com/wordpress-backup-strategies-explained" },
+      { "@type": "ListItem", "position": 6, "name": "Move WordPress to a New Host Without Downtime", "url": "https://wiser-tools.com/move-wordpress-to-new-host-without-downtime" }
+    ]
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://wiser-tools.com/" },
+    { "@type": "ListItem", "position": 2, "name": "WordPress Guides", "item": "https://wiser-tools.com/wordpress-guides" }
+  ]
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WordPress PHP Workers, Explained (2026)</title>
+<meta name="description" content="PHP workers are why a site that is fast at ten visitors crawls at a hundred. What they are, how to estimate how many you need, the symptoms of running out, and why more workers won't fix a slow page.">
+<link rel="canonical" href="https://wiser-tools.com/wordpress-php-workers-explained">
+<style>
+  :root{
+    --bg:#ffffff; --fg:#1a1a2e; --muted:#5b6472; --line:#e6e9ef;
+    --brand:#4a2cff; --brand-d:#3a1fd6; --accent:#0bbf8a; --warn:#d97706;
+    --card:#f7f9fc;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--fg);background:var(--bg);line-height:1.65;font-size:17px}
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px}
+  .topbar{background:#1a1a2e;color:#fff;padding:12px 0}
+  .topbar-inner{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .brand{font-weight:700;font-size:18px;letter-spacing:-.3px}
+  .brand-tag{font-size:13px;color:#a5b0c0}
+  a.brand{color:#fff;text-decoration:none}
+  a.brand:hover{text-decoration:underline}
+  .topbar-home{margin-left:auto;font-size:14px;color:#a5b0c0;text-decoration:none}
+  .topbar-home:hover{color:#fff;text-decoration:underline}
+  .disclosure{background:#fff7ed;border-bottom:1px solid #fed7aa;color:#7c2d12;font-size:14px;padding:10px 20px;text-align:center}
+  .disclosure.neutral{background:#f0fdf4;border-bottom:1px solid #bbf7d0;color:#166534}
+  header{padding:48px 0 24px}
+  h1{font-size:38px;line-height:1.2;margin:0 0 12px;letter-spacing:-.5px}
+  h2{font-size:26px;margin:44px 0 14px;letter-spacing:-.3px}
+  h3{font-size:20px;margin:26px 0 8px}
+  p{margin:0 0 16px;color:var(--muted)}
+  .lead{font-size:19px;color:var(--fg)}
+  a.cta{display:inline-block;background:var(--brand);color:#fff;text-decoration:none;padding:12px 22px;border-radius:10px;font-weight:600;transition:.15s}
+  a.cta:hover{background:var(--brand-d)}
+  .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:14px}
+  .cta-label{font-weight:600;margin:26px 0 0}
+  table{width:100%;border-collapse:collapse;margin:18px 0;font-size:15px}
+  th,td{border:1px solid var(--line);padding:12px 14px;text-align:left;vertical-align:top}
+  th{background:var(--card);font-weight:600}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;margin:16px 0}
+  ul,ol{margin:0 0 16px;padding-left:22px}
+  li{margin:4px 0;color:var(--muted)}
+  .faq{margin:10px 0}
+  .faq h3{margin-bottom:4px}
+  footer{border-top:1px solid var(--line);margin-top:48px;padding:28px 0 56px;font-size:14px;color:var(--muted)}
+  .small{font-size:14px}
+  .note{background:#eff6ff;border:1px solid #bfdbfe;color:#1e40af;border-radius:10px;padding:12px 16px;font-size:14px;margin:16px 0}
+  .warn{background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;border-radius:10px;padding:12px 16px;font-size:15px;margin:16px 0}
+  .related{background:#f7f9fc;border:1px solid var(--line);border-radius:14px;padding:18px 22px;margin:24px 0}
+  .related a{color:var(--brand);text-decoration:none}
+  .related a:hover{text-decoration:underline}
+  .toc{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 22px;margin:20px 0}
+  .toc a{color:var(--brand);text-decoration:none}
+  .toc a:hover{text-decoration:underline}
+  .toc ol{margin:8px 0 0}
+  main a{color:var(--brand)}
+  code{background:#f1f5f9;border:1px solid var(--line);border-radius:4px;padding:1px 5px;font-size:14px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+  pre{background:#0f172a;color:#e2e8f0;border-radius:10px;padding:14px 16px;overflow-x:auto;font-size:14px;line-height:1.55;margin:14px 0}
+  pre code{background:none;border:0;padding:0;color:inherit;font-size:14px}
+  .step{background:#fff;border:1px solid var(--line);border-left:4px solid var(--brand);border-radius:10px;padding:16px 18px;margin:14px 0}
+  .step h3{margin-top:0}
+  .step p:last-child,.step ul:last-child,.step ol:last-child{margin-bottom:0}
+  .meta{font-size:14px;color:var(--muted)}
+  .guide-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin-top:6px}
+  .guide-card{
+    display:block;background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 18px;
+    text-decoration:none;color:inherit;transition:.15s
+  }
+  .guide-card:hover{border-color:var(--brand);background:#fbfbff;transform:translateY(-1px)}
+  .guide-card strong{display:block;color:var(--brand);font-size:16px;margin-bottom:4px}
+  .guide-card span{display:block;font-size:14px;color:var(--muted);line-height:1.5}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="brand" href="/">Wiser Tools</a>
+    <span class="brand-tag">Honest, no-hype tool &amp; service reviews</span>
+    <a class="topbar-home" href="/">&larr; All categories</a>
+  </div>
+</div>
+
+<div class="disclosure neutral">
+  <strong>No affiliate links on this page.</strong> This guide is purely instructional — we earn nothing from it. Other pages on this site do carry affiliate links, and they're always labelled.
+</div>
+
+<header class="wrap">
+  <p class="meta"><a href="/">Home</a> &rsaquo; <a href="wordpress-guides">WordPress Guides</a></p>
+  <h1>WordPress PHP Workers, Explained</h1>
+  <p class="lead">A PHP worker is the process that builds your page, and your server only has so many of them. When they're all busy, new requests queue &mdash; which is why a site can be quick when you test it and unusable during a sale. Here's how to tell whether that's your problem.</p>
+</header>
+
+<main class="wrap">
+
+  <div class="toc">
+    <strong>On this page:</strong>
+    <ol>
+      <li><a href="#what">What a PHP worker actually does</a></li>
+      <li><a href="#cached">Which requests use one (and which don't)</a></li>
+      <li><a href="#queueing">Queueing: the arithmetic, simply</a></li>
+      <li><a href="#symptoms">Symptoms of running out</a></li>
+      <li><a href="#howmany">How many do you need?</a></li>
+      <li><a href="#notspeed">Why more workers isn't more speed</a></li>
+      <li><a href="#check">How to find out what you have</a></li>
+      <li><a href="#fix">What to do about it</a></li>
+    </ol>
+  </div>
+
+
+  <h2 id="what">What a PHP worker actually does</h2>
+  <p>A PHP worker is a process on your server that runs your PHP code to build a page. When a request arrives, a worker picks it up, executes WordPress, queries the database, assembles HTML, hands it back, and becomes free again. The key detail is that a worker is <strong>busy for the entire duration of that request</strong>, and when one request finishes, the worker handles the next.</p>
+  <p>Your server has a finite number of them. When every worker is busy, arriving requests don't fail immediately — they <strong>queue</strong> and wait for a worker to free up. That wait is what you experience as the site suddenly slowing down.</p>
+  <p>This is the mechanism behind the most confusing performance complaint there is: "the site is fast whenever I test it, but customers say it was unusable during the sale." When you test, you're one request, and there's always a free worker. During the sale, fifty people arrive at once and forty-five of them are waiting in line.</p>
+
+  <h2 id="cached">Which requests use one (and which don't)</h2>
+  <p>If your site has a full-page cache, most anonymous page views never touch PHP at all — the server returns stored HTML and no worker is involved. So it's worth knowing exactly which requests <em>do</em> consume one:</p>
+  <ul>
+    <li><strong>Logged-in users</strong> — their pages are personalised, so they can't be served from a shared cache</li>
+    <li><strong>Cart, checkout and account pages</strong> on an ecommerce site</li>
+    <li><strong>admin-ajax and REST API calls</strong> — autosave, live search, "load more" buttons, notifications</li>
+    <li><strong>WP-Cron</strong> — scheduled tasks run through PHP and occupy a worker while they run</li>
+    <li><strong>Search queries and form submissions</strong></li>
+    <li><strong>Cache misses and cache rebuilds</strong> — the first request after a purge, plus every page you've deliberately excluded</li>
+    <li><strong>The entire wp-admin</strong> — which is why a busy front end makes the dashboard feel sluggish</li>
+  </ul>
+  <p>This explains a pattern that puzzles a lot of store owners: the site benchmarks beautifully, and checkout is still slow. The cache is doing its job on the pages that can be cached, and doing nothing for the ones that matter most to revenue. <a href="wordpress-hosting-for-woocommerce">Our WooCommerce hosting comparison</a> looks at this specifically.</p>
+
+  <h2 id="queueing">Queueing: the arithmetic, simply</h2>
+  <p>You can estimate what you need with one straightforward calculation:</p>
+  <pre><code>workers needed = peak uncached requests per second
+                  x average response time in seconds</code></pre>
+  <p>If you get 8 uncached requests per second at peak and each takes 0.4 seconds to build, you need about 3.2 workers just to keep pace — and you need meaningfully more than that, because at exactly 100% utilisation there's no slack at all.</p>
+  <p>The non-obvious part is how badly things degrade once you're over capacity. At 80% utilisation, a small spike gets absorbed. At 100%, the queue starts growing, and it grows faster than the traffic does, because every queued request is itself holding up the ones behind it. A site that copes fine at 50 concurrent visitors can fall over at 70, not because 70 is a big number but because it crossed the line where arrivals outpace completions.</p>
+  <p>That's also why "add more workers" produces such dramatic improvements on sites that were just past the edge — and no improvement at all on sites that weren't.</p>
+
+  <h2 id="symptoms">Symptoms of running out</h2>
+  <p>The pattern to look for is <strong>problems that appear only under load</strong>:</p>
+  <table>
+    <thead>
+      <tr><th>Symptom</th><th>What it usually means</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Fast when you test, slow during campaigns or sales</td><td>Concurrency ceiling reached only at peak</td></tr>
+      <tr><td>wp-admin becomes sluggish exactly when the front end is busy</td><td>Admin requests queueing behind public traffic</td></tr>
+      <tr><td>TTFB spikes under load while CPU looks fine</td><td>Requests waiting for a worker, not for processing power</td></tr>
+      <tr><td>502 or 504 gateway timeouts during traffic</td><td>The queue exceeded the server's wait timeout</td></tr>
+      <tr><td>Scheduled posts silently failing to publish</td><td>WP-Cron can't get a worker at the scheduled moment</td></tr>
+      <tr><td>Checkout specifically slow while browsing is fast</td><td>Uncached checkout pages competing for workers</td></tr>
+    </tbody>
+  </table>
+  <p>The third row is the diagnostic one. If CPU is low and memory is fine but response time climbs, you're almost certainly queueing rather than computing.</p>
+
+  <h2 id="howmany">How many do you need?</h2>
+  <p>It depends far more on your traffic pattern than on your traffic volume. Two sites with identical monthly visitors can need wildly different numbers.</p>
+  <ul>
+    <li><strong>A blog with 100,000 monthly visits</strong>, spread evenly, almost everything served from cache: very few. Traffic trickles in; a handful of workers handles it comfortably.</li>
+    <li><strong>A store with 20,000 monthly visits</strong>, where everyone arrives from a Monday morning email and goes straight to checkout uncached: considerably more. Same order of magnitude fewer visits, far higher peak concurrency.</li>
+  </ul>
+  <p>What raises your requirement: any traffic burst, a high proportion of logged-in users, slow uncached response times, heavy plugins that make each request take longer, and cron jobs running during peak hours. What lowers it: aggressive and effective caching, faster uncached responses, and spreading load away from peak times.</p>
+
+  <h2 id="notspeed">Why more workers isn't more speed</h2>
+  <p>This is the most common misunderstanding. Workers are a <strong>concurrency</strong> resource, not a <strong>speed</strong> resource.</p>
+  <p>If a single page takes three seconds to build, twenty workers still take three seconds to build it. What twenty workers give you is the ability to build twenty of those pages simultaneously. Adding workers makes the site handle more simultaneous visitors without queueing; it does not make any individual visitor's page arrive sooner.</p>
+  <p>Which leads to the practical ordering. Before you pay for more workers, reduce the demand on them:</p>
+  <ol>
+    <li><strong>Cache more.</strong> Every request served from cache is one that never needed a worker. Audit your cache exclusions — pages are often excluded by default and forgotten.</li>
+    <li><strong>Make uncached requests faster.</strong> Redis object caching cuts repeated database queries, which shortens the time each worker is held. Fewer plugins and faster queries do the same. Halving response time halves the workers you need.</li>
+    <li><strong>Then add capacity.</strong> A higher plan tier, or a host that allocates more workers per site.</li>
+  </ol>
+  <p>Steps 1 and 2 are usually free and frequently bigger than step 3. Paying for more workers while running a slow, uncached site is buying your way out of a problem you created.</p>
+
+  <h2 id="check">How to find out what you have</h2>
+  <p>Worker counts aren't exposed anywhere in WordPress, so there's no plugin screen to check. Routes that work:</p>
+  <ul>
+    <li><strong>Ask your host directly.</strong> "How many PHP workers does my plan include?" Most will answer; if they won't, that's itself informative.</li>
+    <li><strong>Check the plan documentation</strong> — most managed hosts publish worker counts per tier, though sometimes only in support docs rather than on the pricing page.</li>
+    <li><strong>Look at your host's resource graphs</strong> during a slow period. Sustained high utilisation with modest CPU points at queueing.</li>
+    <li><strong>Load-test your staging environment</strong>, never production. A load test against a live site is one misconfigured slider away from taking it down.</li>
+    <li><strong>Watch TTFB under real traffic.</strong> Run through <a href="how-to-speed-up-wordpress">the diagnosis in our speed guide</a> — climbing TTFB with flat CPU is the signature.</li>
+  </ul>
+
+  <h2 id="fix">What to do about it</h2>
+  <p>Two things worth being blunt about.</p>
+  <p>First, <strong>on shared hosting you're pooling workers with other sites on the same server</strong>. Your allocation is small and it fluctuates depending on what your neighbours are doing. That's the real substance behind "noisy neighbour" complaints — not that other sites are slow, but that they're consuming a shared pool you depend on. Managed hosts typically allocate a defined number per site or per plan, which makes the ceiling predictable even when it isn't high.</p>
+  <p>Second, <strong>worker counts are usually tied to plan tier</strong>, which makes them one of the few hosting specifications genuinely worth comparing — and one of the least advertised. Two hosts at similar prices can differ by an order of magnitude, and the difference only becomes visible at exactly the moment you can least afford it. It's worth asking before you commit, and it's one of the things we look at when <a href="best-managed-wordpress-hosting">comparing managed hosts</a>.</p>
+
+  <h2 id="faq">FAQ</h2>
+  <div class="faq">
+    <h3>Does more RAM mean more PHP workers?</h3>
+    <p>Not directly. The number of workers is a configuration decision your host makes, while RAM constrains how many can run simultaneously without swapping. A host can give you plenty of RAM and still cap you at two workers, which is why the specification worth asking about is the worker count itself rather than the memory figure.</p>
+  </div>
+  <div class="faq">
+    <h3>Do I need workers at all if I have full-page caching?</h3>
+    <p>Yes. Caching handles anonymous page views, but logged-in users, cart and checkout, admin-ajax, REST calls, WP-Cron and cache misses all still run PHP. A heavily cached site needs fewer workers, not zero. This is why a site can benchmark beautifully and still have a slow checkout.</p>
+  </div>
+  <div class="faq">
+    <h3>Why is my admin slow when the front end is busy?</h3>
+    <p>Because wp-admin requests are uncached and queue behind public traffic for the same pool of workers. When visitors occupy every worker, your dashboard request waits its turn. It's a normal consequence of running out of workers, and it's a useful early warning sign that you're closer to your ceiling than you thought.</p>
+  </div>
+  <div class="faq">
+    <h3>Is this a shared hosting problem specifically?</h3>
+    <p>It's worst on shared hosting, because you're drawing from a pool shared with other sites whose traffic you can't predict. But the constraint exists on every host, including managed ones — the difference is that managed hosts usually give you a defined, published number per plan rather than a fluctuating share.</p>
+  </div>
+  <div class="faq">
+    <h3>How is this different from CPU or memory limits?</h3>
+    <p>CPU is how fast work gets done; workers are how many things can be in progress at once. You can have abundant CPU sitting idle while requests queue because there's no free worker to hand them to — which is exactly why 'my resource graphs look fine' and 'my site is slow' are both true at the same time.</p>
+  </div>
+  <div class="faq">
+    <h3>Will upgrading my plan fix it?</h3>
+    <p>If you're genuinely worker-limited, yes, and often dramatically. But confirm the diagnosis first: cache what you can, cut uncached response time with object caching, and measure again. If the problem was slow uncached requests rather than worker count, a bigger plan buys you a more expensive version of the same problem.</p>
+  </div>
+
+
+  <div class="related">
+    <strong>Related on Wiser Tools</strong>
+        <p><a href="how-to-speed-up-wordpress">How to speed up WordPress: diagnose first</a> — Confirm the bottleneck is concurrency before you spend money on capacity.</p>
+    <p><a href="wordpress-hosting-for-woocommerce">Managed hosting for WooCommerce stores</a> — Why checkout needs a different kind of hosting than a blog does.</p>
+  </div>
+
+</main>
+
+<footer class="wrap">
+  <p><strong>About this guide:</strong> Wiser Tools publishes practical WordPress guides alongside its hosting comparisons. This page contains no affiliate links and no sponsored recommendations. Our hosting comparison pages do carry affiliate links, which are marked with a <code>rel="sponsored"</code> attribute and disclosed at the top of each page.</p>
+  <p class="small">WordPress, plugin and hosting details change over time. Verify current requirements and pricing on each vendor's official site before making changes to a live site. Last reviewed: September 2026.</p>
+</footer>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Wiser Tools",
+  "url": "https://wiser-tools.com/",
+  "description": "Independent, hands-on reviews and comparisons of managed hosting, SaaS tools, and developer services.",
+  "publisher": { "@type": "Organization", "name": "Wiser Tools", "url": "https://wiser-tools.com/" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "WordPress PHP Workers, Explained",
+  "description": "PHP workers are why a site that is fast at ten visitors crawls at a hundred. What they are, how to estimate how many you need, the symptoms of running out, and why more workers won't fix a slow page.",
+  "author": { "@type": "Organization", "name": "Wiser Tools" },
+  "publisher": { "@type": "Organization", "name": "Wiser Tools", "url": "https://wiser-tools.com/" },
+  "datePublished": "2026-09-05",
+  "dateModified": "2026-09-05",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://wiser-tools.com/wordpress-php-workers-explained" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://wiser-tools.com/" },
+    { "@type": "ListItem", "position": 2, "name": "WordPress Guides", "item": "https://wiser-tools.com/wordpress-guides" },
+    { "@type": "ListItem", "position": 3, "name": "PHP Workers Explained", "item": "https://wiser-tools.com/wordpress-php-workers-explained" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "Does more RAM mean more PHP workers?", "acceptedAnswer": { "@type": "Answer", "text": "Not directly. The number of workers is a configuration decision your host makes, while RAM constrains how many can run simultaneously without swapping. A host can give you plenty of RAM and still cap you at two workers, which is why the specification worth asking about is the worker count itself rather than the memory figure." } },
+    { "@type": "Question", "name": "Do I need workers at all if I have full-page caching?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Caching handles anonymous page views, but logged-in users, cart and checkout, admin-ajax, REST calls, WP-Cron and cache misses all still run PHP. A heavily cached site needs fewer workers, not zero. This is why a site can benchmark beautifully and still have a slow checkout." } },
+    { "@type": "Question", "name": "Why is my admin slow when the front end is busy?", "acceptedAnswer": { "@type": "Answer", "text": "Because wp-admin requests are uncached and queue behind public traffic for the same pool of workers. When visitors occupy every worker, your dashboard request waits its turn. It's a normal consequence of running out of workers, and it's a useful early warning sign that you're closer to your ceiling than you thought." } },
+    { "@type": "Question", "name": "Is this a shared hosting problem specifically?", "acceptedAnswer": { "@type": "Answer", "text": "It's worst on shared hosting, because you're drawing from a pool shared with other sites whose traffic you can't predict. But the constraint exists on every host, including managed ones — the difference is that managed hosts usually give you a defined, published number per plan rather than a fluctuating share." } },
+    { "@type": "Question", "name": "How is this different from CPU or memory limits?", "acceptedAnswer": { "@type": "Answer", "text": "CPU is how fast work gets done; workers are how many things can be in progress at once. You can have abundant CPU sitting idle while requests queue because there's no free worker to hand them to — which is exactly why 'my resource graphs look fine' and 'my site is slow' are both true at the same time." } },
+    { "@type": "Question", "name": "Will upgrading my plan fix it?", "acceptedAnswer": { "@type": "Answer", "text": "If you're genuinely worker-limited, yes, and often dramatically. But confirm the diagnosis first: cache what you can, cut uncached response time with object caching, and measure again. If the problem was slow uncached requests rather than worker count, a bigger plan buys you a more expensive version of the same problem." } }
+  ]
+}
+</script>
+
+</body>
+</html>

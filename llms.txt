@@ -9,6 +9,15 @@
 - Best WordPress Hosting for Small Business — https://wiser-tools.com/wordpress-hosting-for-small-business : Reliability, support, migration from GoDaddy/cPanel, and honest cost, matched to business type.
 - Wiser Tools (home) — https://wiser-tools.com/ : Index of our reviews and comparisons.
 
+## WordPress guides (no affiliate links)
+- WordPress Guides (index) — https://wiser-tools.com/wordpress-guides : Index of our practical WordPress guides.
+- How to Fix the WordPress White Screen of Death — https://wiser-tools.com/fix-wordpress-white-screen-of-death : Step-by-step diagnosis — surface the real error with WP_DEBUG, then rule out memory, plugins, theme and core files, in the order that actually finds the cause.
+- How to Speed Up WordPress: Diagnose First — https://wiser-tools.com/how-to-speed-up-wordpress : Measure TTFB, LCP, INP and CLS first to identify whether the bottleneck is server-side, front-end, or JavaScript, then fix in order of impact.
+- WordPress Caching Plugins, Compared — https://wiser-tools.com/wordpress-caching-plugins-compared : The four caching layers (opcode, page, object, CDN), which plugins handle each, and why stacking two page caches causes staleness bugs.
+- WordPress PHP Workers, Explained — https://wiser-tools.com/wordpress-php-workers-explained : Why a site that is fast at ten visitors crawls at a hundred, how to estimate how many workers you need, and why more workers do not make a slow page faster.
+- WordPress Backup Strategies That Actually Restore — https://wiser-tools.com/wordpress-backup-strategies-explained : The 3-2-1 rule for WordPress, backup frequency by site type, and the mistakes that make backups useless.
+- Move WordPress to a New Host Without Downtime — https://wiser-tools.com/move-wordpress-to-new-host-without-downtime : Stage on the new host first, handle serialized URLs correctly, lower DNS TTL early, and avoid the email trap.
+
 ## What Wiser Tools is
 Wiser Tools is an independent review publisher. Our recommendations are based on genuine product research. We may earn a commission from some partner links at no extra cost to readers; this does not affect our rankings or recommendations.
 

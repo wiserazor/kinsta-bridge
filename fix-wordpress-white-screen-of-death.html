@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Fix the WordPress White Screen of Death (2026)</title>
+<meta name="description" content="A step-by-step fix for the WordPress white screen of death: surface the real error with WP_DEBUG, rule out plugins and themes, raise the memory limit, and replace core files safely.">
+<link rel="canonical" href="https://wiser-tools.com/fix-wordpress-white-screen-of-death">
+<style>
+  :root{
+    --bg:#ffffff; --fg:#1a1a2e; --muted:#5b6472; --line:#e6e9ef;
+    --brand:#4a2cff; --brand-d:#3a1fd6; --accent:#0bbf8a; --warn:#d97706;
+    --card:#f7f9fc;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--fg);background:var(--bg);line-height:1.65;font-size:17px}
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px}
+  .topbar{background:#1a1a2e;color:#fff;padding:12px 0}
+  .topbar-inner{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .brand{font-weight:700;font-size:18px;letter-spacing:-.3px}
+  .brand-tag{font-size:13px;color:#a5b0c0}
+  a.brand{color:#fff;text-decoration:none}
+  a.brand:hover{text-decoration:underline}
+  .topbar-home{margin-left:auto;font-size:14px;color:#a5b0c0;text-decoration:none}
+  .topbar-home:hover{color:#fff;text-decoration:underline}
+  .disclosure{background:#fff7ed;border-bottom:1px solid #fed7aa;color:#7c2d12;font-size:14px;padding:10px 20px;text-align:center}
+  .disclosure.neutral{background:#f0fdf4;border-bottom:1px solid #bbf7d0;color:#166534}
+  header{padding:48px 0 24px}
+  h1{font-size:38px;line-height:1.2;margin:0 0 12px;letter-spacing:-.5px}
+  h2{font-size:26px;margin:44px 0 14px;letter-spacing:-.3px}
+  h3{font-size:20px;margin:26px 0 8px}
+  p{margin:0 0 16px;color:var(--muted)}
+  .lead{font-size:19px;color:var(--fg)}
+  a.cta{display:inline-block;background:var(--brand);color:#fff;text-decoration:none;padding:12px 22px;border-radius:10px;font-weight:600;transition:.15s}
+  a.cta:hover{background:var(--brand-d)}
+  .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:14px}
+  .cta-label{font-weight:600;margin:26px 0 0}
+  table{width:100%;border-collapse:collapse;margin:18px 0;font-size:15px}
+  th,td{border:1px solid var(--line);padding:12px 14px;text-align:left;vertical-align:top}
+  th{background:var(--card);font-weight:600}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;margin:16px 0}
+  ul,ol{margin:0 0 16px;padding-left:22px}
+  li{margin:4px 0;color:var(--muted)}
+  .faq{margin:10px 0}
+  .faq h3{margin-bottom:4px}
+  footer{border-top:1px solid var(--line);margin-top:48px;padding:28px 0 56px;font-size:14px;color:var(--muted)}
+  .small{font-size:14px}
+  .note{background:#eff6ff;border:1px solid #bfdbfe;color:#1e40af;border-radius:10px;padding:12px 16px;font-size:14px;margin:16px 0}
+  .warn{background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;border-radius:10px;padding:12px 16px;font-size:15px;margin:16px 0}
+  .related{background:#f7f9fc;border:1px solid var(--line);border-radius:14px;padding:18px 22px;margin:24px 0}
+  .related a{color:var(--brand);text-decoration:none}
+  .related a:hover{text-decoration:underline}
+  .toc{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 22px;margin:20px 0}
+  .toc a{color:var(--brand);text-decoration:none}
+  .toc a:hover{text-decoration:underline}
+  .toc ol{margin:8px 0 0}
+  main a{color:var(--brand)}
+  code{background:#f1f5f9;border:1px solid var(--line);border-radius:4px;padding:1px 5px;font-size:14px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+  pre{background:#0f172a;color:#e2e8f0;border-radius:10px;padding:14px 16px;overflow-x:auto;font-size:14px;line-height:1.55;margin:14px 0}
+  pre code{background:none;border:0;padding:0;color:inherit;font-size:14px}
+  .step{background:#fff;border:1px solid var(--line);border-left:4px solid var(--brand);border-radius:10px;padding:16px 18px;margin:14px 0}
+  .step h3{margin-top:0}
+  .step p:last-child,.step ul:last-child,.step ol:last-child{margin-bottom:0}
+  .meta{font-size:14px;color:var(--muted)}
+  .guide-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin-top:6px}
+  .guide-card{
+    display:block;background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 18px;
+    text-decoration:none;color:inherit;transition:.15s
+  }
+  .guide-card:hover{border-color:var(--brand);background:#fbfbff;transform:translateY(-1px)}
+  .guide-card strong{display:block;color:var(--brand);font-size:16px;margin-bottom:4px}
+  .guide-card span{display:block;font-size:14px;color:var(--muted);line-height:1.5}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="brand" href="/">Wiser Tools</a>
+    <span class="brand-tag">Honest, no-hype tool &amp; service reviews</span>
+    <a class="topbar-home" href="/">&larr; All categories</a>
+  </div>
+</div>
+
+<div class="disclosure neutral">
+  <strong>No affiliate links on this page.</strong> This guide is purely instructional — we earn nothing from it. Other pages on this site do carry affiliate links, and they're always labelled.
+</div>
+
+<header class="wrap">
+  <p class="meta"><a href="/">Home</a> &rsaquo; <a href="wordpress-guides">WordPress Guides</a></p>
+  <h1>How to Fix the WordPress White Screen of Death</h1>
+  <p class="lead">A blank page with no error message is the most unnerving WordPress failure there is, because it tells you nothing. This guide walks the diagnosis in the order that actually finds the cause &mdash; surface the error first, then rule out memory, plugins, theme and core files &mdash; instead of guessing and restoring.</p>
+</header>
+
+<main class="wrap">
+
+  <div class="toc">
+    <strong>On this page:</strong>
+    <ol>
+      <li><a href="#confirm">Confirm it's really the white screen</a></li>
+      <li><a href="#backup">Back up before you touch anything</a></li>
+      <li><a href="#debug">Step 1: Make WordPress tell you the error</a></li>
+      <li><a href="#memory">Step 2: Raise the memory limit (and read the warning)</a></li>
+      <li><a href="#plugins">Step 3: Deactivate every plugin at once</a></li>
+      <li><a href="#theme">Step 4: Force a default theme</a></li>
+      <li><a href="#core">Step 5: Replace the WordPress core files</a></li>
+      <li><a href="#php">Step 6: Check PHP version compatibility</a></li>
+      <li><a href="#triage">Symptom triage table</a></li>
+    </ol>
+  </div>
+
+
+  <h2 id="confirm">Confirm it's really the white screen</h2>
+  <p>"White screen of death" is a catch-all phrase people use for any blank page, but the fixes differ. Before you start renaming folders, work out which of these you have:</p>
+  <ul>
+    <li><strong>Blank page, no error text, admin also blank</strong> &mdash; a fatal PHP error is being suppressed. This is the classic WSOD.</li>
+    <li><strong>Front end blank, wp-admin works</strong> &mdash; far more likely your theme than a plugin.</li>
+    <li><strong>Admin blank, front end fine</strong> &mdash; a plugin doing something expensive or broken inside wp-admin.</li>
+    <li><strong>Blank with a browser error like 500, 502, or 504</strong> &mdash; that's a server-level response, not purely a WordPress one. Check your host's error log; the fix may be outside WordPress entirely.</li>
+    <li><strong>Blank on one page only</strong> &mdash; usually memory exhaustion or a bad query on that specific template, not a global breakage.</li>
+  </ul>
+  <p>Open your browser's developer tools and reload. If the Network tab shows a 200 response with an empty body, it's a PHP fatal. If it shows a 5xx, start with the server.</p>
+
+  <h2 id="backup">Back up before you touch anything</h2>
+  <p>Everything below is safe when done in the right order, but "safe" and "impossible to make worse" aren't the same thing. Before you start, make sure you have a copy of two things: <strong>the database</strong> and <strong>the <code>wp-content</code> folder</strong>. Those two contain your entire site. The WordPress core files (<code>wp-admin</code> and <code>wp-includes</code>) can always be re-downloaded from wordpress.org, so don't panic about those.</p>
+  <p>If you can't reach wp-admin, take the backup through your host's file manager, your hosting control panel's backup tool, or over SFTP. If you have no route to either, stop and ask your host for a snapshot before continuing &mdash; <a href="wordpress-backup-strategies-explained">our backup guide</a> covers why host snapshots are the fastest recovery for exactly this moment.</p>
+
+  <h2 id="debug">Step 1: Make WordPress tell you the error</h2>
+  <p>By default WordPress hides fatal errors from visitors, which is good for security and terrible for debugging. Turn logging on so the error goes to a file instead of the screen.</p>
+  <p>Open <code>wp-config.php</code> (it's in the site root, the same folder as <code>wp-admin</code>) and add these lines <strong>above</strong> the comment that says <code>/* That's all, stop editing! Happy publishing. */</code>:</p>
+  <pre><code>define( 'WP_DEBUG', true );
+define( 'WP_DEBUG_LOG', true );
+define( 'WP_DEBUG_DISPLAY', false );</code></pre>
+  <p>Then reload the blank page. WordPress writes the error to <code>/wp-content/debug.log</code>. Open it and read the last few lines &mdash; you're looking for a line starting with <code>PHP Fatal error</code>. It will usually name the file that caused it, and that file path tells you which plugin or theme to look at. A path containing <code>/wp-content/plugins/some-plugin/</code> means you already know the culprit.</p>
+  <div class="warn"><strong>Turn this back off when you're done.</strong> Leaving debug logging running on a live site fills the log file with notices and, depending on server permissions, can expose file paths. Set those three constants back to <code>false</code> and delete <code>debug.log</code> once the site is working.</div>
+  <p>This step matters more than the rest because it converts guesswork into a specific answer. Every other step on this page is a way of finding the culprit when you <em>can't</em> get the error.</p>
+
+  <h2 id="memory">Step 2: Raise the memory limit (and read the warning)</h2>
+  <p>Exhausted memory is one of the most common causes, and it's the quickest thing to rule out. Add this to <code>wp-config.php</code>, again above the "stop editing" line:</p>
+  <pre><code>define( 'WP_MEMORY_LIMIT', '256M' );</code></pre>
+  <p>If that alone doesn't do it, the limit may be capped at the server level rather than by WordPress. Options, in order of preference:</p>
+  <ul>
+    <li><strong>Hosting control panel</strong> &mdash; most managed hosts have a PHP settings screen where <code>memory_limit</code> can be changed without touching files.</li>
+    <li><strong><code>php.ini</code> or <code>.user.ini</code></strong> &mdash; <code>memory_limit = 256M</code></li>
+    <li><strong><code>.htaccess</code></strong> &mdash; <code>php_value memory_limit 256M</code>. Only works on Apache with mod_php. On nginx, which most managed hosts use, this will throw a 500 error instead. If adding it makes things worse, remove it immediately.</li>
+  </ul>
+  <div class="warn"><strong>If raising the limit "fixes" it, you haven't fixed it.</strong> You've raised the ceiling above a leak. Something &mdash; usually a plugin doing an unbounded query, or a theme loading an enormous dataset &mdash; is consuming more memory than it should. It will come back the moment your content grows. Treat the memory bump as breathing room, not a cure, and note which page triggered it.</div>
+
+  <h2 id="plugins">Step 3: Deactivate every plugin at once</h2>
+  <p>Plugin conflicts cause more white screens than anything else. The problem when your site is blank is that you can't reach the Plugins screen &mdash; so you deactivate them from the outside.</p>
+  <p>Connect over SFTP or your host's file manager and <strong>rename the plugins folder</strong>:</p>
+  <pre><code>wp-content/plugins  ->  wp-content/plugins.disabled</code></pre>
+  <p>WordPress can no longer find any plugin, so it treats them all as inactive and your site should load &mdash; with features missing, but loading. That confirms it's a plugin.</p>
+  <p>Now rename it back to <code>plugins</code> and go through them one at a time: rename an individual plugin's folder to disable just that one, reload, and repeat until the white screen returns. The last one you disabled is the culprit.</p>
+  <p>If you have command-line access, this is faster:</p>
+  <pre><code>wp plugin deactivate --all</code></pre>
+  <p>And if you have database access but no file access, you can clear the active plugins list directly:</p>
+  <pre><code>UPDATE wp_options SET option_value = ''
+WHERE option_name = 'active_plugins';</code></pre>
+  <p>Check your table prefix first &mdash; it isn't always <code>wp_</code>. This approach leaves plugin files in place, which makes it the cleaner option on shared hosting where other sites might rely on the same directory.</p>
+
+  <h2 id="theme">Step 4: Force a default theme</h2>
+  <p>If disabling all plugins didn't help, or if only the front end was blank, it's the theme. Same principle: rename the active theme's folder inside <code>wp-content/themes/</code> and WordPress falls back to a bundled default theme such as Twenty Twenty-Four.</p>
+  <p>If it falls back to a theme you don't have installed, WordPress will error instead. To be safe, set it explicitly in the database:</p>
+  <pre><code>UPDATE wp_options SET option_value = 'twentytwentyfour'
+WHERE option_name IN ('template','stylesheet');</code></pre>
+  <p>Your theme's customizer settings, widget placements and menu assignments live in the database, so renaming a folder doesn't destroy them &mdash; they'll be waiting when you switch back. What you <em>will</em> lose is any change you made by editing theme files directly, which is exactly why child themes exist.</p>
+
+  <h2 id="core">Step 5: Replace the WordPress core files</h2>
+  <p>If neither plugins nor theme is responsible, core files may be corrupt &mdash; a failed automatic update, an interrupted file transfer, or a partial restore.</p>
+  <p>Download a fresh copy of WordPress from wordpress.org, unzip it, and upload <strong>only</strong> the <code>wp-admin</code> and <code>wp-includes</code> folders, overwriting what's there. Then re-upload the individual root files from the fresh download (such as <code>index.php</code> and <code>wp-load.php</code>) &mdash; but <strong>not</strong> <code>wp-config.php</code>, which is yours and contains your database credentials.</p>
+  <div class="warn"><strong>Never overwrite <code>wp-content</code>.</strong> That folder holds your themes, plugins, uploads and custom code. Replacing it with the stock version from wordpress.org deletes your site. If a guide ever tells you to replace it wholesale, it's wrong.</div>
+
+  <h2 id="php">Step 6: Check PHP version compatibility</h2>
+  <p>A white screen that appears right after your host upgraded PHP &mdash; or right after you did &mdash; is almost always a plugin or theme calling a function that was removed in the newer version. PHP 8.x removed and changed a good deal of behaviour that older code relied on.</p>
+  <p>The fix is to find the offending plugin (step 3 will surface it), update it, and if no update exists, replace it. Running an abandoned plugin on a modern PHP version is a slow-motion version of the same problem; it will break eventually. If your host lets you switch PHP versions, rolling back temporarily is a legitimate way to buy time &mdash; just don't leave it there permanently, since old PHP branches stop receiving security patches.</p>
+
+  <h2 id="triage">Symptom triage table</h2>
+  <p>When you just want the fastest path, match your symptom:</p>
+  <table>
+    <thead>
+      <tr><th>Symptom</th><th>Most likely cause</th><th>Try this first</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Blank everywhere, including admin</td><td>Plugin fatal error</td><td>Rename the plugins folder</td></tr>
+      <tr><td>Front end blank, admin fine</td><td>Theme fatal error</td><td>Rename the active theme folder</td></tr>
+      <tr><td>Admin blank, front end fine</td><td>Plugin misbehaving in wp-admin</td><td>Rename the plugins folder</td></tr>
+      <tr><td>Blank immediately after an update</td><td>Version incompatibility</td><td>Disable the thing you just updated</td></tr>
+      <tr><td>Blank right after editing code</td><td>Syntax error</td><td>Restore that file from backup</td></tr>
+      <tr><td>Blank on one page only</td><td>Memory or a slow query</td><td>Raise memory, then profile that template</td></tr>
+      <tr><td>Message about exhausted memory size</td><td>Memory limit, or a leak</td><td>Raise the limit, then find the leak</td></tr>
+      <tr><td>Blank plus a 500 status code</td><td>Server-level error</td><td>Check the host's error log</td></tr>
+      <tr><td>Blank after changing PHP version</td><td>Deprecated function call</td><td>Identify and replace the outdated plugin</td></tr>
+    </tbody>
+  </table>
+  <div class="note"><strong>The order matters.</strong> Working top to bottom &mdash; get the error, rule out memory, disable plugins, force a theme, replace core &mdash; costs about fifteen minutes and identifies the cause in nearly every case. Jumping straight to "restore from backup" works too, but you learn nothing, and the next occurrence is just as mysterious as the first.</div>
+
+  <h2 id="faq">FAQ</h2>
+  <div class="faq">
+    <h3>Will enabling WP_DEBUG show errors to my visitors?</h3>
+    <p>Not with the settings above. Setting WP_DEBUG_DISPLAY to false sends errors to the debug.log file rather than to the browser, so visitors see the same blank page they did before. That's the point: you get the information without exposing file paths and stack traces to the public.</p>
+  </div>
+  <div class="faq">
+    <h3>Can I fix this if I can't access FTP or my host's file manager?</h3>
+    <p>Yes, if you have database access through something like phpMyAdmin. Disabling plugins and switching themes can both be done with the SQL statements above. If you have neither file nor database access, contact your host. This is a routine request for them, and a host that won't help you recover a blank site is worth reconsidering next time you compare providers.</p>
+  </div>
+  <div class="faq">
+    <h3>Why did it happen right after I updated something?</h3>
+    <p>Because the update changed code that your theme or another plugin depended on. It's rarely malicious and usually specific: one function signature changed, or one file moved. The reliable fix is to identify the outdated component, then update or replace it, rather than avoiding updates altogether. Skipping updates trades a visible break now for an invisible security hole later.</p>
+  </div>
+  <div class="faq">
+    <h3>Is it always a plugin?</h3>
+    <p>No. In rough order of likelihood it's a plugin, then a theme, then memory exhaustion, then a PHP version mismatch, then corrupted core files. That's also the order to work through, because each check is cheap and the early ones catch most cases.</p>
+  </div>
+  <div class="faq">
+    <h3>Will fixing the white screen lose my content?</h3>
+    <p>It shouldn't. Posts, pages, media and settings live in the database and in wp-content, and none of the steps above delete either &mdash; renaming a folder doesn't remove it. That said, take a backup before you start. The one scenario where you can lose data is overwriting wp-content with a fresh WordPress download, which is why the instructions above deliberately exclude it.</p>
+  </div>
+  <div class="faq">
+    <h3>My site is back but I never found the cause. Is that OK?</h3>
+    <p>It's survivable but not ideal. If you resolved it by disabling everything and re-enabling selectively, you at least know which component it was. If it resolved itself after a memory bump, assume it will return. In that case keep debug logging enabled for a few days and check the log after your next traffic spike.</p>
+  </div>
+
+
+  <div class="related">
+    <strong>Related on Wiser Tools</strong>
+        <p><a href="best-managed-wordpress-hosting">Which managed WordPress host fits you?</a> — Our full five-host comparison, matched to your situation rather than to a single winner.</p>
+    <p><a href="wordpress-hosting-for-woocommerce">Managed hosting for WooCommerce stores</a> — What changes when the site takes money: checkout speed, object caching, safe update staging.</p>
+  </div>
+
+</main>
+
+<footer class="wrap">
+  <p><strong>About this guide:</strong> Wiser Tools publishes practical WordPress guides alongside its hosting comparisons. This page contains no affiliate links and no sponsored recommendations. Our hosting comparison pages do carry affiliate links, which are marked with a <code>rel="sponsored"</code> attribute and disclosed at the top of each page.</p>
+  <p class="small">WordPress, plugin and hosting details change over time. Verify current requirements and pricing on each vendor's official site before making changes to a live site. Last reviewed: September 2026.</p>
+</footer>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Wiser Tools",
+  "url": "https://wiser-tools.com/",
+  "description": "Independent, hands-on reviews and comparisons of managed hosting, SaaS tools, and developer services.",
+  "publisher": { "@type": "Organization", "name": "Wiser Tools", "url": "https://wiser-tools.com/" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "How to Fix the WordPress White Screen of Death",
+  "description": "A step-by-step fix for the WordPress white screen of death: surface the real error with WP_DEBUG, rule out plugins and themes, raise the memory limit, and replace core files safely.",
+  "author": { "@type": "Organization", "name": "Wiser Tools" },
+  "publisher": { "@type": "Organization", "name": "Wiser Tools", "url": "https://wiser-tools.com/" },
+  "datePublished": "2026-09-05",
+  "dateModified": "2026-09-05",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://wiser-tools.com/fix-wordpress-white-screen-of-death" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://wiser-tools.com/" },
+    { "@type": "ListItem", "position": 2, "name": "WordPress Guides", "item": "https://wiser-tools.com/wordpress-guides" },
+    { "@type": "ListItem", "position": 3, "name": "Fix the White Screen of Death", "item": "https://wiser-tools.com/fix-wordpress-white-screen-of-death" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "Will enabling WP_DEBUG show errors to my visitors?", "acceptedAnswer": { "@type": "Answer", "text": "Not with the settings above. Setting WP_DEBUG_DISPLAY to false sends errors to the debug.log file rather than to the browser, so visitors see the same blank page they did before. That's the point: you get the information without exposing file paths and stack traces to the public." } },
+    { "@type": "Question", "name": "Can I fix this if I can't access FTP or my host's file manager?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, if you have database access through something like phpMyAdmin. Disabling plugins and switching themes can both be done with the SQL statements above. If you have neither file nor database access, contact your host. This is a routine request for them, and a host that won't help you recover a blank site is worth reconsidering next time you compare providers." } },
+    { "@type": "Question", "name": "Why did it happen right after I updated something?", "acceptedAnswer": { "@type": "Answer", "text": "Because the update changed code that your theme or another plugin depended on. It's rarely malicious and usually specific: one function signature changed, or one file moved. The reliable fix is to identify the outdated component, then update or replace it, rather than avoiding updates altogether. Skipping updates trades a visible break now for an invisible security hole later." } },
+    { "@type": "Question", "name": "Is it always a plugin?", "acceptedAnswer": { "@type": "Answer", "text": "No. In rough order of likelihood it's a plugin, then a theme, then memory exhaustion, then a PHP version mismatch, then corrupted core files. That's also the order to work through, because each check is cheap and the early ones catch most cases." } },
+    { "@type": "Question", "name": "Will fixing the white screen lose my content?", "acceptedAnswer": { "@type": "Answer", "text": "It shouldn't. Posts, pages, media and settings live in the database and in wp-content, and none of the steps above delete either &mdash; renaming a folder doesn't remove it. That said, take a backup before you start. The one scenario where you can lose data is overwriting wp-content with a fresh WordPress download, which is why the instructions above deliberately exclude it." } },
+    { "@type": "Question", "name": "My site is back but I never found the cause. Is that OK?", "acceptedAnswer": { "@type": "Answer", "text": "It's survivable but not ideal. If you resolved it by disabling everything and re-enabling selectively, you at least know which component it was. If it resolved itself after a memory bump, assume it will return. In that case keep debug logging enabled for a few days and check the log after your next traffic spike." } }
+  ]
+}
+</script>
+
+</body>
+</html>
