@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WordPress &amp; WooCommerce Accessibility: Avoid ADA Lawsuits (2026)</title>
+<meta name="description" content="Who actually gets sued under the ADA for website accessibility, why WooCommerce stores are the top target, the six barriers most cited in complaints, and the WordPress-specific fixes that actually reduce your risk.">
+<link rel="canonical" href="https://wiser-tools.com/wordpress-accessibility-ada-compliance">
+<style>
+  :root{
+    --bg:#ffffff; --fg:#1a1a2e; --muted:#5b6472; --line:#e6e9ef;
+    --brand:#4a2cff; --brand-d:#3a1fd6; --accent:#0bbf8a; --warn:#d97706;
+    --card:#f7f9fc;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--fg);background:var(--bg);line-height:1.65;font-size:17px}
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px}
+  .topbar{background:#1a1a2e;color:#fff;padding:12px 0}
+  .topbar-inner{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .brand{font-weight:700;font-size:18px;letter-spacing:-.3px}
+  .brand-tag{font-size:13px;color:#a5b0c0}
+  a.brand{color:#fff;text-decoration:none}
+  a.brand:hover{text-decoration:underline}
+  .topbar-home{margin-left:auto;font-size:14px;color:#a5b0c0;text-decoration:none}
+  .topbar-home:hover{color:#fff;text-decoration:underline}
+  .disclosure{background:#fff7ed;border-bottom:1px solid #fed7aa;color:#7c2d12;font-size:14px;padding:10px 20px;text-align:center}
+  .disclosure.neutral{background:#f0fdf4;border-bottom:1px solid #bbf7d0;color:#166534}
+  header{padding:48px 0 24px}
+  h1{font-size:38px;line-height:1.2;margin:0 0 12px;letter-spacing:-.5px}
+  h2{font-size:26px;margin:44px 0 14px;letter-spacing:-.3px}
+  h3{font-size:20px;margin:26px 0 8px}
+  p{margin:0 0 16px;color:var(--muted)}
+  .lead{font-size:19px;color:var(--fg)}
+  a.cta{display:inline-block;background:var(--brand);color:#fff;text-decoration:none;padding:12px 22px;border-radius:10px;font-weight:600;transition:.15s}
+  a.cta:hover{background:var(--brand-d)}
+  .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:14px}
+  .cta-label{font-weight:600;margin:26px 0 0}
+  table{width:100%;border-collapse:collapse;margin:18px 0;font-size:15px}
+  th,td{border:1px solid var(--line);padding:12px 14px;text-align:left;vertical-align:top}
+  th{background:var(--card);font-weight:600}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;margin:16px 0}
+  ul,ol{margin:0 0 16px;padding-left:22px}
+  li{margin:4px 0;color:var(--muted)}
+  .faq{margin:10px 0}
+  .faq h3{margin-bottom:4px}
+  footer{border-top:1px solid var(--line);margin-top:48px;padding:28px 0 56px;font-size:14px;color:var(--muted)}
+  .small{font-size:14px}
+  .note{background:#eff6ff;border:1px solid #bfdbfe;color:#1e40af;border-radius:10px;padding:12px 16px;font-size:14px;margin:16px 0}
+  .warn{background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;border-radius:10px;padding:12px 16px;font-size:15px;margin:16px 0}
+  .related{background:#f7f9fc;border:1px solid var(--line);border-radius:14px;padding:18px 22px;margin:24px 0}
+  .related a{color:var(--brand);text-decoration:none}
+  .related a:hover{text-decoration:underline}
+  .toc{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 22px;margin:20px 0}
+  .toc a{color:var(--brand);text-decoration:none}
+  .toc a:hover{text-decoration:underline}
+  .toc ol{margin:8px 0 0}
+  main a{color:var(--brand)}
+  code{background:#f1f5f9;border:1px solid var(--line);border-radius:4px;padding:1px 5px;font-size:14px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+  pre{background:#0f172a;color:#e2e8f0;border-radius:10px;padding:14px 16px;overflow-x:auto;font-size:14px;line-height:1.55;margin:14px 0}
+  pre code{background:none;border:0;padding:0;color:inherit;font-size:14px}
+  .step{background:#fff;border:1px solid var(--line);border-left:4px solid var(--brand);border-radius:10px;padding:16px 18px;margin:14px 0}
+  .step h3{margin-top:0}
+  .step p:last-child,.step ul:last-child,.step ol:last-child{margin-bottom:0}
+  .meta{font-size:14px;color:var(--muted)}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="brand" href="/">Wiser Tools</a>
+    <span class="brand-tag">Honest, no-hype tool &amp; service reviews</span>
+    <a class="topbar-home" href="/">&larr; All categories</a>
+  </div>
+</div>
+
+<div class="disclosure neutral">
+  <strong>No affiliate links on this page.</strong> This guide is purely instructional &mdash; we earn nothing from it. Other pages on this site do carry affiliate links, and they're always labelled.
+</div>
+
+<header class="wrap">
+  <p class="meta"><a href="/">Home</a> &rsaquo; <a href="wordpress-guides">WordPress Guides</a></p>
+  <h1>WordPress &amp; WooCommerce Accessibility: Avoid ADA Lawsuits</h1>
+  <p class="lead">A 2025 report counted more than 5,000 U.S. website-accessibility lawsuits, and roughly seven in ten targeted online stores. Here's what that means for a WordPress or WooCommerce site owner &mdash; and the fixes that are cheaper than a settlement.</p>
+</header>
+
+<main class="wrap">
+
+  <div class="toc">
+    <strong>On this page:</strong>
+    <ol>
+      <li><a href="#what">What's actually happening (the numbers)</a></li>
+      <li><a href="#risk">Is your WordPress site at risk?</a></li>
+      <li><a href="#barriers">The six barriers most often cited</a></li>
+      <li><a href="#wp">WordPress-specific fixes</a></li>
+      <li><a href="#woo">WooCommerce-specific fixes</a></li>
+      <li><a href="#notdo">What NOT to do: overlay widgets</a></li>
+      <li><a href="#checklist">A remediation checklist</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ol>
+  </div>
+
+  <div class="note">
+    This page is a practical risk and remediation overview, not legal advice. If you receive a demand letter, speak to an attorney experienced in ADA Title III matters before responding.
+  </div>
+
+  <h2 id="what">What's actually happening (the numbers)</h2>
+  <p>In 2025, U.S. federal and state courts together saw more than <strong>5,000 website-accessibility lawsuits</strong> &mdash; a 20&ndash;27% jump over 2024. The industry split is the part that should get a store owner's attention: an estimated <strong>69&ndash;78% of those suits targeted e-commerce and online retail</strong>, with food service a distant second at around 21%, and every other sector &mdash; healthcare, finance, education, blogs &mdash; sitting at roughly 1% each or less.</p>
+  <p>The economics explain the concentration. Most of these are not lawsuits at first; they start as <strong>demand letters</strong> from a small group of plaintiff firms that operate at scale. They (or paid testers) systematically visit retail sites, log WCAG failures, and send a settlement request. Reported outcomes cluster around <strong>$5,000&ndash;$20,000 to settle</strong>, with legal fees on top pushing the real cost to $25,000&ndash;$75,000. Because small businesses tend to settle fast, they're economically attractive targets &mdash; which is why the plaintiff bar keeps coming back.</p>
+  <p>Within e-commerce, <strong>WooCommerce and Shopify stores are the focal point</strong>. One mid-2025 report found Shopify-based stores alone accounted for roughly a third of platform-identifiable suits. WooCommerce stores are frequently built by non-specialists, carry many plugins, ship product images without alt text, and expose inaccessible checkout flows &mdash; exactly the kind of barrier a scanner documents in minutes. If you run a WooCommerce store, you are in the precise demographic these firms pursue.</p>
+
+  <h2 id="risk">Is your WordPress site at risk?</h2>
+  <p>Two factors drive exposure far more than anything else:</p>
+  <ul>
+    <li><strong>You sell to U.S./EU consumers</strong> (a transactional site with checkout, booking, or account-gated purchasing); and</li>
+    <li><strong>You are a U.S./EU-established entity</strong>, or at least clearly direct your offering at those markets (USD pricing, U.S. shipping, U.S.-targeted marketing).</li>
+  </ul>
+  <p>A pure content or affiliate site &mdash; one that earns commissions but doesn't transact with visitors &mdash; sits in that "everything else" bucket that makes up about 1% of filings. The mills are hunting for cart and form barriers, not comparison articles. That is the core reason a hosting-comparison site is a low-priority target.</p>
+  <p>There is one myth worth killing: <strong>"I'm not in the U.S., so I can't be sued."</strong> Courts have allowed suits against operators with no U.S. physical presence, on the theory that if U.S. users can access the site, jurisdiction follows. But the practical risk for a site operated from outside the U.S. with no U.S. entity, no U.S. assets, and no transactions is <strong>low</strong> &mdash; not zero, but low &mdash; because cross-border service of process and collection are expensive enough that plaintiff firms usually pass. The calculus changes the moment you add a paid product, course, membership, or gated newsletter: you become "transactional," and the risk rises a tier.</p>
+  <p>The useful takeaway: this guide exists to protect <em>your customers and readers</em> (store owners), and doing the basics on your own site is also cheap hygiene that future-proofs you if you ever add a product.</p>
+
+  <h2 id="barriers">The six barriers most often cited</h2>
+  <p>Complaints are remarkably consistent about what they allege. Fixing these six removes the large majority of exposure:</p>
+  <table>
+    <thead>
+      <tr><th>Barrier</th><th>Why it gets cited</th><th>Cheap fix</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Missing alt text on images (especially product images)</td><td>Screen readers announce the filename or nothing; shoppers can't tell what's for sale</td><td>Add descriptive alt per image; never leave blank on product media</td></tr>
+      <tr><td>Unlabeled forms (contact, checkout, login)</td><td>Fields aren't programmatically tied to labels, so the field's purpose is unknown</td><td>Wrap every input in a <code>&lt;label&gt;</code>; don't rely on placeholder-only</td></tr>
+      <tr><td>Keyboard navigation failures</td><td>Dropdowns need hover, focus indicators missing, controls unreachable without a mouse</td><td>Test tab-only; add visible focus styles; avoid hover-only menus</td></tr>
+      <tr><td>Insufficient color contrast</td><td>Text below 4.5:1 is unreadable for low-vision users</td><td>Use contrast-checker tools; aim for 4.5:1 (normal) / 3:1 (large)</td></tr>
+      <tr><td>Missing heading structure / landmarks</td><td>Screen-reader users can't jump between sections</td><td>Use real H2/H3 in order; don't fake headings with bold</td></tr>
+      <tr><td>Vague link text ("click here", "read more")</td><td>Out of context, the link's destination is meaningless</td><td>Write descriptive link text that makes sense on its own</td></tr>
+    </tbody>
+  </table>
+
+  <h2 id="wp">WordPress-specific fixes</h2>
+  <p>The single highest-leverage step is <strong>choosing an accessibility-ready theme</strong>. WordPress.org maintains an "Accessibility Ready" tag for themes audited for semantics, keyboard support, and contrast &mdash; starting there eliminates a large class of problems before you write a line of content.</p>
+  <ul>
+    <li><strong>Use semantic blocks.</strong> In the block editor, use real Heading blocks (H2, H3) in logical order. Don't simulate headings with bold text &mdash; it breaks navigation for screen-reader users.</li>
+    <li><strong>Build an alt-text habit.</strong> Add alt on the media screen and per-image, describing the image's function ("red leather wallet open, showing card slots"), not "image1" or the filename.</li>
+    <li><strong>Avoid keyboard traps.</strong> Carousels and sliders that capture focus are a common failure. If you use one, confirm it can be operated and exited with the keyboard alone.</li>
+    <li><strong>Audit, don't guess.</strong> Install the free <code>axe DevTools</code> or <code>WAVE</code> browser extension, and run Google Lighthouse's Accessibility tab on each template. Fix "critical" and "serious" items first; they're usually the ones a complaint would cite.</li>
+    <li><strong>Write descriptive links.</strong> "Our WooCommerce hosting comparison" beats "click here" every time, for users and for SEO.</li>
+  </ul>
+
+  <h2 id="woo">WooCommerce-specific fixes</h2>
+  <p>WooCommerce adds the transactional surfaces that draw the most complaints, so it deserves its own pass:</p>
+  <ul>
+    <li><strong>Product images:</strong> set alt text per product, not the raw filename. If you have many SKUs, bulk-edit via CSV rather than leaving them blank.</li>
+    <li><strong>Checkout and form fields:</strong> every field needs a visible label and a programmatic association. Placeholder-only fields fail the "what goes here?" test for assistive tech.</li>
+    <li><strong>Keyboard-only test of cart &amp; checkout:</strong> can you tab through, change quantity, apply a coupon, and place the order without ever touching a mouse? If not, that's a documented barrier.</li>
+    <li><strong>Error messages:</strong> validation errors should be announced (via an <code>aria-live</code> region), not just shown as red text that a screen reader may skip.</li>
+    <li><strong>Account pages:</strong> the same keyboard and label treatment as checkout. Logged-in areas are uncached and frequently overlooked.</li>
+  </ul>
+  <p>A practical note: several <a href="wordpress-hosting-for-woocommerce">managed WordPress hosts</a> give you a staging site, so you can run the accessibility audit on a copy instead of production &mdash; fix, verify, then push.</p>
+
+  <h2 id="notdo">What NOT to do: overlay widgets</h2>
+  <div class="warn">
+    <strong>Do not install an "accessibility widget"</strong> (the floating shield that promises one-line compliance). In 2025 the FTC reached a settlement with a major widget provider over deceptive marketing claims, and roughly <strong>23% of that year's accessibility suits were filed against sites that already had a widget installed</strong>. Courts increasingly cite the widget itself as evidence the owner knew about accessibility and chose a shortcut.
+  </div>
+  <p>Overlays don't fix underlying HTML, ARIA, or keyboard issues &mdash; and some actively interfere with screen readers. The only defensible strategy is real, code-level remediation. (This is also why, if you ever point your readers at tools, the honest recommendation is an accessibility-ready theme plus an audit tool, never an overlay.)</p>
+
+  <h2 id="checklist">A remediation checklist</h2>
+  <p>You don't need a consultant to clear the most-cited barriers. In order:</p>
+  <div class="step">
+    <h3>1. Scan the right pages</h3>
+    <p>Run Lighthouse (Accessibility) and axe on your homepage, a standard page template, a product page, checkout, and your contact form &mdash; not just the homepage.</p>
+  </div>
+  <div class="step">
+    <h3>2. Fix contrast and missing alt first</h3>
+    <p>These are high-volume, low-effort wins and appear constantly in complaints. Batch them.</p>
+  </div>
+  <div class="step">
+    <h3>3. Switch themes if needed</h3>
+    <p>If your current theme fails keyboard navigation or heading structure, moving to an Accessibility Ready theme resolves whole categories at once.</p>
+  </div>
+  <div class="step">
+    <h3>4. Label every form field; test tab order</h3>
+    <p>Contact, checkout, login, and search &mdash; each input gets a real label and a sensible keyboard sequence.</p>
+  </div>
+  <div class="step">
+    <h3>5. Publish a short accessibility statement</h3>
+    <p>A one-page statement describing your commitment and a contact route signals good faith &mdash; useful if a demand letter ever arrives.</p>
+  </div>
+  <div class="step">
+    <h3>6. Re-scan and document</h3>
+    <p>Keep a dated record of what you fixed. Demonstrated progress materially improves your position in any dispute.</p>
+  </div>
+  <div class="step">
+    <h3>7. Keep monitoring</h3>
+    <p>Themes and plugin updates can reintroduce barriers. Re-run the scan after major updates, especially on checkout.</p>
+  </div>
+
+  <h2 id="faq">FAQ</h2>
+  <div class="faq">
+    <h3>Do I need to be in the U.S. to be sued?</h3>
+    <p>No physical U.S. presence is required &mdash; courts have allowed jurisdiction when U.S. users can access the site. But for a site operated from outside the U.S. with no U.S. entity or assets, the practical risk stays low because serving and collecting across borders is costly. A transactional site aimed at U.S. customers raises that exposure regardless of where you sit.</p>
+  </div>
+  <div class="faq">
+    <h3>Does an accessibility widget make me compliant?</h3>
+    <p>No. A 2025 FTC settlement addressed deceptive compliance claims, and about 23% of that year's accessibility suits named sites that had a widget installed. Real, code-level remediation is the only strategy courts and plaintiffs accept.</p>
+  </div>
+  <div class="faq">
+    <h3>Is my blog at risk if I don't sell anything?</h3>
+    <p>Lower risk &mdash; content and non-transactional sites make up only about 1% of filings. Still, adding alt text and proper headings is cheap, helps SEO, and future-proofs you if you later add any gated or paid feature.</p>
+  </div>
+  <div class="faq">
+    <h3>Which standard should I target &mdash; WCAG 2.1 or 2.2?</h3>
+    <p>Courts and demand letters generally expect <strong>WCAG 2.1 Level AA</strong>. WCAG 2.2 AA is the safer, forward-looking target, but meeting 2.1 AA is the widely-cited baseline for private sites today.</p>
+  </div>
+  <div class="faq">
+    <h3>How much does remediation cost versus a settlement?</h3>
+    <p>A proper audit plus remediation often lands around a few thousand dollars. Settlements start near $5,000 and commonly reach $20,000 plus legal fees &mdash; so prevention is almost always cheaper than the letter.</p>
+  </div>
+  <div class="faq">
+    <h3>Does the EU EAA apply to me?</h3>
+    <p>If you offer products or services to consumers in the EU, the European Accessibility Act (effective June 28, 2025) can reach you regardless of where you're based. Content and affiliate sites are lower priority than e-commerce, but any transactional feature pulls you into scope.</p>
+  </div>
+  <div class="faq">
+    <h3>Will fixing accessibility hurt my design or SEO?</h3>
+    <p>Generally the opposite. Semantic HTML, descriptive alt text, and clear structure improve usability for everyone and give search engines better signals. The changes are usually invisible to sighted users.</p>
+  </div>
+  <div class="faq">
+    <h3>Should I worry about my own affiliate comparison site?</h3>
+    <p>As a content site run from outside the U.S. with no transactions, your realistic risk is low. Doing the basics anyway is good practice, cheap, and protective if you ever add a product, course, or membership.</p>
+  </div>
+
+  <div class="related">
+    <strong>Related on Wiser Tools</strong>
+    <p><a href="wordpress-hosting-for-woocommerce">Managed hosting for WooCommerce stores</a> &mdash; Why checkout needs a different kind of hosting than a blog does.</p>
+    <p><a href="how-to-speed-up-wordpress">How to speed up WordPress: diagnose first</a> &mdash; Performance and accessibility audits share the same starting tools.</p>
+    <p><a href="wordpress-caching-plugins-compared">WordPress caching plugins compared</a> &mdash; A faster, cleaner site is easier to keep accessible through updates.</p>
+  </div>
+
+</main>
+
+<footer class="wrap">
+  <p><strong>About this guide:</strong> Wiser Tools publishes practical WordPress guides alongside its hosting comparisons. This page contains no affiliate links and no sponsored recommendations. Our hosting comparison pages do carry affiliate links, which are marked with a <code>rel="sponsored"</code> attribute and disclosed at the top of each page.</p>
+  <p class="small">WordPress, plugin and hosting details change over time. Verify current requirements and pricing on each vendor's official site before making changes to a live site. Last reviewed: September 2026.</p>
+</footer>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Wiser Tools",
+  "url": "https://wiser-tools.com/",
+  "description": "Independent, hands-on reviews and comparisons of managed hosting, SaaS tools, and developer services.",
+  "publisher": { "@type": "Organization", "name": "Wiser Tools", "url": "https://wiser-tools.com/" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "WordPress & WooCommerce Accessibility: Avoid ADA Lawsuits (2026)",
+  "description": "Who actually gets sued under the ADA for website accessibility, why WooCommerce stores are the top target, the six barriers most cited in complaints, and the WordPress-specific fixes that actually reduce your risk.",
+  "author": { "@type": "Organization", "name": "Wiser Tools" },
+  "publisher": { "@type": "Organization", "name": "Wiser Tools", "url": "https://wiser-tools.com/" },
+  "datePublished": "2026-09-07",
+  "dateModified": "2026-09-07",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://wiser-tools.com/wordpress-accessibility-ada-compliance" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://wiser-tools.com/" },
+    { "@type": "ListItem", "position": 2, "name": "WordPress Guides", "item": "https://wiser-tools.com/wordpress-guides" },
+    { "@type": "ListItem", "position": 3, "name": "WordPress & WooCommerce Accessibility", "item": "https://wiser-tools.com/wordpress-accessibility-ada-compliance" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "Do I need to be in the U.S. to be sued?", "acceptedAnswer": { "@type": "Answer", "text": "No physical U.S. presence is required — courts have allowed jurisdiction when U.S. users can access the site. But for a site operated from outside the U.S. with no U.S. entity or assets, the practical risk stays low because serving and collecting across borders is costly. A transactional site aimed at U.S. customers raises that exposure regardless of where you sit." } },
+    { "@type": "Question", "name": "Does an accessibility widget make me compliant?", "acceptedAnswer": { "@type": "Answer", "text": "No. A 2025 FTC settlement addressed deceptive compliance claims, and about 23% of that year's accessibility suits named sites that had a widget installed. Real, code-level remediation is the only strategy courts and plaintiffs accept." } },
+    { "@type": "Question", "name": "Is my blog at risk if I don't sell anything?", "acceptedAnswer": { "@type": "Answer", "text": "Lower risk — content and non-transactional sites make up only about 1% of filings. Still, adding alt text and proper headings is cheap, helps SEO, and future-proofs you if you later add any gated or paid feature." } },
+    { "@type": "Question", "name": "Which standard should I target — WCAG 2.1 or 2.2?", "acceptedAnswer": { "@type": "Answer", "text": "Courts and demand letters generally expect WCAG 2.1 Level AA. WCAG 2.2 AA is the safer, forward-looking target, but meeting 2.1 AA is the widely-cited baseline for private sites today." } },
+    { "@type": "Question", "name": "How much does remediation cost versus a settlement?", "acceptedAnswer": { "@type": "Answer", "text": "A proper audit plus remediation often lands around a few thousand dollars. Settlements start near $5,000 and commonly reach $20,000 plus legal fees — so prevention is almost always cheaper than the letter." } },
+    { "@type": "Question", "name": "Does the EU EAA apply to me?", "acceptedAnswer": { "@type": "Answer", "text": "If you offer products or services to consumers in the EU, the European Accessibility Act (effective June 28, 2025) can reach you regardless of where you're based. Content and affiliate sites are lower priority than e-commerce, but any transactional feature pulls you into scope." } },
+    { "@type": "Question", "name": "Will fixing accessibility hurt my design or SEO?", "acceptedAnswer": { "@type": "Answer", "text": "Generally the opposite. Semantic HTML, descriptive alt text, and clear structure improve usability for everyone and give search engines better signals. The changes are usually invisible to sighted users." } },
+    { "@type": "Question", "name": "Should I worry about my own affiliate comparison site?", "acceptedAnswer": { "@type": "Answer", "text": "As a content site run from outside the U.S. with no transactions, your realistic risk is low. Doing the basics anyway is good practice, cheap, and protective if you ever add a product, course, or membership." } }
+  ]
+}
+</script>
+
+</body>
+</html>
