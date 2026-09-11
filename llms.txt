@@ -1,6 +1,6 @@
 # Wiser Tools
 
-> Independent, hands-on reviews and comparisons of managed hosting, SaaS tools, and developer services. We compare on merits, disclose affiliate relationships, and never accept payment for placement.
+> Independent, research-based comparisons of managed hosting, SaaS tools, and developer services. We compare on merits, disclose affiliate relationships, and never accept payment for placement.
 
 ## Hosting comparisons
 - Best Managed WordPress Hosting 2026 — https://wiser-tools.com/best-managed-wordpress-hosting : A no-hype comparison of Kinsta, Cloudways, WP Engine, and SiteGround on speed, support, pricing, and who each host is actually for, matched to the reader's situation (no single "top pick").
@@ -8,6 +8,7 @@
 - Managed WordPress Hosting for WooCommerce — https://wiser-tools.com/wordpress-hosting-for-woocommerce : Store-focused comparison — checkout speed under logged-in traffic, object caching, staging for product changes, matched to store type.
 - Best WordPress Hosting for Small Business — https://wiser-tools.com/wordpress-hosting-for-small-business : Reliability, support, migration from GoDaddy/cPanel, and honest cost, matched to business type.
 - Wiser Tools (home) — https://wiser-tools.com/ : Index of our reviews and comparisons.
+- About Wiser Tools — https://wiser-tools.com/about : How we evaluate hosting, where our information comes from, what we don't do, and how the site is funded.
 
 ## WordPress guides (no affiliate links)
 - WordPress Guides (index) — https://wiser-tools.com/wordpress-guides : Index of our practical WordPress guides.

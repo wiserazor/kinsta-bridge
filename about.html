@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Wiser Tools &amp; How We Evaluate Hosting</title>
+<meta name="description" content="What Wiser Tools is, how we compare managed WordPress hosting, where our information comes from, what we deliberately don't do, and why no page here names a single overall winner.">
+<link rel="canonical" href="https://wiser-tools.com/about">
+<style>
+  :root{
+    --bg:#ffffff; --fg:#1a1a2e; --muted:#5b6472; --line:#e6e9ef;
+    --brand:#4a2cff; --brand-d:#3a1fd6; --accent:#0bbf8a; --warn:#d97706;
+    --card:#f7f9fc;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--fg);background:var(--bg);line-height:1.65;font-size:17px}
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px}
+  .topbar{background:#1a1a2e;color:#fff;padding:12px 0}
+  .topbar-inner{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .brand{font-weight:700;font-size:18px;letter-spacing:-.3px}
+  .brand-tag{font-size:13px;color:#a5b0c0}
+  a.brand{color:#fff;text-decoration:none}
+  a.brand:hover{text-decoration:underline}
+  .topbar-home{margin-left:auto;font-size:14px;color:#a5b0c0;text-decoration:none}
+  .topbar-home:hover{color:#fff;text-decoration:underline}
+  .disclosure{background:#fff7ed;border-bottom:1px solid #fed7aa;color:#7c2d12;font-size:14px;padding:10px 20px;text-align:center}
+  .disclosure.neutral{background:#f0fdf4;border-bottom:1px solid #bbf7d0;color:#166534}
+  header{padding:48px 0 24px}
+  h1{font-size:38px;line-height:1.2;margin:0 0 12px;letter-spacing:-.5px}
+  h2{font-size:26px;margin:44px 0 14px;letter-spacing:-.3px}
+  h3{font-size:20px;margin:26px 0 8px}
+  p{margin:0 0 16px;color:var(--muted)}
+  .lead{font-size:19px;color:var(--fg)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;margin:16px 0}
+  ul,ol{margin:0 0 16px;padding-left:22px}
+  li{margin:4px 0;color:var(--muted)}
+  footer{border-top:1px solid var(--line);margin-top:48px;padding:28px 0 56px;font-size:14px;color:var(--muted)}
+  .small{font-size:14px}
+  .note{background:#eff6ff;border:1px solid #bfdbfe;color:#1e40af;border-radius:10px;padding:12px 16px;font-size:14px;margin:16px 0}
+  .related{background:#f7f9fc;border:1px solid var(--line);border-radius:14px;padding:18px 22px;margin:24px 0}
+  .related a{color:var(--brand);text-decoration:none}
+  .related a:hover{text-decoration:underline}
+  main a{color:var(--brand)}
+  .meta{font-size:14px;color:var(--muted)}
+  code{background:#f1f5f9;border:1px solid var(--line);border-radius:4px;padding:1px 5px;font-size:14px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="brand" href="/">Wiser Tools</a>
+    <span class="brand-tag">Honest, no-hype tool &amp; service reviews</span>
+    <a class="topbar-home" href="/">&larr; All categories</a>
+  </div>
+</div>
+
+<div class="disclosure neutral">
+  <strong>No affiliate links on this page.</strong> This page explains how the site works — nothing here earns us a commission.
+</div>
+
+<header class="wrap">
+  <p class="meta"><a href="/">Home</a> &rsaquo; About</p>
+  <h1>About Wiser Tools</h1>
+  <p class="lead">Wiser Tools compares managed WordPress hosting for people who already know they need it and now have to pick one. This page explains what we check, where the information comes from, and — just as importantly — what we don't do.</p>
+</header>
+
+<main class="wrap">
+
+  <h2>What this site is</h2>
+  <p>The hosting market doesn't have a shortage of "best hosting" lists. It has a shortage of lists that tell you which option fits <em>your</em> situation and where each one stops working.</p>
+  <p>So the comparison pages here are organised by the person buying, not by a ranking: agencies managing client sites, WooCommerce store owners, small businesses, and developers who want more control. Each host appears in the same four pages, but the recommendation changes with the reader — because that's the honest answer.</p>
+  <p>You will not find a single "overall winner" anywhere on this site. When a page has to give you one answer, that's usually a sign the page was written for a search engine rather than for you.</p>
+
+  <h2 id="method">How we evaluate hosting</h2>
+  <p>Every comparison is built from the same inputs, and the inputs are things you can check yourself:</p>
+  <ul>
+    <li><strong>Published plan documentation.</strong> Prices, visit limits, PHP worker counts, storage, staging, backup retention and migration terms, taken from each host's own site and help centre.</li>
+    <li><strong>Policy terms that cost you money later.</strong> Renewal pricing versus intro pricing, what happens when you exceed a visit limit (throttle or overage), refund windows, and whether backups or object cache are included or add-ons.</li>
+    <li><strong>Architecture, stated as architecture.</strong> Whether your site gets its own container, its own server, or a slice of a shared one — and what that means for uncached requests like WooCommerce checkout.</li>
+    <li><strong>Who the plan is wrong for.</strong> Every host in a comparison gets a "this is the wrong choice if…" note. Limits are more useful than adjectives.</li>
+  </ul>
+
+  <h2 id="limits">What we don't do</h2>
+  <p>This is the part most review sites leave out, and it's the part that matters when you're judging whether to trust a number:</p>
+  <div class="card">
+    <ul>
+      <li><strong>We don't run paid accounts on every host at once.</strong> We don't hold subscriptions with all the providers compared here, so we don't publish our own benchmark results. Where a figure would require us to have measured it, we say so and give you the documented spec or the architectural reason instead.</li>
+      <li><strong>We don't publish invented performance numbers.</strong> Published TTFB figures vary enormously with test location, theme, plugin stack and cache state. A millisecond number we can't reproduce is worse than no number, so we leave it out.</li>
+      <li><strong>We don't name a single winner</strong>, and we don't reorder a comparison because one host pays better than another.</li>
+      <li><strong>Nobody pays for inclusion.</strong> A host isn't in a comparison because of a commercial relationship; the four providers on this site are there because they cover the range from budget shared hosting to premium managed platforms.</li>
+    </ul>
+  </div>
+  <p>If a page here states something as a measurement, it will say who measured it and when. If it doesn't say that, treat it as a documented specification rather than a test result — that distinction is deliberate.</p>
+
+  <h2 id="funding">How this site is funded</h2>
+  <p>Some pages carry affiliate links: if you click one and later buy, the host pays us a commission, at no extra cost to you. Those links are always marked with <code>rel="sponsored"</code> and the pages that carry them say so near the top.</p>
+  <p>Commission rates differ between hosts — sometimes significantly. That's a real conflict of interest, and pretending otherwise would be dishonest, so here's how it's handled: <strong>commission rate has no effect on which host is recommended for which situation.</strong> The comparisons are organised around plan limits and pricing, and those are facts you can verify on the host's own site in a couple of minutes. If you ever find a recommendation here that you can't reproduce from the provider's published terms, the page is wrong and it will be corrected.</p>
+
+  <h2 id="updates">Corrections and keeping pages current</h2>
+  <p>Hosting plans, prices and limits change constantly, and a comparison that was accurate six months ago can be quietly wrong today. Pages are reviewed and updated on a rolling basis as providers change their plans. Anything that looks out of date almost certainly is — check the provider's own pricing page before you buy, which every comparison here also tells you to do.</p>
+
+  <div class="related">
+    <p><strong>Start here:</strong></p>
+    <p><a href="best-managed-wordpress-hosting">Best managed WordPress hosting compared</a> — the main comparison, organised by who each plan actually suits.</p>
+    <p><a href="wordpress-guides">WordPress guides</a> — troubleshooting and performance tutorials, with no affiliate links on any of them.</p>
+  </div>
+
+</main>
+
+<footer class="wrap">
+  <p><strong>Affiliate disclosure:</strong> Wiser Tools participates in affiliate programs for several of the services reviewed on this site. Some links are affiliate links, meaning we may receive a commission if you sign up — at no additional cost to you. This does not influence our comparisons. Affiliate links carry a <code>rel="sponsored"</code> attribute in line with Google's guidelines.</p>
+  <p class="small">Pricing and program terms change. Verify current details on each provider's official site before purchasing.</p>
+  <p class="small"><a href="about">About Wiser Tools &amp; how we evaluate</a></p>
+</footer>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "AboutPage",
+      "@id": "https://wiser-tools.com/about#page",
+      "url": "https://wiser-tools.com/about",
+      "name": "About Wiser Tools & How We Evaluate Hosting",
+      "description": "What Wiser Tools is, how we compare managed WordPress hosting, where our information comes from, and what we deliberately don't do.",
+      "inLanguage": "en",
+      "isPartOf": { "@id": "https://wiser-tools.com/#website" },
+      "about": { "@id": "https://wiser-tools.com/#organization" },
+      "dateModified": "2026-09-11"
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://wiser-tools.com/#organization",
+      "name": "Wiser Tools",
+      "url": "https://wiser-tools.com/",
+      "description": "Independent, research-based comparison site for managed WordPress hosting, organised by buyer situation rather than by a single ranked winner."
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://wiser-tools.com/" },
+        { "@type": "ListItem", "position": 2, "name": "About", "item": "https://wiser-tools.com/about" }
+      ]
+    }
+  ]
+}
+</script>
+
+</body>
+</html>
