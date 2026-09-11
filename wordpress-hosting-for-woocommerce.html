@@ -190,7 +190,7 @@
   <div class="note">
     <strong>Before you load-test:</strong> don't fire aggressive traffic at a host you don't have an account with, and check the acceptable-use policy of any host you're already on — some treat unannounced load testing as abuse and will throttle or suspend you. The safe path is to test inside your own money-back window on a staging clone, at modest concurrency, and to tell support what you're doing if you plan to push hard.
   </div>
-  <p>One more honest caveat: published benchmark numbers age badly. Hosts change infrastructure, plans, and PHP versions constantly, and a single-site test says more about that site's plugins than about the platform. Treat any third-party benchmark — including ours — as a starting hypothesis, then verify on your own store during the trial window.</p>
+  <p>One more honest caveat: published benchmark numbers age badly. Hosts change infrastructure, plans, and PHP versions constantly, and a single-site test says more about that site's plugins than about the platform. Treat any third-party benchmark as a starting hypothesis, then verify on your own store during the trial window.</p>
 
   <h2 id="kinsta">Kinsta for stores</h2>
   <p>Kinsta's container isolation keeps PHP workers dedicated to your site, so a traffic spike on a neighbor can't steal your checkout capacity. For stores, the relevant notes:</p>

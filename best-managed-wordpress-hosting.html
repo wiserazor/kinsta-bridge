@@ -261,8 +261,8 @@
   <p>A CDN (Cloudflare on Kinsta, Bunny or Cloudflare elsewhere) handles static assets close to the visitor, but the origin TTFB is the floor everything else builds on. Cheap hosting with a great CDN still has a slow floor.</p>
   <p>For WooCommerce and membership sites, the dynamic origin matters even more: cart and checkout pages can't be cached, so PHP workers and object cache (Redis) do the heavy lifting. This is where Kinsta's paid Redis add-on or Cloudways' built-in object cache become real differentiators, not marketing bullet points.</p>
 
-  <h2>Real-world comparison data</h2>
-  <p>Numbers beat adjectives. Here's how the five hosts compare on the metrics that actually affect your day-to-day:</p>
+  <h2>Side-by-side specs (from public plan docs)</h2>
+  <p>Numbers beat adjectives — but only numbers you can trust. Everything below comes from each host's <strong>published plan documentation</strong>, not from our own testing: we don't hold paid accounts with all five hosts, and we'd rather publish fewer figures than invent any. Where a number could only be produced by running the site ourselves, we say so instead of guessing.</p>
   <table>
     <thead>
       <tr>
@@ -284,12 +284,12 @@
         <td class="price">$3</td>
       </tr>
       <tr>
-        <td><strong>Typical TTFB (cached page)</strong></td>
-        <td>~150–250ms</td>
-        <td>~200–400ms</td>
-        <td>~180–300ms</td>
-        <td>~300–500ms</td>
-        <td>~250–450ms (Turbo)</td>
+        <td><strong>Dynamic-request headroom</strong></td>
+        <td>Own container, own CPU ceiling</td>
+        <td>Dedicated server for your apps</td>
+        <td>Shared container, isolated accounts</td>
+        <td>Shared across tenants</td>
+        <td>Shared across tenants (Turbo = LiteSpeed cache)</td>
       </tr>
       <tr>
         <td><strong>Site isolation</strong></td>
@@ -341,7 +341,7 @@
       </tr>
     </tbody>
   </table>
-  <p class="small">TTFB ranges are based on independent benchmarks and user reports; your mileage varies by location, theme, and plugins. Prices are monthly-billed entry tiers; annual billing typically saves 2 months.</p>
+  <p class="small">Figures above are list prices and documented features as published by each host — not measurements from our own testing. <strong>We deliberately don't publish TTFB numbers here:</strong> we haven't benchmarked these hosts ourselves, and third-party figures swing wildly with test location, theme, plugin stack and cache state, so any single millisecond number would mislead more than it helps. Use each host's money-back window and measure on your own site. Prices are monthly-billed entry tiers; annual billing typically saves two months.</p>
 
   <h2>How to choose: a decision framework</h2>
   <p>Forget "best overall." Ask these four questions in order, and the right host usually surfaces:</p>
@@ -385,7 +385,7 @@
   </div>
   <div class="faq">
     <h3>Which host is fastest?</h3>
-    <p>For cached pages, all five are competitive. For uncached/dynamic pages (logged-in users, WooCommerce checkout), Kinsta's container isolation typically delivers the most consistent TTFB under load. Cloudways can match it with proper server sizing. Budget shared hosts (SiteGround, hosting.com) slow down exactly when traffic peaks.</p>
+    <p>For cached pages all five land in the same ballpark, because the CDN is doing most of the work. The difference shows on uncached, dynamic requests (logged-in users, WooCommerce checkout): an isolated container or a dedicated server has its own CPU ceiling, while shared plans compete with other tenants for the same resources. That's an architectural expectation rather than a measurement — and at this level your plugin stack usually matters more than the host, so verify it on your own site during the trial window.</p>
   </div>
   <div class="faq">
     <h3>Can I run WooCommerce on these hosts?</h3>
@@ -468,7 +468,7 @@
     { "@type": "Question", "name": "What happens if I exceed visits?", "acceptedAnswer": { "@type": "Answer", "text": "On Kinsta and WP Engine, you're billed for overages and your site stays online. On SiteGround, heavy traffic may trigger throttling or a forced upgrade. Cloudways charges for bandwidth overages. hosting.com has soft limits on shared plans." } },
     { "@type": "Question", "name": "Do I need technical skills?", "acceptedAnswer": { "@type": "Answer", "text": "No for Kinsta, WP Engine, and SiteGround — everything is one-click. Cloudways requires more comfort with server concepts (choosing a cloud provider, vertical scaling). hosting.com's managed WP plans are beginner-friendly; their raw shared plans assume more DIY." } },
     { "@type": "Question", "name": "Is there a money-back guarantee?", "acceptedAnswer": { "@type": "Answer", "text": "Kinsta offers 30 days. WP Engine offers 60 days. SiteGround offers 30 days. hosting.com offers an anytime prorated refund. Cloudways offers a 3-day free trial instead of a traditional money-back period." } },
-    { "@type": "Question", "name": "Which host is fastest?", "acceptedAnswer": { "@type": "Answer", "text": "For cached pages, all five are competitive. For uncached/dynamic pages (logged-in users, WooCommerce checkout), Kinsta's container isolation typically delivers the most consistent TTFB under load. Cloudways can match it with proper server sizing. Budget shared hosts (SiteGround, hosting.com) slow down exactly when traffic peaks." } },
+    { "@type": "Question", "name": "Which host is fastest?", "acceptedAnswer": { "@type": "Answer", "text": "For cached pages all five land in the same ballpark, because the CDN is doing most of the work. The difference shows on uncached, dynamic requests (logged-in users, WooCommerce checkout): an isolated container or a dedicated server has its own CPU ceiling, while shared plans compete with other tenants for the same resources. That's an architectural expectation rather than a measurement — and at this level your plugin stack usually matters more than the host, so verify it on your own site during the trial window." } },
     { "@type": "Question", "name": "Can I run WooCommerce on these hosts?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, but object caching matters. Kinsta requires the $100/mo Redis add-on for busy stores. Cloudways includes Redis. WP Engine's EverCache handles WooCommerce well. SiteGround and hosting.com work for small stores but may strain under heavy logged-in traffic." } },
     { "@type": "Question", "name": "What about email hosting?", "acceptedAnswer": { "@type": "Answer", "text": "None of the five include email hosting. Kinsta, WP Engine, and Cloudways explicitly don't offer it — use Google Workspace or Microsoft 365. SiteGround and hosting.com offer basic email on shared plans, but it's not their strength." } }
   ]
