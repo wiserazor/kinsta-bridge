@@ -119,7 +119,7 @@
     <li><strong>Blank with a browser error like 500, 502, or 504</strong> &mdash; that's a server-level response, not purely a WordPress one. Check your host's error log; the fix may be outside WordPress entirely.</li>
     <li><strong>Blank on one page only</strong> &mdash; usually memory exhaustion or a bad query on that specific template, not a global breakage.</li>
   </ul>
-  <p>Open your browser's developer tools and reload. If the Network tab shows a 200 response with an empty body, it's a PHP fatal. If it shows a 5xx, start with the server.</p>
+  <p>Open your browser's developer tools and reload. If the Network tab shows a 200 response with an empty body, it's a PHP fatal. If it shows a 5xx, you're looking at a server or gateway problem rather than a WordPress one, and <a href="wordpress-site-down-diagnosis">our site-down guide</a> picks the diagnosis up from there.</p>
 
   <h2 id="backup">Back up before you touch anything</h2>
   <p>Everything below is safe when done in the right order, but "safe" and "impossible to make worse" aren't the same thing. Before you start, make sure you have a copy of two things: <strong>the database</strong> and <strong>the <code>wp-content</code> folder</strong>. Those two contain your entire site. The WordPress core files (<code>wp-admin</code> and <code>wp-includes</code>) can always be re-downloaded from wordpress.org, so don't panic about those.</p>
@@ -224,6 +224,7 @@ WHERE option_name IN ('template','stylesheet');</code></pre>
 
   <div class="related">
     <strong>Related on Wiser Tools</strong>
+    <p><a href="wordpress-site-down-diagnosis">The whole site is unreachable, not just blank</a> &mdash; Work outward from DNS and TLS to the server, CDN and database, with a status code table and what to send your host.</p>
         <p><a href="best-managed-wordpress-hosting">Which managed WordPress host fits you?</a> — Our full five-host comparison, matched to your situation rather than to a single winner.</p>
     <p><a href="wordpress-hosting-for-woocommerce">Managed hosting for WooCommerce stores</a> — What changes when the site takes money: checkout speed, object caching, safe update staging.</p>
   </div>

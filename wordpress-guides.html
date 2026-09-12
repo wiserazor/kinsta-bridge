@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>WordPress Guides — Speed, Fixes, Backups &amp; Migrations</title>
-<meta name="description" content="Practical WordPress guides on speed diagnosis, caching, the white screen of death, backups, zero-downtime migrations and PHP workers. No affiliate links, no fluff.">
+<meta name="description" content="Practical WordPress guides on speed diagnosis, downtime troubleshooting, caching, the white screen of death, backups, zero-downtime migrations and PHP workers. No affiliate links, no fluff.">
 <link rel="canonical" href="https://wiser-tools.com/wordpress-guides">
 <style>
   :root{
@@ -100,6 +100,10 @@
       <strong>The white screen of death</strong>
       <span>Surface the real error first, then rule out memory, plugins, theme and core files — in the order that actually finds the cause.</span>
     </a>
+    <a class="guide-card" href="wordpress-site-down-diagnosis">
+      <strong>Site down: find the cause</strong>
+      <span>Work out which layer actually broke — DNS, TLS, the server, the CDN or WordPress — and how to tell your host what you already ruled out.</span>
+    </a>
   </div>
 
   <h2>Speed &amp; performance</h2>
@@ -172,11 +176,11 @@
   "@context": "https://schema.org",
   "@type": "CollectionPage",
   "name": "WordPress Guides",
-  "description": "Practical WordPress guides on speed diagnosis, caching, troubleshooting, backups and migrations.",
+  "description": "Practical WordPress guides on speed diagnosis, downtime troubleshooting, caching, backups and migrations.",
   "url": "https://wiser-tools.com/wordpress-guides",
   "publisher": { "@type": "Organization", "name": "Wiser Tools", "url": "https://wiser-tools.com/" },
   "datePublished": "2026-09-05",
-  "dateModified": "2026-09-05",
+  "dateModified": "2026-09-12",
   "mainEntity": {
     "@type": "ItemList",
     "itemListElement": [
@@ -188,7 +192,8 @@
       { "@type": "ListItem", "position": 6, "name": "Move WordPress to a New Host Without Downtime", "url": "https://wiser-tools.com/move-wordpress-to-new-host-without-downtime" },
       { "@type": "ListItem", "position": 7, "name": "WordPress Staging Environments, Explained", "url": "https://wiser-tools.com/wordpress-staging-environments-explained" },
       { "@type": "ListItem", "position": 8, "name": "WordPress Database Optimization, Explained", "url": "https://wiser-tools.com/wordpress-database-optimization-explained" },
-      { "@type": "ListItem", "position": 9, "name": "WordPress & WooCommerce Accessibility: Avoid ADA Lawsuits", "url": "https://wiser-tools.com/wordpress-accessibility-ada-compliance" }
+      { "@type": "ListItem", "position": 9, "name": "WordPress & WooCommerce Accessibility: Avoid ADA Lawsuits", "url": "https://wiser-tools.com/wordpress-accessibility-ada-compliance" },
+      { "@type": "ListItem", "position": 10, "name": "WordPress Site Down: How to Diagnose It", "url": "https://wiser-tools.com/wordpress-site-down-diagnosis" }
     ]
   }
 }

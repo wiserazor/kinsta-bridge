@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WordPress Site Down: How to Diagnose It</title>
+<meta name="description" content="A layered guide to diagnosing a WordPress site that won't load: confirm the outage, then work outward from DNS and TLS to the server, CDN and PHP layer. Includes a status code reference table and what to send your host.">
+<link rel="canonical" href="https://wiser-tools.com/wordpress-site-down-diagnosis">
+<style>
+  :root{
+    --bg:#ffffff; --fg:#1a1a2e; --muted:#5b6472; --line:#e6e9ef;
+    --brand:#4a2cff; --brand-d:#3a1fd6; --accent:#0bbf8a; --warn:#d97706;
+    --card:#f7f9fc;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--fg);background:var(--bg);line-height:1.65;font-size:17px}
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px}
+  .topbar{background:#1a1a2e;color:#fff;padding:12px 0}
+  .topbar-inner{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .brand{font-weight:700;font-size:18px;letter-spacing:-.3px}
+  .brand-tag{font-size:13px;color:#a5b0c0}
+  a.brand{color:#fff;text-decoration:none}
+  a.brand:hover{text-decoration:underline}
+  .topbar-home{margin-left:auto;font-size:14px;color:#a5b0c0;text-decoration:none}
+  .topbar-home:hover{color:#fff;text-decoration:underline}
+  .disclosure{background:#fff7ed;border-bottom:1px solid #fed7aa;color:#7c2d12;font-size:14px;padding:10px 20px;text-align:center}
+  .disclosure.neutral{background:#f0fdf4;border-bottom:1px solid #bbf7d0;color:#166534}
+  header{padding:48px 0 24px}
+  h1{font-size:38px;line-height:1.2;margin:0 0 12px;letter-spacing:-.5px}
+  h2{font-size:26px;margin:44px 0 14px;letter-spacing:-.3px}
+  h3{font-size:20px;margin:26px 0 8px}
+  p{margin:0 0 16px;color:var(--muted)}
+  .lead{font-size:19px;color:var(--fg)}
+  table{width:100%;border-collapse:collapse;margin:18px 0;font-size:15px}
+  th,td{border:1px solid var(--line);padding:12px 14px;text-align:left;vertical-align:top}
+  th{background:var(--card);font-weight:600}
+  ul,ol{margin:0 0 16px;padding-left:22px}
+  li{margin:4px 0;color:var(--muted)}
+  .faq{margin:10px 0}
+  .faq h3{margin-bottom:4px}
+  footer{border-top:1px solid var(--line);margin-top:48px;padding:28px 0 56px;font-size:14px;color:var(--muted)}
+  .small{font-size:14px}
+  .note{background:#eff6ff;border:1px solid #bfdbfe;color:#1e40af;border-radius:10px;padding:12px 16px;font-size:14px;margin:16px 0}
+  .warn{background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;border-radius:10px;padding:12px 16px;font-size:15px;margin:16px 0}
+  .related{background:#f7f9fc;border:1px solid var(--line);border-radius:14px;padding:18px 22px;margin:24px 0}
+  .related a{color:var(--brand);text-decoration:none}
+  .related a:hover{text-decoration:underline}
+  .toc{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 22px;margin:20px 0}
+  .toc a{color:var(--brand);text-decoration:none}
+  .toc a:hover{text-decoration:underline}
+  .toc ol{margin:8px 0 0}
+  main a{color:var(--brand)}
+  code{background:#f1f5f9;border:1px solid var(--line);border-radius:4px;padding:1px 5px;font-size:14px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+  pre{background:#0f172a;color:#e2e8f0;border-radius:10px;padding:14px 16px;overflow-x:auto;font-size:14px;line-height:1.55;margin:14px 0}
+  pre code{background:none;border:0;padding:0;color:inherit;font-size:14px}
+  .step{background:#fff;border:1px solid var(--line);border-left:4px solid var(--brand);border-radius:10px;padding:16px 18px;margin:14px 0}
+  .step h3{margin-top:0}
+  .step p:last-child,.step ul:last-child,.step ol:last-child{margin-bottom:0}
+  .meta{font-size:14px;color:var(--muted)}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="brand" href="/">Wiser Tools</a>
+    <span class="brand-tag">Honest, no-hype tool &amp; service reviews</span>
+    <a class="topbar-home" href="/">&larr; All categories</a>
+  </div>
+</div>
+
+<div class="disclosure neutral">
+  <strong>No affiliate links on this page.</strong> This guide is purely instructional. We earn nothing from it. Other pages on this site do carry affiliate links, and they're always labelled.
+</div>
+
+<header class="wrap">
+  <p class="meta"><a href="/">Home</a> &rsaquo; <a href="wordpress-guides">WordPress Guides</a></p>
+  <h1>WordPress Site Down: How to Diagnose It</h1>
+  <p class="lead">Your site won't load. Before you open a support ticket or restore a backup, find out which layer is actually broken. A DNS failure and a database failure can look identical in the browser and have nothing in common underneath, so this guide works outward from the network towards WordPress, in the order that narrows it down fastest.</p>
+</header>
+
+<main class="wrap">
+
+  <div class="toc">
+    <strong>On this page:</strong>
+    <ol>
+      <li><a href="#kind">Work out which kind of "down" you have</a></li>
+      <li><a href="#yourself">Rule out your own connection first</a></li>
+      <li><a href="#dns">Layer 1: Does the domain resolve?</a></li>
+      <li><a href="#server">Layer 2: Is the server answering?</a></li>
+      <li><a href="#tls">Layer 3: Is the certificate valid?</a></li>
+      <li><a href="#gateway">Layer 4: Gateway errors (500, 502, 503, 504)</a></li>
+      <li><a href="#application">Layer 5: Is WordPress itself running?</a></li>
+      <li><a href="#codes">Status code reference table</a></li>
+      <li><a href="#support">Contacting your host with evidence</a></li>
+    </ol>
+  </div>
+
+  <h2 id="kind">Work out which kind of "down" you have</h2>
+  <p>"Down" covers several different failures, and the symptom is the fastest route to the layer. Open the site and note exactly what you see before you touch anything:</p>
+  <ul>
+    <li><strong>The browser can't connect at all</strong> ("This site can't be reached", "Server not found"): the name isn't resolving, or nothing is answering at the other end.</li>
+    <li><strong>A status code instead of your site</strong> (500, 502, 503, 504): the server is reachable and failing behind the front door.</li>
+    <li><strong>A certificate warning instead of your site</strong>: the site may be perfectly healthy and only TLS is broken.</li>
+    <li><strong>An unstyled page, or a redirect loop</strong>: WordPress is running, so the fault is inside the application layer.</li>
+    <li><strong>It loads for others but not for you</strong>: your network, your DNS cache, or a regional block. Not the server.</li>
+    <li><strong>The front end is fine but <code>/wp-admin</code> isn't</strong> (or the reverse): almost always application-level. A server problem takes down both.</li>
+  </ul>
+  <p>Also write down when it started and what changed just before. A site that broke minutes after a plugin update, a nameserver change, or a PHP version bump has already pointed at the answer.</p>
+
+  <h2 id="yourself">Rule out your own connection first</h2>
+  <p>Two minutes here can save an hour of server troubleshooting. The goal is to establish whether the site is down for everyone or only for you.</p>
+  <ul>
+    <li><strong>Try a different network.</strong> Mobile data instead of Wi-Fi, or the reverse.</li>
+    <li><strong>Check from outside your own network.</strong> Any multi-location uptime checker will tell you whether the failure is global. If a checker in three regions loads the page and you don't, the problem sits between you and the site.</li>
+    <li><strong>Flush your local DNS cache</strong>, because a cached record keeps sending you to an address that may no longer exist. On Windows, run <code>ipconfig /flushdns</code> in a command prompt. On macOS: <code>sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder</code>.</li>
+    <li><strong>Open an incognito window</strong> to rule out a cached response or an extension.</li>
+  </ul>
+  <div class="note"><strong>A regional network problem looks exactly like a server outage.</strong> If you sit behind a corporate network, a restrictive national firewall, or a VPN that has just changed exit node, the site can be perfectly healthy everywhere except from where you are. Cross-check from an external monitor before you email your host about an outage that isn't happening.</div>
+
+  <h2 id="dns">Layer 1: Does the domain resolve?</h2>
+  <p>Start at the outermost layer. Can the name be turned into an address?</p>
+  <pre><code>dig +short yourdomain.com
+dig +short NS yourdomain.com</code></pre>
+  <p>If <code>dig</code> isn't installed, <code>nslookup yourdomain.com</code> gives you the same answer on Windows.</p>
+  <p>What you're looking for:</p>
+  <ul>
+    <li><strong>No A record at all</strong>: the DNS zone is broken or the record was deleted. Nothing further down this page matters until that's fixed.</li>
+    <li><strong>An A record pointing somewhere unexpected</strong>: the domain may have been moved, or the DNS changed by someone else.</li>
+    <li><strong>NS records still pointing at the registrar's defaults</strong>: the host was never given authority over the zone, so whatever you configured in the hosting panel was never live.</li>
+    <li><strong>Correct records, but your browser disagrees</strong>: cached DNS, covered above.</li>
+  </ul>
+  <p>Two failures deserve a specific check because they present as "the host is down" when the host is fine:</p>
+  <ul>
+    <li><strong>An expired domain.</strong> If the registration lapsed, DNS stops resolving entirely and no amount of server troubleshooting will help. Check the expiry date at your registrar before going further.</li>
+    <li><strong>A recent DNS change.</strong> Records propagate according to their TTL, which ranges from five minutes to 48 hours. If you changed nameservers or an A record in the last day, you may simply be waiting. Our <a href="move-wordpress-to-new-host-without-downtime">migration guide</a> covers how to plan that window.</li>
+  </ul>
+  <p>You can also bypass DNS completely. If you know the server's IP address, request the site directly from it:</p>
+  <pre><code>curl -I https://SERVER_IP -H "Host: yourdomain.com" -k</code></pre>
+  <p>If that returns your site but the domain doesn't, the problem is DNS and not the server. That single test splits the whole investigation in two.</p>
+
+  <h2 id="server">Layer 2: Is the server answering?</h2>
+  <p>Next, check whether anything is listening. One command gives you both the status and the failure mode:</p>
+  <pre><code>curl -sS -o /dev/null -w "%{http_code}\n" https://yourdomain.com</code></pre>
+  <ul>
+    <li><strong>A number</strong> (200, 403, 500, 502): the server answered. Go to the layer that code belongs to.</li>
+    <li><strong>Connection refused</strong>: nothing is listening on that port. The web server is down, or the port is closed.</li>
+    <li><strong>Connection timed out</strong>: packets are going nowhere. Usually a firewall, a dead host, or a blocked IP.</li>
+    <li><strong>Could not resolve host</strong>: back to Layer 1.</li>
+  </ul>
+  <p>Then check the two things people forget, in this order:</p>
+  <ol>
+    <li><strong>Your host's status page.</strong> If it reports an ongoing incident, stop troubleshooting. Waiting is the fix, and nothing you change will help.</li>
+    <li><strong>Your account status in the hosting panel.</strong> This is the most common cause of a sudden, unexplained outage that has nothing to do with the server: a suspended account. Suspensions come from an expired card, a failed renewal, exceeded disk or bandwidth limits, or an abuse report. The server is perfectly healthy; your access to it isn't. Check billing and resource usage before anything else.</li>
+  </ol>
+  <p>Note that <code>ping</code> proves very little here. Many hosts block ICMP, so an unreachable ping alongside a working site is normal, and a successful ping says nothing about whether the web server is up.</p>
+
+  <h2 id="tls">Layer 3: Is the certificate valid?</h2>
+  <p>If the browser shows a warning page rather than your site ("Your connection is not private", <code>NET::ERR_CERT_DATE_INVALID</code>), the certificate is the problem. It's the most common cause at this layer and the easiest to confirm:</p>
+  <pre><code>echo | openssl s_client -connect yourdomain.com:443 -servername yourdomain.com 2>/dev/null | openssl x509 -noout -subject -dates</code></pre>
+  <p>That prints the name the certificate was issued for and its validity window. Two fields matter:</p>
+  <ul>
+    <li><strong><code>notAfter</code> in the past</strong>: expired. Automatic renewal failed at some point.</li>
+    <li><strong><code>subject</code> naming a different domain</strong>: the certificate doesn't cover the hostname being requested. This happens when a subdomain was added without a matching certificate, or when the host's temporary certificate is still in place.</li>
+  </ul>
+  <p>Free certificates renew automatically, and the usual reason they stop is a change that broke the validation method: DNS moved away from the provider, a proxy was switched on, or a <code>.well-known</code> path stopped being served. Reissuing from the hosting panel normally clears it.</p>
+  <p>One combination is worth recognising, because it sends people down the wrong path: if <code>http://</code> loads and <code>https://</code> doesn't, the site itself is fine and only TLS is broken. Don't go looking for a database problem.</p>
+
+  <h2 id="gateway">Layer 4: Gateway errors (500, 502, 503, 504)</h2>
+  <p>The server is reachable and TLS works, but the response is an error. This is the layer where the request arrives and the thing behind it doesn't answer:</p>
+  <ul>
+    <li><strong>502 Bad Gateway</strong>: the web server asked PHP for a response and got nothing valid back. A crashed or exhausted PHP process pool is the usual cause.</li>
+    <li><strong>503 Service Unavailable</strong>: the server is deliberately refusing traffic, whether from overload, maintenance mode, or a resource limit being enforced.</li>
+    <li><strong>504 Gateway Timeout</strong>: PHP accepted the request and then took too long. Something in the stack is hanging, often a plugin waiting on an external API or an unbounded query.</li>
+    <li><strong>500 Internal Server Error</strong>: most often a fatal PHP error or a broken <code>.htaccess</code>. A 500 is usually the same underlying problem as a blank page, with the error finally surfacing. Our <a href="fix-wordpress-white-screen-of-death">white screen guide</a> covers that diagnosis step by step.</li>
+  </ul>
+  <p>If a CDN or proxy sits in front of your site, add one more possibility: the CDN is up and your origin server is not. CDN error codes name this precisely (521, 522, 524, 525 and 526 at Cloudflare), and they all mean the same thing, namely that the edge could not get a valid answer from the origin.</p>
+  <p>Two checks are worth running at this layer:</p>
+  <ul>
+    <li><strong>Read the error log.</strong> A 502 accompanied by <code>Max children reached</code>, or a 500 followed by <code>Allowed memory size exhausted</code>, is a specific and fixable problem rather than a mystery. When something is down, the error log is the highest-value file on the server.</li>
+    <li><strong>Look at resource usage.</strong> If the outage coincides with a traffic spike, PHP workers or database connections may have been exhausted rather than broken. Our <a href="wordpress-php-workers-explained">PHP workers guide</a> explains why that shows up as a wall rather than a gradual slowdown.</li>
+  </ul>
+
+  <h2 id="application">Layer 5: Is WordPress itself running?</h2>
+  <p>Everything above can be healthy while WordPress itself is broken. Two failure modes account for most of it.</p>
+  <p><strong>"Error establishing a database connection"</strong> means PHP is running and reached the database step. Check in this order: the credentials in <code>wp-config.php</code>, whether the database server itself is up, and whether the connection limit has been reached. On managed hosting the second and third are your host's side of the fence, but verifying the first takes a minute and rules out the most common cause, which is a hostname or password that changed during a migration.</p>
+  <p><strong>A blank page or a partial load</strong> means PHP is failing inside WordPress. That is the white screen guide's territory, and the diagnosis there starts by making WordPress write the fatal error to a log instead of hiding it.</p>
+  <p>Three further checks are worth running when the failure has no obvious pattern:</p>
+  <ul>
+    <li><strong><code>.htaccess</code>.</strong> A single bad line breaks the whole site, and an interrupted write leaves the file truncated. Renaming it to <code>.htaccess.bak</code> tests this in seconds on Apache. If the site comes back, that file was the problem.</li>
+    <li><strong>The active theme.</strong> A fatal error in a theme takes down the front end while leaving <code>wp-admin</code> reachable, which is a useful clue in itself.</li>
+    <li><strong>PHP version.</strong> A site that broke immediately after a PHP upgrade is almost always running code that calls a function the new version removed.</li>
+  </ul>
+  <div class="warn"><strong>Take a backup before you start changing files.</strong> You need the database and <code>wp-content</code>, and those two contain your entire site. If you can't reach <code>wp-admin</code>, pull the copy through your host's file manager or over SFTP. Our <a href="wordpress-backup-strategies-explained">backup guide</a> explains why a host snapshot is usually the fastest route back.</div>
+
+  <h2 id="codes">Status code reference table</h2>
+  <p>When you want to skip to the answer, match what you see:</p>
+  <table>
+    <thead>
+      <tr><th>What you see</th><th>Layer</th><th>Usual cause</th><th>First move</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>"Server not found", can't resolve</td><td>DNS</td><td>Zone broken, domain expired, NS never set</td><td><code>dig</code> the domain; check expiry at the registrar</td></tr>
+      <tr><td>Connection refused</td><td>Server</td><td>Web server not running, port closed</td><td>Check the host's status page</td></tr>
+      <tr><td>Connection timed out</td><td>Server / network</td><td>Firewall, dead host, blocked IP</td><td>Check status page, then account status</td></tr>
+      <tr><td>Certificate warning</td><td>TLS</td><td>Expired or mismatched certificate</td><td>Reissue the certificate</td></tr>
+      <tr><td>403 Forbidden</td><td>Server / WAF</td><td>Firewall or CDN rule, file permissions</td><td>Review security rules, then permissions</td></tr>
+      <tr><td>404 on every URL</td><td>Server</td><td>Document root points at the wrong folder</td><td>Confirm the domain's web root</td></tr>
+      <tr><td>500</td><td>Application</td><td>PHP fatal error, broken <code>.htaccess</code></td><td>Read the error log</td></tr>
+      <tr><td>502</td><td>Gateway</td><td>PHP pool down or exhausted</td><td>Restart PHP; check worker usage</td></tr>
+      <tr><td>503</td><td>Server</td><td>Overload, maintenance mode, resource cap</td><td>Check resource usage and maintenance plugins</td></tr>
+      <tr><td>504</td><td>Gateway</td><td>A script is hanging</td><td>Identify the slow plugin</td></tr>
+      <tr><td>521 / 522 / 524</td><td>CDN to origin</td><td>Origin unreachable or too slow</td><td>Check the origin server itself</td></tr>
+      <tr><td>525 / 526</td><td>CDN TLS</td><td>Invalid certificate on the origin</td><td>Reinstall the origin certificate</td></tr>
+      <tr><td>"Error establishing a database connection"</td><td>Application</td><td>Credentials, database server down, connection limit</td><td>Verify <code>wp-config.php</code>, then ask the host</td></tr>
+      <tr><td>Blank page with a 200 status</td><td>Application</td><td>A suppressed PHP fatal error</td><td>Enable debug logging</td></tr>
+    </tbody>
+  </table>
+
+  <h2 id="support">Contacting your host with evidence</h2>
+  <p>Once DNS resolves, an external checker agrees the site is down, and the server returns a 5xx, the problem is on your host's side. That is the point at which a support ticket is the right move, and the quality of the ticket decides how quickly it gets solved.</p>
+  <p>Send this:</p>
+  <ul>
+    <li>the domain name and the exact time the problem started, with your timezone</li>
+    <li>what you see, described in the browser's own words</li>
+    <li>the output of the status code check above</li>
+    <li>anything relevant from the error log</li>
+    <li>what you have already ruled out</li>
+  </ul>
+  <p>A ticket that says "my site is down, please fix" gets a reply asking for information. A ticket that says "example.com has returned 502 since 14:20 UTC, DNS resolves correctly, an external checker confirms the failure from three regions, and the error log shows <code>Max children reached</code>" gets an engineer.</p>
+  <p>That difference is also a fair way to judge a provider. Every host goes down occasionally, and what separates them is whether support reads the ticket and answers with something specific, or replies with a template asking you to clear your cache. If you are comparing hosts, look at how each one describes its own incident response before you need it, not after. Our <a href="best-managed-wordpress-hosting">hosting comparison</a> covers that alongside the specifications.</p>
+
+  <h2 id="faq">FAQ</h2>
+  <div class="faq">
+    <h3>How do I tell whether the problem is my host or my WordPress site?</h3>
+    <p>Use the status code as the dividing line. Connection failures and gateway errors (502, 503, 504) belong to the host's infrastructure. A page that returns 200 but renders blank, or a site that loads with database errors, belongs to WordPress. If external checkers in several regions can't reach the site at all, the problem is on the host's side regardless of what WordPress is doing.</p>
+  </div>
+  <div class="faq">
+    <h3>Why does my site load for everyone except me?</h3>
+    <p>Almost always something local: a cached DNS record, a cached browser response, a VPN exit node, or a network-level block. Flush the DNS cache, try a different network, and check the site from an external monitor. If the monitor sees the site, the site is up and the problem is on your side of the connection.</p>
+  </div>
+  <div class="faq">
+    <h3>How long does DNS propagation actually take?</h3>
+    <p>It follows the TTL on the record you changed, not a fixed schedule. Anywhere from five minutes to 48 hours is realistic. The standard way to make a planned change fast is to lower the TTL a day in advance, so the old record expires quickly once you switch.</p>
+  </div>
+  <div class="faq">
+    <h3>Can a single plugin take the whole site down?</h3>
+    <p>Yes. A fatal error in a plugin takes down every page that loads it, which on most sites is all of them. The tell is that deactivating plugins brings the site back immediately. If you can't reach <code>wp-admin</code>, you can deactivate them externally by renaming the plugins folder over SFTP, which the white screen guide covers in detail.</p>
+  </div>
+  <div class="faq">
+    <h3>What's the difference between a 502 and a 504?</h3>
+    <p>A 502 means the web server asked PHP for a response and got nothing valid back. A 504 means PHP accepted the request and never finished in time. Both point at the PHP layer, but a 504 usually means something is slow rather than dead, which is why it often turns out to be a plugin waiting on an external service.</p>
+  </div>
+  <div class="faq">
+    <h3>My site went down right after I changed the nameservers. Is it broken?</h3>
+    <p>Probably not. That's expected propagation. Confirm the records are correct at the new provider, wait out the TTL, and resist the temptation to change something else while you wait. Changing things twice during propagation is how a routine migration turns into a genuine outage.</p>
+  </div>
+
+  <div class="related">
+    <strong>Related on Wiser Tools</strong>
+    <p><a href="fix-wordpress-white-screen-of-death">Fix the white screen of death</a> &mdash; for a site that loads but shows nothing: how to surface a suppressed PHP fatal error and trace it to a plugin, theme or memory limit.</p>
+    <p><a href="wordpress-backup-strategies-explained">Backup strategies that actually restore</a> &mdash; what to copy before you change anything, and why a host snapshot is the fastest way back from a broken deploy.</p>
+    <p><a href="move-wordpress-to-new-host-without-downtime">Move host without downtime</a> &mdash; lowering TTL, handling serialized URLs, and avoiding the email trap during a migration.</p>
+    <p><a href="wordpress-php-workers-explained">PHP workers, explained</a> &mdash; why an overloaded site returns 502 rather than slowing down gradually.</p>
+  </div>
+
+</main>
+
+<footer class="wrap">
+  <p><strong>About this guide:</strong> Wiser Tools publishes practical WordPress guides alongside its hosting comparisons. This page contains no affiliate links and no sponsored recommendations. Our hosting comparison pages do carry affiliate links, which are marked with a <code>rel="sponsored"</code> attribute and disclosed at the top of each page.</p>
+  <p class="small">WordPress, plugin and hosting details change over time. Verify current requirements and pricing on each vendor's official site before making changes to a live site. Last reviewed: September 2026.</p>
+  <p class="small"><a href="about">About Wiser Tools &amp; how we evaluate</a></p>
+</footer>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Wiser Tools",
+  "url": "https://wiser-tools.com/",
+  "description": "Independent, research-based comparisons of managed hosting, SaaS tools, and developer services.",
+  "publisher": { "@type": "Organization", "name": "Wiser Tools", "url": "https://wiser-tools.com/" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "WordPress Site Down: How to Diagnose It",
+  "description": "A layered guide to diagnosing a WordPress site that won't load: confirm the outage, then work outward from DNS and TLS to the server, CDN and PHP layer. Includes a status code reference table and what to send your host.",
+  "author": { "@type": "Organization", "name": "Wiser Tools" },
+  "publisher": { "@type": "Organization", "name": "Wiser Tools", "url": "https://wiser-tools.com/" },
+  "datePublished": "2026-09-12",
+  "dateModified": "2026-09-12",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://wiser-tools.com/wordpress-site-down-diagnosis" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://wiser-tools.com/" },
+    { "@type": "ListItem", "position": 2, "name": "WordPress Guides", "item": "https://wiser-tools.com/wordpress-guides" },
+    { "@type": "ListItem", "position": 3, "name": "WordPress Site Down: How to Diagnose It", "item": "https://wiser-tools.com/wordpress-site-down-diagnosis" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "How do I tell whether the problem is my host or my WordPress site?", "acceptedAnswer": { "@type": "Answer", "text": "Use the status code as the dividing line. Connection failures and gateway errors (502, 503, 504) belong to the host's infrastructure. A page that returns 200 but renders blank, or a site that loads with database errors, belongs to WordPress. If external checkers in several regions can't reach the site at all, the problem is on the host's side regardless of what WordPress is doing." } },
+    { "@type": "Question", "name": "Why does my site load for everyone except me?", "acceptedAnswer": { "@type": "Answer", "text": "Almost always something local: a cached DNS record, a cached browser response, a VPN exit node, or a network-level block. Flush the DNS cache, try a different network, and check the site from an external monitor. If the monitor sees the site, the site is up and the problem is on your side of the connection." } },
+    { "@type": "Question", "name": "How long does DNS propagation actually take?", "acceptedAnswer": { "@type": "Answer", "text": "It follows the TTL on the record you changed, not a fixed schedule. Anywhere from five minutes to 48 hours is realistic. The standard way to make a planned change fast is to lower the TTL a day in advance, so the old record expires quickly once you switch." } },
+    { "@type": "Question", "name": "Can a single plugin take the whole site down?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. A fatal error in a plugin takes down every page that loads it, which on most sites is all of them. The tell is that deactivating plugins brings the site back immediately. If you can't reach wp-admin, you can deactivate them externally by renaming the plugins folder over SFTP." } },
+    { "@type": "Question", "name": "What's the difference between a 502 and a 504?", "acceptedAnswer": { "@type": "Answer", "text": "A 502 means the web server asked PHP for a response and got nothing valid back. A 504 means PHP accepted the request and never finished in time. Both point at the PHP layer, but a 504 usually means something is slow rather than dead, which is why it often turns out to be a plugin waiting on an external service." } },
+    { "@type": "Question", "name": "My site went down right after I changed the nameservers. Is it broken?", "acceptedAnswer": { "@type": "Answer", "text": "Probably not. That's expected propagation. Confirm the records are correct at the new provider, wait out the TTL, and resist the temptation to change something else while you wait. Changing things twice during propagation is how a routine migration turns into a genuine outage." } }
+  ]
+}
+</script>
+
+</body>
+</html>
