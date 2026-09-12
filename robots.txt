@@ -21,6 +21,12 @@ Allow: /
 User-agent: Perplexity-User
 Allow: /
 
+User-agent: MistralAI-User
+Allow: /
+
+User-agent: DuckAssistBot
+Allow: /
+
 # Training and data-collection crawlers - not allowed: they take content, refer no one
 User-agent: GPTBot
 Disallow: /
@@ -46,13 +52,22 @@ Disallow: /
 User-agent: cohere-ai
 Disallow: /
 
+User-agent: OmgiliBot
+Disallow: /
+
+User-agent: Diffbot
+Disallow: /
+
+User-agent: ImagesiftBot
+Disallow: /
+
+User-agent: Timpibot
+Disallow: /
+
 User-agent: Google-Extended
 Disallow: /
 
 User-agent: Applebot-Extended
-Disallow: /
-
-User-agent: OmgiliBot
 Disallow: /
 
 Sitemap: https://wiser-tools.com/sitemap.xml
