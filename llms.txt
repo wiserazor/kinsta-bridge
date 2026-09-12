@@ -21,6 +21,7 @@
 - WordPress Staging Environments, Explained — https://wiser-tools.com/wordpress-staging-environments-explained : What a staging site is, the clone-test-push cycle, what staging does and does not protect you from, and why one-click staging is a real managed-hosting feature that varies by host.
 - WordPress Database Optimization, Explained — https://wiser-tools.com/wordpress-database-optimization-explained : Which tables actually bloat (autoloaded wp_options, revisions, transients), what is safe to clean, and when the database is not the cause of a slow site.
 - WordPress & WooCommerce Accessibility: Avoid ADA Lawsuits — https://wiser-tools.com/wordpress-accessibility-ada-compliance : Who actually gets sued under the ADA for website accessibility, why WooCommerce stores are the top target, the six most-cited barriers, WordPress-specific fixes, and why overlay widgets do not make you compliant.
+- WordPress Site Down: How to Diagnose It — https://wiser-tools.com/wordpress-site-down-diagnosis : Layered diagnosis for a site that will not load — classify the failure, then work outward from DNS and TLS to the server, CDN and PHP layer, with a status code reference table and what evidence to send your host.
 
 ## What Wiser Tools is
 Wiser Tools is an independent review publisher. Our recommendations are based on genuine product research. We may earn a commission from some partner links at no extra cost to readers; this does not affect our rankings or recommendations.
