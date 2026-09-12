@@ -1,29 +1,58 @@
 User-agent: *
 Allow: /
 
-# Allow AI search engines to index and cite this site (GEO / AEO)
-User-agent: GPTBot
+# AI search indexers - allowed: they cite this site and link back
+User-agent: OAI-SearchBot
 Allow: /
 
-User-agent: ChatGPT-User
-Allow: /
-
-User-agent: ClaudeBot
-Allow: /
-
-User-agent: Google-Extended
+User-agent: Claude-SearchBot
 Allow: /
 
 User-agent: PerplexityBot
 Allow: /
 
-User-agent: OmgiliBot
+# User-triggered agents - allowed: a real person asked an AI about this page
+User-agent: ChatGPT-User
 Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# Training and data-collection crawlers - not allowed: they take content, refer no one
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
 
 User-agent: CCBot
-Allow: /
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: meta-externalagent
+Disallow: /
+
+User-agent: Amazonbot
+Disallow: /
+
+User-agent: cohere-ai
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
 
 User-agent: Applebot-Extended
-Allow: /
+Disallow: /
+
+User-agent: OmgiliBot
+Disallow: /
 
 Sitemap: https://wiser-tools.com/sitemap.xml
