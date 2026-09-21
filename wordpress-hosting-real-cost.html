@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What WordPress Hosting Really Costs in 2026 — Intro Price vs Renewal</title>
+<meta name="description" content="Hosting adverts show the first-term price. Here is what five hosts actually charge after the discount ends: year-one cost, renewal rate, and three-year total — with a calculator.">
+<link rel="canonical" href="https://wiser-tools.com/wordpress-hosting-real-cost">
+<style>
+  :root{
+    --bg:#ffffff; --fg:#1a1a2e; --muted:#5b6472; --line:#e6e9ef;
+    --brand:#4a2cff; --brand-d:#3a1fd6; --accent:#0bbf8a; --warn:#d97706;
+    --card:#f7f9fc;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--fg);background:var(--bg);line-height:1.65;font-size:17px}
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px}
+  .topbar{background:#1a1a2e;color:#fff;padding:12px 0}
+  .topbar-inner{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .brand{font-weight:700;font-size:18px;letter-spacing:-.3px}
+  .brand-tag{font-size:13px;color:#a5b0c0}
+  a.brand{color:#fff;text-decoration:none}
+  a.brand:hover{text-decoration:underline}
+  .topbar-home{margin-left:auto;font-size:14px;color:#a5b0c0;text-decoration:none}
+  .topbar-home:hover{color:#fff;text-decoration:underline}
+  .disclosure{background:#fff7ed;border-bottom:1px solid #fed7aa;color:#7c2d12;font-size:14px;padding:10px 20px;text-align:center}
+  header{padding:48px 0 24px}
+  h1{font-size:38px;line-height:1.2;margin:0 0 12px;letter-spacing:-.5px}
+  h2{font-size:26px;margin:44px 0 14px;letter-spacing:-.3px}
+  h3{font-size:20px;margin:26px 0 8px}
+  p{margin:0 0 16px;color:var(--muted)}
+  .lead{font-size:19px;color:var(--fg)}
+  a.cta{display:inline-block;background:var(--brand);color:#fff;text-decoration:none;padding:12px 22px;border-radius:10px;font-weight:600;transition:.15s}
+  a.cta:hover{background:var(--brand-d)}
+  a.cta.green{background:var(--accent)}
+  a.cta.green:hover{filter:brightness(.95)}
+  .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:14px}
+  table{width:100%;border-collapse:collapse;margin:18px 0;font-size:15px}
+  th,td{border:1px solid var(--line);padding:12px 14px;text-align:left;vertical-align:top}
+  th{background:var(--card);font-weight:600}
+  td.price{font-weight:700;color:var(--fg)}
+  td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
+  .pick{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:14px;padding:22px;margin:22px 0}
+  .pick .tag{display:inline-block;background:var(--accent);color:#fff;font-size:12px;font-weight:700;padding:3px 10px;border-radius:20px;letter-spacing:.4px;text-transform:uppercase}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;margin:16px 0}
+  .pros{color:#047857}.cons{color:#b91c1c}
+  ul{margin:0 0 16px;padding-left:22px}
+  li{margin:4px 0;color:var(--muted)}
+  .faq{margin:10px 0}
+  .faq h3{margin-bottom:4px}
+  footer{border-top:1px solid var(--line);margin-top:48px;padding:28px 0 56px;font-size:14px;color:var(--muted)}
+  .small{font-size:14px}
+  .note{background:#eff6ff;border:1px solid #bfdbfe;color:#1e40af;border-radius:10px;padding:12px 16px;font-size:14px;margin:16px 0}
+  .related{background:#f7f9fc;border:1px solid var(--line);border-radius:14px;padding:18px 22px;margin:24px 0}
+  .related a{color:var(--brand);text-decoration:none}
+  .related a:hover{text-decoration:underline}
+  .toc{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 22px;margin:20px 0}
+  .toc a{color:var(--brand);text-decoration:none}
+  .toc a:hover{text-decoration:underline}
+  /* calculator */
+  .calc{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px;margin:20px 0}
+  .calc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin:14px 0 6px}
+  .calc label{display:block;font-size:13px;font-weight:600;color:var(--fg);margin-bottom:5px}
+  .calc select,.calc input{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:9px;font-size:15px;background:#fff;color:var(--fg);font-family:inherit}
+  .calc-out{background:#fff;border:1px dashed var(--line);border-radius:12px;padding:18px;margin-top:14px}
+  .calc-total{font-size:30px;font-weight:700;color:var(--fg);letter-spacing:-.5px;display:block;margin:2px 0 6px}
+  .calc-row{display:flex;justify-content:space-between;gap:12px;font-size:14px;border-bottom:1px dotted var(--line);padding:6px 0}
+  .calc-row:last-child{border-bottom:0}
+  .calc-row span:first-child{color:var(--muted)}
+  .calc-row span:last-child{font-variant-numeric:tabular-nums;font-weight:600}
+  .calc-warn{color:#b45309;font-size:14px;margin:10px 0 0}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="brand" href="/">Wiser Tools</a>
+    <span class="brand-tag">Honest, no-hype tool &amp; service reviews</span>
+    <a class="topbar-home" href="/">&larr; All categories</a>
+  </div>
+</div>
+
+<div class="disclosure">
+  <strong>Disclosure:</strong> This page contains affiliate links. If you click through and purchase a hosting plan, Wiser Tools may earn a commission — at no extra cost to you. We only recommend hosts we have genuinely researched.
+</div>
+
+<header class="wrap">
+  <h1>What WordPress Hosting Really Costs</h1>
+  <p class="lead">Every hosting advert quotes the cheapest month of the cheapest term. The number that decides your budget is the one printed underneath in smaller type: the renewal rate. This page puts both side by side for five hosts, then rolls them into three-year totals — because "cheap" and "not expensive over time" are two different questions.</p>
+  <a class="cta" href="#calculator">Run the numbers for your plan →</a>
+</header>
+
+<main class="wrap">
+
+  <div class="toc">
+    <strong>On this page:</strong>
+    <ul style="margin:8px 0 0">
+      <li><a href="#compare">The three-year cost table</a></li>
+      <li><a href="#calculator">Cost calculator</a></li>
+      <li><a href="#mechanics">Why the price "changes" after year one</a></li>
+      <li><a href="#read">How to read a hosting price page</a></li>
+      <li><a href="#hostingcom">hosting.com — the cheapest entry, and it tells you the renewal</a></li>
+      <li><a href="#cloudways">Cloudways — no discount, no jump</a></li>
+      <li><a href="#kinsta">Kinsta — ten months for twelve</a></li>
+      <li><a href="#wpengine">WP Engine — the renewal it doesn't publish</a></li>
+      <li><a href="#siteground">SiteGround — the classic sixfold renewal</a></li>
+      <li><a href="#payless">Four ways to pay less without switching hosts</a></li>
+      <li><a href="#pick">Which one to pick, by situation</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+  </div>
+
+  <h2 id="compare">The three-year cost table</h2>
+  <p>Hosts advertise a first-term price that expires; almost none advertise the total you'll have paid by year three. The table below uses each host's own published numbers, taken from its pricing page on 2026-09-21, and assumes you stay on the same entry plan. Entry plans differ in capacity, so the specs column matters as much as the price — a $4.49 plan and an $11 plan are not the same product.</p>
+  <p>Prices and features change. Pricing checked 2026-09-21 — verify current details on each host's official site before purchasing.</p>
+  <table>
+    <thead>
+      <tr>
+        <th>Host &amp; entry plan</th>
+        <th>What you get</th>
+        <th>Year 1</th>
+        <th>From year 2</th>
+        <th>3-year total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>hosting.com</strong><br>Small</td>
+        <td>1 install · 30,000 visitors · 20 GB NVMe · 100 GB bandwidth</td>
+        <td class="num">$53.87<br><span class="small">yearly prepay</span></td>
+        <td class="num">$9.99/mo<br><span class="small">$119.88 per year</span></td>
+        <td class="price num">$293.63</td>
+      </tr>
+      <tr>
+        <td><strong>Cloudways</strong><br>2 GB (DigitalOcean)</td>
+        <td>1 vCPU · 50 GB storage · 2 TB bandwidth · unlimited sites</td>
+        <td class="num">$132.00<br><span class="small">$11/mo, no prepay</span></td>
+        <td class="num">$11/mo<br><span class="small">unchanged</span></td>
+        <td class="price num">$396.00</td>
+      </tr>
+      <tr>
+        <td><strong>SiteGround</strong><br>StartUp</td>
+        <td>1 site · 10 GB storage · CDN, SSL, email included</td>
+        <td class="num">$35.88<br><span class="small">yearly prepay</span></td>
+        <td class="num">$17.99/mo<br><span class="small">$215.88 per year</span></td>
+        <td class="price num">$467.64</td>
+      </tr>
+      <tr>
+        <td><strong>hosting.com</strong><br>Medium</td>
+        <td>5 installs · 120,000 visitors · 50 GB NVMe · 300 GB bandwidth</td>
+        <td class="num">$59.89<br><span class="small">yearly prepay</span></td>
+        <td class="num">$17.99/mo<br><span class="small">$215.88 per year</span></td>
+        <td class="price num">$491.65</td>
+      </tr>
+      <tr>
+        <td><strong>Kinsta</strong><br>Launch</td>
+        <td>1 install · 75,000 visits · 15 GB storage · 15 GB bandwidth</td>
+        <td class="num">$350.00<br><span class="small">annual billing</span></td>
+        <td class="num">$350 per year<br><span class="small">unchanged</span></td>
+        <td class="price num">$1,050.00</td>
+      </tr>
+      <tr>
+        <td><strong>WP Engine</strong><br>Essential</td>
+        <td>1 site · additional sites $20/mo each</td>
+        <td class="num">$336.00<br><span class="small">annual billing</span></td>
+        <td class="num">not published<br><span class="small">"subject to change"</span></td>
+        <td class="price num">unknown</td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="small">Totals assume no overages from extra visits, bandwidth or add-ons, no tax, and no price changes. All five have changed plan names, prices or billing terms at least once in the last year, so treat the table as a starting point, not a quote.</p>
+
+  <div class="note">
+    <strong>The short version:</strong> two of these five plan lines can produce a three-year total under $500, and they get there in opposite ways. hosting.com buys it with the steepest first-year discount and a moderate renewal; Cloudways buys it by never discounting at all. SiteGround's entry plan looks cheapest in month one and costs more than both by year three, because its renewal is six times its intro rate. Kinsta simply starts high. WP Engine can't be ranked, because it doesn't publish what the second year costs.
+  </div>
+
+  <h2 id="calculator">Cost calculator</h2>
+  <p>Pick a host, a plan and a term, and see the total for the period you expect to stay. The figures are the published rates from 2026-09-21; the point of the calculator is the shape of the curve — a jump after year one is a very different commitment from a flat rate.</p>
+  <div class="calc">
+    <div class="calc-grid">
+      <div>
+        <label for="c-host">Host</label>
+        <select id="c-host"></select>
+      </div>
+      <div>
+        <label for="c-plan">Plan</label>
+        <select id="c-plan"></select>
+      </div>
+      <div>
+        <label for="c-term">Billing term</label>
+        <select id="c-term">
+          <option value="annual">Prepaid year (discounted term)</option>
+          <option value="monthly">Monthly, no prepay</option>
+        </select>
+      </div>
+      <div>
+        <label for="c-years">Years you stay</label>
+        <input id="c-years" type="number" min="1" max="5" step="1" value="3" inputmode="numeric">
+      </div>
+    </div>
+    <div class="calc-out" id="c-out" aria-live="polite"></div>
+    <p class="calc-warn" id="c-warn" hidden></p>
+    <p class="small">Assumes one plan, unchanged capacity, no add-ons, no tax, no overage. Where a host only publishes a first-year rate, the total for later years is unknown and the calculator says so rather than guessing.</p>
+  </div>
+  <noscript><p class="small">The calculator needs JavaScript. The static table above carries the same numbers.</p></noscript>
+
+  <h2 id="mechanics">Why the price "changes" after year one</h2>
+  <p>None of this is a trick exactly, but it is designed to be skimmed past. Four mechanisms do most of the work:</p>
+  <ul>
+    <li><strong>The first-term discount.</strong> SiteGround's entry plan is advertised at 83% off; hosting.com's is 55% to 72% off depending on tier. The crossed-out number is not a competitor's price — it is the same host's standard rate.</li>
+    <li><strong>The prepay requirement.</strong> The discount is attached to a twelve-month term paid upfront. SiteGround and hosting.com both work this way, so the cheap month is really a cheap year you pay in one go.</li>
+    <li><strong>Renewal equals the standard rate.</strong> On hosting.com the monthly rate and the renewal rate are literally the same number ($9.99 / $17.99 / $25.99 / $34.99), which is unusually transparent. On SiteGround the intro rate expires and the standard rate takes over ($2.99 becomes $17.99).</li>
+    <li><strong>Annual billing as a standing discount.</strong> Kinsta charges ten months for a twelve-month term, and that stays true at renewal. WP Engine discounts annual billing by 20% on its entry tier, but its headline price applies to new customers in year one only.</li>
+  </ul>
+  <p>The hosts with no discount at all — Cloudways and, at the annual rate, Kinsta — look expensive in month one and predictable in month thirteen. That predictability is a feature you can price: over three years, Kinsta's Launch tier costs $1,050 with no surprises, while SiteGround's entry tier costs $467.64 and hosting.com's Small costs $293.63. Whether the difference is worth it depends on what the site earns, which is the next section's job.</p>
+
+  <h2 id="read">How to read a hosting price page</h2>
+  <p>Five checks turn a pricing page into a number you can budget against:</p>
+  <ul>
+    <li><strong>Match the toggle to your term.</strong> Annual and monthly views show different prices, and the annual view often displays a monthly-equivalent figure rather than the amount you actually pay today. Read the line that starts with "Pay".</li>
+    <li><strong>Find the renewal sentence.</strong> Look for "Renews at", "then $X/mo on renewal", or "first year pricing". If a host doesn't publish it, that is itself information.</li>
+    <li><strong>Do the multiplication yourself.</strong> Kinsta: monthly rate × 10 gives the annual total, always. SiteGround and hosting.com: the annual figure is the monthly-equivalent × 12, prepaid. If your own arithmetic disagrees with the page, trust the page and re-read it.</li>
+    <li><strong>Count what isn't in the price.</strong> Additional sites, extra disk, object caching, backup retention beyond two weeks, email, staging and visits or bandwidth overages are all billed separately by at least one host here.</li>
+    <li><strong>Check for first-year-only terms.</strong> A discount limited to new customers on one tier is not a price, it is a promotion — and it won't apply when you upgrade.</li>
+  </ul>
+
+  <h2 id="hostingcom">hosting.com — the cheapest entry, and it tells you the renewal</h2>
+  <p>hosting.com's WordPress plans are the cheapest entry point of the five, and unusually for this category it publishes the renewal rate next to the intro price instead of burying it. On a prepaid year the monthly-equivalent rates are $4.49, $4.99, $10.99 and $14.99 for Small, Medium, Advanced and Turbo; switch the toggle to monthly and you see exactly what those plans renew at: $9.99, $17.99, $25.99 and $34.99.</p>
+  <p>One consequence is worth acting on. Small's first year costs $53.87 and Medium's costs $59.89 — six dollars apart — while Medium carries four times the visitor allowance, five installs instead of one, and a renewal ($17.99) that is under twice Small's ($9.99). For anything beyond a single small site, the second tier is the better buy from day one, and that is visible only because the renewal rates are published.</p>
+  <p>Every plan includes unlimited PHP workers, a 99.99% uptime guarantee, free SSL, their Enterprise CDN, a web application firewall, malware protection, free migrations, daily backups with 14-day retention and staging. WP Rocket and Object Cache Pro are bundled from Medium upward; Relay, their in-memory cache, is Turbo-only.</p>
+  <div class="cta-row">
+    <a class="cta green" href="https://hosting.com/wordpress/?utm_source=fp_affiliate&amp;utm_medium=15242216&amp;utm_campaign=42825&amp;utm_content=affiliates&amp;fpr=dstr3z" rel="sponsored">See hosting.com's current prices</a>
+  </div>
+
+  <h2 id="cloudways">Cloudways — no discount, no jump</h2>
+  <p>Cloudways rents you a server on a cloud provider you choose and manages the stack. There is no first-term discount, which means the price you see is the price you keep paying: the DigitalOcean entry tier is $11/month for 2 GB RAM, 1 vCPU, 50 GB storage and 2 TB of bandwidth, and it stays $11 in year three. Servers bill hourly too, so a short project doesn't pay for a full month.</p>
+  <p>That flat structure makes Cloudways the easiest of the five to budget for, and its hosting bill is the second-lowest three-year total in the table above. The trade-offs show up elsewhere: bandwidth overages are billed per GB ($0.40 per 10 GB), extra disk is $2 per GB, and you carry more of the WordPress layer yourself — plugin conflicts and some tuning are your problem, not a support ticket. The 8 GB tier is $88/month and the largest published DigitalOcean configuration is $342/month.</p>
+  <div class="cta-row">
+    <a class="cta" href="#cloudways" data-aff-slot="cloudways">See Cloudways</a>
+  </div>
+
+  <h2 id="kinsta">Kinsta — ten months for twelve</h2>
+  <p>Kinsta's pricing is the least promotional of the five. The Business line runs Launch, Launch Plus, Build, Expand, Scale and Lead at $35, $59, $69, $99, $169 and $299 per month; annual billing charges ten months for a twelve-month term, so Launch is $350 a year whether it is your first year or your fifth. Agency tiers are sized by install count — 20, 40 and 60 installs at $340, $450 and $675 per month — and Enterprise is quote-based from $500/month.</p>
+  <p>So Kinsta never springs a renewal increase, and it also never gives you a cheap first year. What it charges for is the structure: isolated containers on Google Cloud, a per-site dashboard, engineer-level support, and visits that are metered and billed rather than throttled. Its add-ons are where budgets drift: an additional site is $30/month, an extra 20 GB of disk is $20/month, and object caching (Redis) is a paid addition rather than a bundled feature.</p>
+  <div class="cta-row">
+    <a class="cta" href="#kinsta" data-aff-slot="kinsta">See Kinsta</a>
+  </div>
+
+  <h2 id="wpengine">WP Engine — the renewal it doesn't publish</h2>
+  <p>WP Engine's pricing page now leads with three tiers: Essential, Core and Enterprise. Essential is $336 per year billed annually, which works out at about $28/month, and additional sites cost $20/month each. Core and Enterprise are quote-based.</p>
+  <p>The reason WP Engine sits at the bottom of the table with "unknown" rather than a total is that its headline figure is explicitly first-year pricing for new customers, and the page says renewal pricing is subject to change. That is a legitimate way to sell, but it means the second year of an Essential plan cannot be computed from public information — by the host's own terms, not our estimate. If you are budgeting three years out, ask for the renewal rate in writing before you commit.</p>
+  <div class="cta-row">
+    <a class="cta" href="#wpengine" data-aff-slot="wpengine">See WP Engine</a>
+  </div>
+
+  <h2 id="siteground">SiteGround — the classic sixfold renewal</h2>
+  <p>SiteGround is the clearest example of the pattern this page exists to expose. StartUp is advertised at $2.99/month, GrowBig at $4.99 and GoGeek at $7.99 — all requiring a twelve-month prepay, all discounted 82% or 83% from the standard rate. The renewal line underneath says $17.99, $29.99 and $44.99.</p>
+  <p>Nothing there is hidden: it is printed on the same card as the discount. But the ratio is easy to miss. StartUp's second year costs more than five times its first, which is why its three-year total ($467.64) overtakes hosting.com's Medium tier ($491.65) only narrowly despite starting $24 cheaper in year one — and overtakes hosting.com's Small tier ($293.63) outright. The same structure applies to GrowBig ($779.64 over three years) and GoGeek ($1,175.64).</p>
+  <p>What SiteGround does include is real: free email, CDN, SSL, backups, dynamic caching and memcached across all three plans, plus one-click staging and priority support on GoGeek. Judge it on the renewal rate, not the advert.</p>
+  <div class="cta-row">
+    <a class="cta" href="#siteground" data-aff-slot="siteground">See SiteGround</a>
+  </div>
+
+  <h2 id="payless">Four ways to pay less without switching hosts</h2>
+  <ul>
+    <li><strong>Buy the tier you need now, not the tier you hope to need.</strong> Where the ladder is steeply discounted at the bottom (hosting.com is the extreme case: $53.87 for Small versus $59.89 for Medium in year one), moving up a tier early costs a few dollars and buys several times the capacity — while moving up mid-term means paying the standard rate for the difference.</li>
+    <li><strong>Prepay only when the discount is real, and check the year-three number before you do.</strong> A prepay that saves $200 in year one and costs $200 more in year two is a loan, not a discount. Run both terms through the calculator above.</li>
+    <li><strong>Price the add-ons before you upgrade a tier.</strong> Additional sites run $20/month at WP Engine and $30/month at Kinsta; extra disk is $20 per 20 GB at Kinsta and $2 per GB at Cloudways; Redis is a paid addition at Kinsta and included with the server at Cloudways. Sometimes the add-on is cheaper than the tier, and sometimes the tier is cheaper than the add-ons.</li>
+    <li><strong>Watch the two meters, not the plan name.</strong> Visits (Kinsta) and bandwidth (Cloudways) are the two things billed beyond the plan, and both hosts publish the overage rate. A plan that fits your traffic costs what it says; a plan that doesn't is the most expensive way to buy hosting.</li>
+  </ul>
+
+  <div class="pick" id="pick">
+    <span class="tag">Match your situation — not our opinion</span>
+    <h3 style="margin-top:10px">Which cost structure fits you?</h3>
+    <p>No single host is cheapest for everyone. Find the row that matches how you'll use the plan, then run the numbers for your own term:</p>
+    <table>
+      <thead>
+        <tr><th>You…</th><th>Cost structure that fits</th><th></th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Want the lowest total bill and will prepay a year up front</td><td><strong>hosting.com</strong> — steepest year-one discount, published renewal</td><td><a class="cta green" href="https://hosting.com/wordpress/?utm_source=fp_affiliate&amp;utm_medium=15242216&amp;utm_campaign=42825&amp;utm_content=affiliates&amp;fpr=dstr3z" rel="sponsored">See hosting.com</a></td></tr>
+        <tr><td>Want a flat bill you can predict in year three</td><td><strong>Cloudways</strong> — no discount, no increase, hourly billing</td><td><a class="cta" href="#cloudways" data-aff-slot="cloudways">See Cloudways</a></td></tr>
+        <tr><td>Have a developer and can manage the WordPress layer</td><td><strong>Cloudways</strong> — cheapest three-year total with cloud control</td><td><a class="cta" href="#cloudways" data-aff-slot="cloudways">See Cloudways</a></td></tr>
+        <tr><td>Need the site to be revenue-safe and don't mind paying for it</td><td><strong>Kinsta</strong> — metered, never discounted, never jumps</td><td><a class="cta" href="#kinsta" data-aff-slot="kinsta">See Kinsta</a></td></tr>
+        <tr><td>Need enterprise governance and can ask for pricing in writing</td><td><strong>WP Engine</strong> — first-year price, quote-based above that</td><td><a class="cta" href="#wpengine" data-aff-slot="wpengine">See WP Engine</a></td></tr>
+        <tr><td>Want the lowest possible first invoice and email included</td><td><strong>SiteGround</strong> — cheapest month one, but check the renewal</td><td><a class="cta" href="#siteground" data-aff-slot="siteground">See SiteGround</a></td></tr>
+      </tbody>
+    </table>
+    <p class="small">Every host above is a managed platform we've researched. We earn a commission if you sign up via these links, at no extra cost — but the match is based on your situation, not our payout.</p>
+  </div>
+
+  <h2 id="faq">FAQ</h2>
+  <div class="faq">
+    <h3>Why did my WordPress hosting price go up after the first year?</h3>
+    <p>Because the first-year price was a discount, not a rate. Most hosts in this category sell the first term below cost to win the account and then bill the standard rate from renewal onward. On SiteGround the entry plan goes from $2.99 to $17.99 per month; on hosting.com from a $4.49 monthly equivalent to $9.99. Hosts that never discount, such as Cloudways, don't have a second-year jump because there was nothing to expire.</p>
+  </div>
+  <div class="faq">
+    <h3>Is it cheaper to pay monthly or yearly?</h3>
+    <p>Yearly, on almost every host, but the size of the saving varies wildly. Kinsta gives you ten months for twelve at any tier, so the annual term saves about 17%. SiteGround's and hosting.com's headline rates require a prepaid year and save far more than that — which is exactly why the renewal rate matters more than the discount. Cloudways charges the same either way and bills hourly.</p>
+  </div>
+  <div class="faq">
+    <h3>Which of these hosts is cheapest over three years?</h3>
+    <p>On entry plans, hosting.com's Small tier at $293.63, followed by Cloudways' 2 GB server at $396. SiteGround's StartUp overtakes both in year three despite the cheapest first invoice, because its renewal is six times its intro rate. Kinsta is predictable but higher at $1,050 for three years of Launch. WP Engine cannot be ranked, because it publishes first-year pricing and says renewal pricing is subject to change.</p>
+  </div>
+  <div class="faq">
+    <h3>Can I avoid the renewal increase?</h3>
+    <p>Not on a host that discounts, short of switching hosts or moving to a longer prepaid term. The workable strategies are to compare renewal rates rather than intro prices, to choose a host whose standard rate you can live with, and to time a migration to the end of a discounted term rather than the middle of it. Asking support for a loyalty rate sometimes works, but it is not something to budget on.</p>
+  </div>
+  <div class="faq">
+    <h3>Do these prices include tax, email and backups?</h3>
+    <p>No on tax: all five quote USD prices excluding tax, and the amount depends on your billing country. Email is included by hosting.com and SiteGround and not by Kinsta, WP Engine or Cloudways. Backups are included everywhere, but retention differs — 14 days at Kinsta and hosting.com, and longer retention is a paid add-on on most tiers.</p>
+  </div>
+  <div class="faq">
+    <h3>What happens if I exceed my visits or bandwidth?</h3>
+    <p>It depends which meter you exceed. Kinsta meters visits and bills overages rather than throttling your site. Cloudways bills bandwidth per GB beyond the plan, $0.40 per 10 GB, and extra disk at $2 per GB. SiteGround and hosting.com size plans by visitors and bandwidth as soft limits, which in practice means a forced upgrade conversation rather than a line item — worth knowing before a launch.</p>
+  </div>
+
+  <div class="related">
+    <strong>Dig deeper:</strong>
+    <ul style="margin:8px 0 0">
+      <li><a href="best-managed-wordpress-hosting">The full managed WordPress hosting comparison →</a></li>
+      <li><a href="wordpress-hosting-for-small-business">WordPress hosting for small business: reliability and support →</a></li>
+      <li><a href="wordpress-hosting-for-woocommerce">Hosting for WooCommerce stores: checkout speed →</a></li>
+      <li><a href="managed-wordpress-hosting-for-agencies">Agency hosting: client billing and hand-off →</a></li>
+      <li><a href="wordpress-php-workers-explained">Why a plan's visitor limit isn't the same as its capacity →</a></li>
+      <li><a href="wordpress-backup-strategies-explained">Backup retention, explained →</a></li>
+    </ul>
+  </div>
+
+</main>
+
+<footer class="wrap">
+  <p><strong>Affiliate disclosure:</strong> Wiser Tools participates in affiliate programs including Kinsta, Cloudways, WP Engine, SiteGround and hosting.com. Some links on this page are affiliate links, meaning we may receive a commission if you sign up — at no additional cost to you. This does not influence our comparisons; we compare on merits. Affiliate links on this site carry a <code>rel="sponsored"</code> attribute in line with Google's guidelines.</p>
+  <p class="small">Prices shown are the rates published by each host on 2026-09-21, in USD and excluding tax, and they change often. Verify current details on each host's official site before purchasing. Last reviewed: September 2026.</p>
+  <p class="small"><a href="about">About Wiser Tools &amp; how we evaluate</a></p>
+</footer>
+
+<script>
+(function(){
+  var DATA = {
+    "hosting.com": {
+      plans: {
+        "Small (1 install, 30k visitors)":       { annual: [53.87, 119.88], monthly: [119.88, 119.88] },
+        "Medium (5 installs, 120k visitors)":    { annual: [59.89, 215.88], monthly: [215.88, 215.88] },
+        "Advanced (15 installs, 250k visitors)": { annual: [131.89, 311.88], monthly: [311.88, 311.88] },
+        "Turbo (50 installs, 500k visitors)":    { annual: [179.88, 419.88], monthly: [419.88, 419.88] }
+      }
+    },
+    "Cloudways": {
+      plans: {
+        "2 GB / 1 vCPU (DigitalOcean)":  { annual: [132, 132], monthly: [132, 132] },
+        "8 GB / 4 vCPU (DigitalOcean)":  { annual: [1056, 1056], monthly: [1056, 1056] },
+        "128 GB / 24 vCPU (DigitalOcean)": { annual: [4104, 4104], monthly: [4104, 4104] }
+      }
+    },
+    "Kinsta": {
+      plans: {
+        "Launch (1 install, 75k visits)":     { annual: [350, 350], monthly: [420, 420] },
+        "Launch Plus (1 install, 125k)":      { annual: [590, 590], monthly: [708, 708] },
+        "Build (2 installs, 200k)":           { annual: [690, 690], monthly: [828, 828] },
+        "Expand (5 installs, 350k)":          { annual: [990, 990], monthly: [1188, 1188] },
+        "Scale (10 installs, 650k)":          { annual: [1690, 1690], monthly: [2028, 2028] },
+        "Lead (20 installs, 1.5M)":           { annual: [2990, 2990], monthly: [3588, 3588] }
+      }
+    },
+    "WP Engine": {
+      plans: {
+        "Essential (1 site, annual)": { annual: [336, null], monthly: [null, null] }
+      }
+    },
+    "SiteGround": {
+      plans: {
+        "StartUp (1 site, 10 GB)":            { annual: [35.88, 215.88], monthly: [215.88, 215.88] },
+        "GrowBig (unlimited sites, 50 GB)":   { annual: [59.88, 359.88], monthly: [359.88, 359.88] },
+        "GoGeek (unlimited sites, 100 GB)":   { annual: [95.88, 539.88], monthly: [539.88, 539.88] }
+      }
+    }
+  };
+
+  var hostSel = document.getElementById("c-host");
+  var planSel = document.getElementById("c-plan");
+  var termSel = document.getElementById("c-term");
+  var yearsIn = document.getElementById("c-years");
+  var out = document.getElementById("c-out");
+  var warn = document.getElementById("c-warn");
+
+  function money(n){
+    return "$" + n.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
+  function fillHosts(){
+    Object.keys(DATA).forEach(function(h){
+      var o = document.createElement("option");
+      o.value = h; o.textContent = h;
+      hostSel.appendChild(o);
+    });
+  }
+
+  function fillPlans(){
+    planSel.innerHTML = "";
+    var plans = DATA[hostSel.value].plans;
+    Object.keys(plans).forEach(function(p){
+      var o = document.createElement("option");
+      o.value = p; o.textContent = p;
+      planSel.appendChild(o);
+    });
+  }
+
+  function compute(){
+    var entry = DATA[hostSel.value].plans[planSel.value][termSel.value];
+    var first = entry[0];
+    var after = entry[1];
+    var years = Math.min(5, Math.max(1, parseInt(yearsIn.value, 10) || 3));
+    yearsIn.value = years;
+
+    if (first === null) {
+      out.innerHTML = "<span class='small'>No published price for this combination.</span>";
+      warn.hidden = true;
+      return;
+    }
+
+    var rows = "<div class='calc-row'><span>Year 1</span><span>" + money(first) + "</span></div>";
+    var total = first;
+    for (var y = 2; y <= years; y++) {
+      if (after === null) {
+        rows += "<div class='calc-row'><span>Year " + y + "</span><span>not published</span></div>";
+      } else {
+        rows += "<div class='calc-row'><span>Year " + y + "</span><span>" + money(after) + "</span></div>";
+        total += after;
+      }
+    }
+
+    var headline = (after === null) ? money(first) + " in year 1" : money(total);
+    out.innerHTML = "<span class='small'>" + hostSel.value + " · " + planSel.value + "</span>" +
+      "<span class='calc-total'>" + headline + "</span>" +
+      "<span class='small'>" + (after === null ? "renewal not published" : "total over " + years + (years === 1 ? " year" : " years")) + "</span>" +
+      rows;
+
+    if (after === null) {
+      warn.hidden = false;
+      warn.textContent = "This host publishes first-year pricing and states that renewal pricing is subject to change, so a multi-year total can't be computed from public information. Ask for the renewal rate in writing.";
+    } else if (after > first * 1.5 && first > 0) {
+      warn.hidden = false;
+      warn.textContent = "Note the jump: this term's first year is discounted, and the price rises substantially from year 2. Switch the term to monthly to see the flat rate.";
+    } else {
+      warn.hidden = true;
+    }
+  }
+
+  hostSel.addEventListener("change", function(){ fillPlans(); compute(); });
+  planSel.addEventListener("change", compute);
+  termSel.addEventListener("change", compute);
+  yearsIn.addEventListener("input", compute);
+  fillHosts(); fillPlans(); compute();
+})();
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Wiser Tools",
+  "url": "https://wiser-tools.com/",
+  "description": "Independent, research-based comparisons of managed hosting, SaaS tools, and developer services.",
+  "publisher": { "@type": "Organization", "name": "Wiser Tools", "url": "https://wiser-tools.com/" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "What WordPress Hosting Really Costs in 2026 — Intro Price vs Renewal",
+  "description": "What five WordPress hosts actually charge after the first-term discount ends: year-one cost, renewal rate and three-year total, with a cost calculator and the mechanics behind renewal increases.",
+  "author": { "@type": "Organization", "name": "Wiser Tools" },
+  "publisher": { "@type": "Organization", "name": "Wiser Tools", "url": "https://wiser-tools.com/" },
+  "datePublished": "2026-09-21",
+  "dateModified": "2026-09-21",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://wiser-tools.com/wordpress-hosting-real-cost" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://wiser-tools.com/" },
+    { "@type": "ListItem", "position": 2, "name": "What WordPress Hosting Really Costs", "item": "https://wiser-tools.com/wordpress-hosting-real-cost" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "Why did my WordPress hosting price go up after the first year?", "acceptedAnswer": { "@type": "Answer", "text": "Because the first-year price was a discount, not a rate. Most hosts in this category sell the first term below their standard rate to win the account and then bill the standard rate from renewal onward. On SiteGround the entry plan goes from $2.99 to $17.99 per month; on hosting.com from a $4.49 monthly equivalent to $9.99. Hosts that never discount, such as Cloudways, don't have a second-year jump because there was nothing to expire." } },
+    { "@type": "Question", "name": "Is it cheaper to pay monthly or yearly?", "acceptedAnswer": { "@type": "Answer", "text": "Yearly, on almost every host, but the size of the saving varies wildly. Kinsta gives you ten months for twelve at any tier, so the annual term saves about 17%. SiteGround's and hosting.com's headline rates require a prepaid year and save far more than that, which is exactly why the renewal rate matters more than the discount. Cloudways charges the same either way and bills hourly." } },
+    { "@type": "Question", "name": "Which of these hosts is cheapest over three years?", "acceptedAnswer": { "@type": "Answer", "text": "On entry plans, hosting.com's Small tier at $293.63, followed by Cloudways' 2 GB server at $396. SiteGround's StartUp overtakes both in year three despite the cheapest first invoice, because its renewal is six times its intro rate. Kinsta is predictable but higher at $1,050 for three years of Launch. WP Engine cannot be ranked, because it publishes first-year pricing and says renewal pricing is subject to change." } },
+    { "@type": "Question", "name": "Can I avoid the renewal increase?", "acceptedAnswer": { "@type": "Answer", "text": "Not on a host that discounts, short of switching hosts or moving to a longer prepaid term. The workable strategies are to compare renewal rates rather than intro prices, to choose a host whose standard rate you can live with, and to time a migration to the end of a discounted term rather than the middle of it. Asking support for a loyalty rate sometimes works, but it is not something to budget on." } },
+    { "@type": "Question", "name": "Do these prices include tax, email and backups?", "acceptedAnswer": { "@type": "Answer", "text": "No on tax: all five quote USD prices excluding tax, and the amount depends on your billing country. Email is included by hosting.com and SiteGround and not by Kinsta, WP Engine or Cloudways. Backups are included everywhere, but retention differs: 14 days at Kinsta and hosting.com, and longer retention is a paid add-on on most tiers." } },
+    { "@type": "Question", "name": "What happens if I exceed my visits or bandwidth?", "acceptedAnswer": { "@type": "Answer", "text": "It depends which meter you exceed. Kinsta meters visits and bills overages rather than throttling your site. Cloudways bills bandwidth per GB beyond the plan, $0.40 per 10 GB, and extra disk at $2 per GB. SiteGround and hosting.com size plans by visitors and bandwidth as soft limits, which in practice means a forced upgrade conversation rather than a line item, worth knowing before a launch." } }
+  ]
+}
+</script>
+
+</body>
+</html>
