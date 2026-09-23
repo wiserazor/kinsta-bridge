@@ -1,0 +1,106 @@
+{
+  "dataset": "Managed WordPress hosting price index",
+  "version": "2026-09-21",
+  "checked_date": "2026-09-21",
+  "currency": "USD",
+  "tax": "excluded; prices as published by each vendor on the checked date",
+  "method": "Every figure was read from the vendor's own pricing page on the checked date, in a browser, with the billing toggle set to both the discounted term and the monthly term where the page offered one. No figure comes from a third-party review, a reseller, or an aggregator.",
+  "license": "CC BY 4.0",
+  "citation": "Wiser Tools, \u201cManaged WordPress hosting price index (2026-09-21)\u201d, https://wiser-tools.com/wordpress-hosting-price-index",
+  "field_notes": {
+    "entry_price_per_month_usd": "The monthly-equivalent figure shown for the discounted term (yearly/prepay). For hosts that do not discount, this equals the monthly price.",
+    "monthly_price_usd": "The rate the vendor charges when you select monthly billing, if offered.",
+    "year_1_total_usd": "What you actually pay in the first year on the entry term, including prepaid years written as a single payment.",
+    "renewal_price_per_month_usd": "The rate that applies after the first term, as published by the vendor, or derived when the vendor states the standard rate only.",
+    "three_year_total_usd": "Year 1 at the published first-term price plus two years at the published renewal rate. Null or 'unknown' where the vendor does not publish a renewal rate.",
+    "est_visits_per_month": "The vendor's own published visitor allowance, not a measurement."
+  },
+  "vendors": [
+    {
+      "vendor": "Kinsta",
+      "plan_line": "Business",
+      "pricing_model": "No first-term discount. Annual billing is ten months for twelve, which stays true at renewal. A first-month-free promotion was active on the entry tier on the checked date.",
+      "entry_price_per_month_usd": 29.17,
+      "entry_monthly_price_usd": 35,
+      "annual_total_usd": 350,
+      "add_ons": {
+        "additional_site_usd_per_month": 30,
+        "additional_disk_20gb_usd_per_month": 20
+      },
+      "plans": [
+        { "plan": "Launch", "installs": 1, "est_visits_per_month": 75000, "storage": "15 GB", "bandwidth": "15 GB", "monthly_usd": 35, "annual_usd": 350, "three_year_usd": 1050 },
+        { "plan": "Launch Plus", "installs": 1, "est_visits_per_month": 125000, "storage": "25 GB", "bandwidth": "25 GB", "monthly_usd": 59, "annual_usd": 590, "three_year_usd": 1770 },
+        { "plan": "Build", "installs": 2, "est_visits_per_month": 200000, "storage": "30 GB", "bandwidth": "40 GB", "monthly_usd": 69, "annual_usd": 690, "three_year_usd": 2070 },
+        { "plan": "Expand", "installs": 5, "est_visits_per_month": 350000, "storage": "40 GB", "bandwidth": "65 GB", "monthly_usd": 99, "annual_usd": 990, "three_year_usd": 2970 },
+        { "plan": "Scale", "installs": 10, "est_visits_per_month": 650000, "storage": "50 GB", "bandwidth": "125 GB", "monthly_usd": 169, "annual_usd": 1690, "three_year_usd": 5070 },
+        { "plan": "Lead", "installs": 20, "est_visits_per_month": 1500000, "storage": "60 GB", "bandwidth": "275 GB", "monthly_usd": 299, "annual_usd": 2990, "three_year_usd": 8970 }
+      ],
+      "agency_plans": [
+        { "plan": "Agency 20", "installs": 20, "storage": "50 GB", "bandwidth": "250 GB", "monthly_usd": 340, "annual_usd": 3400, "three_year_usd": 10200 },
+        { "plan": "Agency 40", "installs": 40, "storage": "100 GB", "bandwidth": "500 GB", "monthly_usd": 450, "annual_usd": 4500, "three_year_usd": 13500 },
+        { "plan": "Agency 60", "installs": 60, "storage": "150 GB", "bandwidth": "750 GB", "monthly_usd": 675, "annual_usd": 6750, "three_year_usd": 20250 }
+      ],
+      "enterprise": { "starting_price_usd_per_month": 500, "note": "quote-based" },
+      "source_url": "https://kinsta.com/pricing/"
+    },
+    {
+      "vendor": "Cloudways",
+      "plan_line": "DigitalOcean",
+      "pricing_model": "No first-term discount and no renewal increase. Backups and object caching included at server level. Billed hourly.",
+      "entry_price_per_month_usd": 11,
+      "add_ons": {
+        "additional_bandwidth_usd_per_10gb": 0.40,
+        "additional_disk_usd_per_gb": 2
+      },
+      "plans": [
+        { "plan": "2 GB", "ram": "2 GB", "vcpu": 1, "storage": "50 GB", "bandwidth": "2 TB", "monthly_usd": 11, "hourly_usd": 0.0357, "three_year_usd": 396 },
+        { "plan": "8 GB", "ram": "8 GB", "vcpu": 4, "storage": "160 GB", "bandwidth": "5 TB", "monthly_usd": 88, "three_year_usd": 3168 },
+        { "plan": "128 GB", "ram": "128 GB", "vcpu": 24, "storage": "2560 GB", "bandwidth": "11 TB", "monthly_usd": 342, "hourly_usd": 1.0848, "three_year_usd": 12312 }
+      ],
+      "source_url": "https://www.cloudways.com/en/pricing.php"
+    },
+    {
+      "vendor": "WP Engine",
+      "plan_line": "Managed Hosting Platform",
+      "pricing_model": "Headline price is first-year pricing for new customers on the entry tier. The pricing page states that renewal pricing is subject to change, so a multi-year total cannot be computed from public information.",
+      "renewal_published": false,
+      "plans": [
+        { "plan": "Essential", "sites_included": 1, "additional_site_usd_per_month": 20, "annual_usd": 336, "monthly_equivalent_usd": 28, "three_year_usd": "unknown" },
+        { "plan": "Core", "sites_range": "30-50", "billing": "quote" },
+        { "plan": "Enterprise", "sites_range": "50+", "billing": "custom" }
+      ],
+      "source_url": "https://wpengine.com/plans/"
+    },
+    {
+      "vendor": "SiteGround",
+      "plan_line": "WordPress hosting",
+      "pricing_model": "First-term discount of 82-83 percent on a twelve-month prepay. Renewal is charged at the standard monthly rate, which the vendor publishes next to the discounted price.",
+      "plans": [
+        { "plan": "StartUp", "first_term_monthly_usd": 2.99, "year_1_total_usd": 35.88, "renewal_monthly_usd": 17.99, "renewal_year_usd": 215.88, "three_year_usd": 467.64, "sites": 1, "storage": "10 GB" },
+        { "plan": "GrowBig", "first_term_monthly_usd": 4.99, "year_1_total_usd": 59.88, "renewal_monthly_usd": 29.99, "renewal_year_usd": 359.88, "three_year_usd": 779.64, "sites": "unlimited", "storage": "50 GB" },
+        { "plan": "GoGeek", "first_term_monthly_usd": 7.99, "year_1_total_usd": 95.88, "renewal_monthly_usd": 44.99, "renewal_year_usd": 539.88, "three_year_usd": 1175.64, "sites": "unlimited", "storage": "100 GB" }
+      ],
+      "source_url": "https://www.siteground.com/wordpress-hosting.htm"
+    },
+    {
+      "vendor": "hosting.com",
+      "plan_line": "WordPress hosting",
+      "pricing_model": "The headline rate requires a prepaid yearly term (marketed as two months free). Monthly billing is charged at the same rate as renewal, so the yearly term is the only discount, and it is deeper than the label suggests.",
+      "plans": [
+        { "plan": "Small", "yearly_equivalent_monthly_usd": 4.49, "year_1_total_usd": 53.87, "monthly_usd": 9.99, "renewal_monthly_usd": 9.99, "three_year_usd": 293.63, "installs": 1, "est_visits_per_month": 30000, "storage": "20 GB NVMe", "bandwidth": "100 GB" },
+        { "plan": "Medium", "yearly_equivalent_monthly_usd": 4.99, "year_1_total_usd": 59.89, "monthly_usd": 17.99, "renewal_monthly_usd": 17.99, "three_year_usd": 491.65, "installs": 5, "est_visits_per_month": 120000, "storage": "50 GB NVMe", "bandwidth": "300 GB" },
+        { "plan": "Advanced", "yearly_equivalent_monthly_usd": 10.99, "year_1_total_usd": 131.89, "monthly_usd": 25.99, "renewal_monthly_usd": 25.99, "three_year_usd": 755.65, "installs": 15, "est_visits_per_month": 250000, "storage": "100 GB NVMe", "bandwidth": "600 GB" },
+        { "plan": "Turbo", "yearly_equivalent_monthly_usd": 14.99, "year_1_total_usd": 179.88, "monthly_usd": 34.99, "renewal_monthly_usd": 34.99, "three_year_usd": 1019.64, "installs": 50, "est_visits_per_month": 500000, "storage": "200 GB NVMe", "bandwidth": "1.2 TB" }
+      ],
+      "included_all_plans": ["unlimited PHP workers", "99.99% uptime guarantee", "free SSL", "Enterprise CDN", "web application firewall", "malware protection", "free migrations", "daily backups with 14-day retention", "staging"],
+      "tier_gated": { "wp_rocket": "from Medium", "object_cache_pro": "from Medium", "relay": "Turbo only" },
+      "source_url": "https://hosting.com/hosting/platforms/wordpress-hosting/"
+    }
+  ],
+  "changelog": [
+    {
+      "date": "2026-09-21",
+      "note": "First published version. Three of the five vendors had changed plan names, prices or billing terms since the previous round of checks, which is the reason this dataset records the checked date on every row."
+    }
+  ]
+}

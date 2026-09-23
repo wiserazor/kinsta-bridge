@@ -8,6 +8,7 @@
 - Managed WordPress Hosting for WooCommerce — https://wiser-tools.com/wordpress-hosting-for-woocommerce : Store-focused comparison — checkout speed under logged-in traffic, object caching, staging for product changes, matched to store type.
 - Best WordPress Hosting for Small Business — https://wiser-tools.com/wordpress-hosting-for-small-business : Reliability, support, migration from GoDaddy/cPanel, and honest cost, matched to business type.
 - What WordPress Hosting Really Costs — https://wiser-tools.com/wordpress-hosting-real-cost : Intro price versus renewal price for five hosts, with year-one cost, renewal rate and three-year totals, plus the mechanics behind renewal increases and a cost calculator.
+- Managed WordPress Hosting Price Index — https://wiser-tools.com/wordpress-hosting-price-index : A dated, downloadable price index. First-term price, renewal price and three-year total for five managed WordPress hosts, read from each vendor's own pricing page on 2026-09-21. Published as CSV and JSON under CC BY 4.0. No affiliate links on the page.
 - Wiser Tools (home) — https://wiser-tools.com/ : Index of our reviews and comparisons.
 - About Wiser Tools — https://wiser-tools.com/about : How we evaluate hosting, where our information comes from, what we don't do, and how the site is funded.
 
